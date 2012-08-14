@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
 <% if current_user %>
   Logged in as <%= current_user.email %>.
+  <%= link_to "Settings", edit_user_path(current_user) %>
   <%= link_to "Log Out", logout_path %>
 <% else %>
   <%= link_to "Sign Up", signup_path %> or
@@ -15,7 +16,9 @@
 
 </head>
 <body>
-
+  <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
 
 <%= yield %>
 

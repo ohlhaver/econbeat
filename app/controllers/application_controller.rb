@@ -11,4 +11,10 @@ private
 	def authorize
 	  redirect_to login_url, alert: "Not authorized" if current_user.nil?
 	end
+
+	def correct_user
+      @user = User.find(params[:id])
+      redirect_to root_path, alert: "Not authorized" unless current_user == @user
+    end
+
 end

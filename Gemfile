@@ -26,3 +26,5 @@ end
 group :production do
   gem 'pg', '0.12.2'
 end
+
+gem 'will_paginate', '3.0.3'
