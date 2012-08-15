@@ -26,4 +26,16 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
+	def show
+    @user = User.find(params[:id])
+    @posts = @user.posts.paginate(page: params[:page])
+  end
+
+  def feed
+    # This is preliminary. See "Following users" for the full implementation.
+    Post.where("user_id = ?", id)
+  end
+
+
 end

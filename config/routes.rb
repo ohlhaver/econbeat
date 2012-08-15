@@ -12,6 +12,8 @@ get 'login', to: 'sessions#new', as: 'login'
 get 'logout', to: 'sessions#destroy', as: 'logout'
 get 'edit', to: 'users#edit', as: 'edit'
 
+
+resources :posts, only: [:create, :destroy]
 resources :users
 resources :sessions
 
