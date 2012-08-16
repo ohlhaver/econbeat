@@ -1,27 +1,21 @@
 <!DOCTYPE html>
+
 <html>
 <head>
   <title>Jurnalo</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
- <%= link_to "Home", root_path %> 
-<% if current_user %>
-  Logged in as <%= current_user.email %>.
-  <%= link_to "Settings", edit_user_path(current_user) %>
-  <%= link_to "Log Out", logout_path %>
-<% else %>
-  <%= link_to "Sign Up", signup_path %> or
-  <%= link_to "Log In", login_path %>
-<% end %>
 
 </head>
 <body>
+  <div class="container">
+  <%= render 'layouts/header' %>
   <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
   <% end %>
 
 <%= yield %>
-
+  </div>
 </body>
 </html>
