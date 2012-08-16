@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   validates :user_id, presence: true
   validates :url, presence: true
+  validates :headline, presence: true
 
   default_scope order: 'posts.created_at DESC'
 

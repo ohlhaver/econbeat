@@ -4,8 +4,14 @@ class PostsController < ApplicationController
 
 
 	def create
+
 	    @post = current_user.posts.build(params[:post])
+	    @doc = Pismo::Document.new(@post.url)
+	    @post.headline = @doc.title
+	    @post.description = @doc.description
+	    @post.author = @doc.author
 	    if @post.save
+
 	      flash[:success] = "Post created!"
 	      redirect_to root_url
 	    else
