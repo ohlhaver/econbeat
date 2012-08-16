@@ -12,11 +12,14 @@ get 'login', to: 'sessions#new', as: 'login'
 get 'logout', to: 'sessions#destroy', as: 'logout'
 get 'edit', to: 'users#edit', as: 'edit'
 
-
+resources :users do
+    member do
+      get :following, :followers
+    end
+end
 resources :posts, only: [:create, :destroy]
-resources :users
 resources :sessions
-
+resources :relationships, only: [:create, :destroy]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

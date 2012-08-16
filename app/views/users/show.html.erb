@@ -1,7 +1,23 @@
-<% if @user.posts.any? %>
+
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @user.name %>
+      </h1>
+    </section>
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="span8">
+    <%= render 'follow_form' if current_user %>
+    <% if @user.posts.any? %>
       <h3>Posts (<%= @user.posts.count %>)</h3>
       
         <%= render @posts %>
       
       <%= will_paginate @posts %>
-    <% end %>
+    <% end %>       
+  </div>
+</div> 
