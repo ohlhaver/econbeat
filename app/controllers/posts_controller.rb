@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+	include ActionView::Helpers::TextHelper
 	before_filter :authorize, only: [:create, :destroy]
 	before_filter :correct_user,   only: :destroy
 

@@ -1,7 +1,7 @@
 <li>
 <span class="content"><b><%= link_to post.headline, post.url %></b></span>
 <% if post.author %>  <%= post.author %><%end%>
-  <span class="content"><%= truncate(post.description, :length => 123, :omission =>"...") %>  
+  <span class="content"><%= truncate(post.description, :length => 100, :omission =>"...", :separator => ' ') %>  
     <% if current_user == post.user %>
     <%= link_to "delete", post, method: :delete,
                                      data: { confirm: "You sure?" },
@@ -10,7 +10,7 @@
 </span> 
 
   <span class="timestamp">
-   <%= time_ago_in_words(post.created_at) %> ago
+   <%= post.topic.name + " - " unless post.topic == nil  %> <%= time_ago_in_words(post.created_at) %> ago
   </span>
   
 </li>

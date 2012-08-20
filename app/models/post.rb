@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
-  attr_accessible :category_id, :url
+  attr_accessible :topic_id, :url
   belongs_to :user
+  belongs_to :topic
   validates :user_id, presence: true
   validates :url, presence: true
   validates :headline, presence: true

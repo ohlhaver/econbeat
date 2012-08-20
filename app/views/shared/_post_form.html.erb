@@ -1,7 +1,12 @@
-<%= form_for(@post) do |f| %>
+<%= simple_form_for @post do |f| %>
+<fieldset>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_field :url, placeholder: "Compose new post..." %>
+    <%= f.text_field :url, placeholder: "Post a url..." %>
   </div>
+  
+  <%= f.association :topic, :prompt => "select topic" %>
+
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+</fieldset>
 <% end %>
