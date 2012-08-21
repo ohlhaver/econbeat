@@ -12,6 +12,8 @@
   </aside>
   <div class="span8">
     <%= render 'follow_form' if current_user %>
+    
+
     <% if @user.posts.any? %>
       <h3>Posts (<%= @user.posts.count %>)</h3>
        <ol class="microposts">

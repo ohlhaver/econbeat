@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120820200901) do
+ActiveRecord::Schema.define(:version => 20120821143309) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(:version => 20120820200901) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "filters", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "utopic_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "filters", ["user_id"], :name => "index_filters_on_user_id"
+
   create_table "posts", :force => true do |t|
     t.string   "headline"
     t.string   "url"
@@ -56,10 +65,12 @@ ActiveRecord::Schema.define(:version => 20120820200901) do
     t.string   "description"
     t.string   "author"
     t.integer  "topic_id"
+    t.integer  "utopic_id"
   end
 
   add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
   add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id_and_created_at"
+  add_index "posts", ["utopic_id"], :name => "index_posts_on_utopic_id"
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
@@ -84,6 +95,13 @@ ActiveRecord::Schema.define(:version => 20120820200901) do
     t.string   "name"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "utopics", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

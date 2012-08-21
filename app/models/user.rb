@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
+  has_many :utopics
+  has_many :filters
   validates_uniqueness_of :email, :name
 
   def feed
@@ -25,7 +27,6 @@ class User < ActiveRecord::Base
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user.id).destroy
   end
-
 
 
 end

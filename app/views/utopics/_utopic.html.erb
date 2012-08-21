@@ -1,0 +1,11 @@
+<li>
+  <%= utopic.topic.name unless utopic.topic == nil  %>
+  <% @filter = Filter.find_by_utopic_id_and_user_id(utopic.id, current_user.id) %>
+  <% if @filter == nil %>
+  <%= link_to "unfollow", :controller => "filters", :action => "new", :utopic => utopic.id, :filter => nil %>
+  <% else %>
+  <%= link_to "follow", :controller => "filters", :action => "new", :utopic => utopic.id, :filter => @filter.id %>
+  <% end %> 
+ 
+
+</li>

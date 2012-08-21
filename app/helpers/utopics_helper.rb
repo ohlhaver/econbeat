@@ -1,0 +1,2 @@
+module UtopicsHelper
+end

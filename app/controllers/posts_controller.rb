@@ -11,7 +11,14 @@ class PostsController < ApplicationController
 	    @post.headline = @doc.title
 	    @post.description = @doc.description
 	    @post.author = @doc.author
+	    @post.topic_id = 0 if @post.topic_id == nil
+	    #@utopic = @post.topic_id
+	    @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
+
+	    @post.utopic_id = @utopic.id
+
 	    if @post.save
+	     
 
 	      flash[:success] = "Post created!"
 	      redirect_to root_url
