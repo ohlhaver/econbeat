@@ -10,10 +10,17 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_relationships, source: :follower
   has_many :utopics
   has_many :filters
+
+
   validates_uniqueness_of :email, :name
 
   def feed
-    Post.from_users_followed_by(self)
+    a = Post.from_users_followed_by(self)
+    
+    self.filters.each do |f|
+      a = a - f.utopic.posts if f.utopic != nil
+    end
+    return a
   end
 
   def following?(other_user)
