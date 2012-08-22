@@ -64,4 +64,19 @@ Jurnalo::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  config.action_mailer.default_url_options = { :host => "jurnalo.herokuapp.com" }
+
+  # Change mail delvery to either :smtp, :sendmail, :file, :test
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  address: "smtp.gmail.com",
+  port: 587,
+  domain: "@jurnalo.com",
+  authentication: "plain",
+  enable_starttls_auto: true,
+  user_name: "jurnalo.service@gmail.com",
+  password: "rockybeach"
+}
+
 end

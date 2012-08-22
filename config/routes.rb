@@ -1,6 +1,8 @@
 Jurnalo::Application.routes.draw do
   
 
+
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -26,6 +28,7 @@ resources :filters, only: [:new, :create, :destroy]
 resources :posts, only: [:create, :destroy]
 resources :sessions
 resources :relationships, only: [:create, :destroy]
+resources :password_resets
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
