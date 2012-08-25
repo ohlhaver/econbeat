@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :name, :password_confirmation
+  attr_accessible :email, :password, :name, :password_confirmation, :invitation_token
   has_secure_password
   has_many :posts
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_relationships, source: :follower
   has_many :utopics
   has_many :filters
+  has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
+  belongs_to :invitation
 
   validates :name, presence: true, length: { maximum: 50 },
                     uniqueness: { case_sensitive: false }
@@ -18,11 +20,16 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
+  validates_presence_of :invitation_id, :message => 'is required'
+  validates_uniqueness_of :invitation_id
+
   before_save { |user| user.email = email.downcase }
   before_save { |user| user.name = name.downcase }
 
 
   before_create { generate_token(:auth_token) }
+  before_create :set_invitation_limit
 
   def send_password_reset
     generate_token(:password_reset_token)
@@ -57,6 +64,20 @@ class User < ActiveRecord::Base
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user.id).destroy
   end
+
+  def invitation_token
+    invitation.token if invitation
+  end
+
+  def invitation_token=(token)
+    self.invitation = Invitation.find_by_token(token)
+  end
+
+  private
+
+    def set_invitation_limit
+      self.invitation_limit = 100
+    end
 
 
 end

@@ -4,6 +4,7 @@
   <div class="span6 offset3">
 
 <%= form_for @user do |f| %>
+  <%= f.hidden_field :invitation_token %>
    <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
     <%= f.label :name %><br />

@@ -3,12 +3,15 @@ class UsersController < ApplicationController
   before_filter :authorize, only: [:following, :followers]
 
  def new
-  @user = User.new
+  @user = User.new(:invitation_token => params[:invitation_token])
+  @user.email = @user.invitation.recipient_email if @user.invitation
  end
 
  def create
   @user = User.new(params[:user])
   if @user.save
+    @inviter = User.find(@user.invitation.sender_id)
+    @user.follow!(@inviter)
     session[:user_id] = @user.id
     redirect_to root_url, notice: "Thank you for signing up!"
   else

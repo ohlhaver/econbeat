@@ -3,6 +3,8 @@ Jurnalo::Application.routes.draw do
 
 
 
+  resources :invitations
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -13,10 +15,15 @@ Jurnalo::Application.routes.draw do
 
   get "static_pages/contact"
 
-get 'signup', to: 'users#new', as: 'signup'
+
+
+#get '/signup', to: 'users#new', as: 'signup'
 get 'login', to: 'sessions#new', as: 'login'
 get 'logout', to: 'sessions#destroy', as: 'logout'
 get 'edit', to: 'users#edit', as: 'edit'
+
+match '/signup(/:invitation_token)' => 'users#new', as: 'signup'
+#match '/signup' => 'users#new', as: 'signup'
 
 resources :users do
     member do

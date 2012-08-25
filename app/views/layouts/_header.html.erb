@@ -8,6 +8,7 @@
           <li><%= link_to "Home", root_path %></li>
 
           <% if current_user %>
+
         
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -21,11 +22,23 @@
                   <%= link_to "Log out", logout_path %>
                 </li>
               </ul>
+
             </li>
+              <% if current_user.invitation_limit > 0 %>
+              <li>
+            <p>
+
+              <%= link_to 'Send invitation', new_invitation_path %>
+              (<%= current_user.invitation_limit %> left)
+            </p>
+          <% end %>
+        </li>
+
           <% else %>
             <li><%= link_to "Log in", login_path %></li>
           <% end %>
         </ul>
+
       </nav>
     </div>
   </div>
