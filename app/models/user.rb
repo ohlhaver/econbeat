@@ -21,8 +21,8 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
 
-  #validates_presence_of :invitation_id, :message => 'is required'
-  #validates_uniqueness_of :invitation_id
+  validates_presence_of :invitation_id, :message => 'is required'
+  validates_uniqueness_of :invitation_id
 
   before_save { |user| user.email = email.downcase }
   before_save { |user| user.name = name.downcase }
@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   private
 
     def set_invitation_limit
-      self.invitation_limit = 1000
+      self.invitation_limit = 10
     end
 
 
