@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       @inviter = User.find(@user.invitation.sender_id) 
       @user.follow!(@inviter)
     end
-    session[:user_id] = @user.id
+    cookies.permanent[:auth_token] = @user.auth_token
     redirect_to root_url, notice: "Thank you for signing up!"
   else
     render "new"
