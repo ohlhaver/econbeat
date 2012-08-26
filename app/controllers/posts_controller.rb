@@ -19,9 +19,12 @@ class PostsController < ApplicationController
 
 	    if @post.save
 	     
-
-	      flash[:success] = "Post created!"
-	      redirect_to root_url
+	     	alerted_users = @post.user.followers - @post.utopic.users
+	    	if alerted_users != []
+		    	PostMailer.notification(@post, alerted_users).deliver
+			end
+		      flash[:success] = "Post created!"
+		      redirect_to root_url
 	    else
 	      @feed_items = []
       	  render 'static_pages/home'

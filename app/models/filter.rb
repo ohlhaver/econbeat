@@ -4,4 +4,5 @@ class Filter < ActiveRecord::Base
   belongs_to :utopic
   has_many :utopics
   has_many :posts, through: :utopics
+  
 end

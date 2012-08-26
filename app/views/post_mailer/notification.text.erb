@@ -1,0 +1,13 @@
+
+<%= @post.headline %>
+<%= @post.topic.name unless @post.topic == nil  %> 
+<% if @post.author %>by <%= @post.author %><%end%>
+<%= truncate(@post.description, :length => 100, :omission =>"...", :separator => ' ') %> 
+
+<%=  @post.url %>
+
+View your entire Jurnalo feed here:
+<%= root_url %>
+
+Unfollow or filter messages from <%= @post.user.name %> here:
+<%= user_url(@post.user) %> 

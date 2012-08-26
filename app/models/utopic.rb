@@ -4,4 +4,5 @@ class Utopic < ActiveRecord::Base
   belongs_to :user
   has_many :posts
   has_many :filters
+  has_many :users, through: :filters
 end
