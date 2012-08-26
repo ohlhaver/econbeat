@@ -9,12 +9,25 @@ private
 	helper_method :current_user
 
 	def authorize
-	  redirect_to login_url, alert: "Not authorized" if current_user.nil?
+		if current_user.nil?	
+		  store_location
+		  redirect_to login_url, alert: "Not authorized" 
+		end
 	end
 
 	def correct_user
       @user = User.find(params[:id])
       redirect_to root_path, alert: "Not authorized" unless current_user == @user
     end
+
+    def redirect_back_or(default)
+   	 redirect_to(session[:return_to] || default)
+   	 session.delete(:return_to)
+  	end
+
+	def store_location
+	  session[:return_to] = request.url
+	end
+
 
 end

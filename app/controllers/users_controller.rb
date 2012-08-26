@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	before_filter :correct_user, only: [:index, :edit, :update, :destroy]
-  before_filter :authorize, only: [:following, :followers]
+  before_filter :authorize, only: [:following, :followers, :show]
 
  def new
   @user = User.new(:invitation_token => params[:invitation_token])
@@ -59,6 +59,8 @@ class UsersController < ApplicationController
     @users = @user.followers.page params[:page]
     render 'show_follow'
   end
+
+
 
     
 
