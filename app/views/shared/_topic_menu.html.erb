@@ -1,0 +1,23 @@
+    <div class="span8">
+      <ul class="nav nav-tabs">
+       <% if params[:topic] == nil %> 
+       <li class="active"> 
+       <%else%>
+       <li>
+       <%end%>
+        <%= link_to "All", :topic => nil %>
+      </li>
+
+      <% @topics.each do |topic| %>
+
+       <% if params[:topic] == topic.id.to_s %> 
+       <li class="active"> 
+       <%else%>
+       <li>
+        <%end%>
+       
+       <%= link_to topic.name, :topic => topic.id %> </li>
+       
+       <%end%>
+      
+  </ul>

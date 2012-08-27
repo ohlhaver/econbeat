@@ -15,7 +15,7 @@
     
 
     <% if @user.posts.any? %>
-      <h3>Posts (<%= @user.posts.count %>)</h3>
+     <%= render 'shared/topic_menu' %>
        <ol class="microposts">
         <%= render @posts %>
       	</ol>

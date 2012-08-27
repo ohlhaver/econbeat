@@ -36,7 +36,13 @@ class UsersController < ApplicationController
 
 	def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page params[:page]
+    @topics = Topic.find(:all)
+      if params[:topic]
+        @posts = @user.posts.where("topic_id = ?", params[:topic]) 
+      else
+        @posts = @user.posts
+      end
+    @posts = @posts.page params[:page]
   end
 
   def feed
