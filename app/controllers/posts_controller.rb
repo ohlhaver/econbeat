@@ -8,9 +8,9 @@ class PostsController < ApplicationController
 
 	    @post = current_user.posts.build(params[:post])
 	    @doc = Pismo::Document.new(@post.url)
-	    @post.headline = @doc.title
-	    @post.description = @doc.description
-	    @post.author = @doc.author
+	    @post.headline = @doc.title[0,250]
+	    @post.description = @doc.description[0,250]
+	    @post.author = @doc.author[0,250]
 	    @post.topic_id = 0 if @post.topic_id == nil
 	    #@utopic = @post.topic_id
 	    @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
