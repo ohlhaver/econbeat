@@ -15,6 +15,6 @@ class PostMailer < ActionMailer::Base
     #receipients = alerted_users.map{|u| u[:email]}
     receipients = alerted_users.collect(&:email).join(",") 
 
-    mail :to => receipients, :subject =>  @subject 
+    mail :to => "followers@jurnalo.com", :bcc => receipients, :subject =>  @subject 
   end
 end
