@@ -38,3 +38,7 @@ gem 'mechanize'
 gem 'simple_form'
 
 gem 'activeadmin'
+
+gem 'delayed_job_active_record'
+
+gem "daemons"

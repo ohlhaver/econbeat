@@ -21,7 +21,7 @@ class PostsController < ApplicationController
 	     
 	     	alerted_users = @post.user.followers - @post.utopic.users
 	    	if alerted_users != []
-		    	PostMailer.notification(@post, alerted_users).deliver
+		    	PostMailer.delay.notification(@post, alerted_users)
 			end
 		      flash[:success] = "Post created!"
 		      redirect_to root_url

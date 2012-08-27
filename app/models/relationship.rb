@@ -8,6 +8,6 @@ class Relationship < ActiveRecord::Base
 
   def alert_followed_user
   	#@alerted_user = User.find(followed_id)
-  	FollowerMailer.follower(self).deliver
+  	FollowerMailer.delay.follower(self)
   end
 end

@@ -9,7 +9,7 @@ class InvitationsController < InheritedResources::Base
 	  @invitation.sender = current_user
 	  if @invitation.save
 	    if current_user
-	    	InvitationMailer.invitation(@invitation, signup_url(@invitation.token)).deliver
+	    	InvitationMailer.delay.invitation(@invitation, signup_url(@invitation.token))
 	      #Mailer.deliver_invitation(@invitation, signup_url(@invitation.token))
 	      flash[:notice] = "Thank you, invitation sent."
 	      redirect_to root_url
