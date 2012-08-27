@@ -4,11 +4,11 @@ class StaticPagesController < ApplicationController
     if current_user
       @post  = current_user.posts.build
       @topics = Topic.find(:all)
-     
+
       if params[:topic]
-        @feed_items = current_user.feed.where("topic_id = ?", params[:topic]) 
+        @feed_items = current_user.feed.where("topic_id = ?", params[:topic]).page params[:page] 
       else
-        @feed_items = current_user.feed
+        @feed_items = current_user.feed.page params[:page]
       end
     end
  
