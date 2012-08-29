@@ -2,7 +2,7 @@
 
 
    </span><%= link_to feed_item.headline, feed_item.url %><br>
-  <span class="content"><% if feed_item.author %>  by <%= feed_item.author %><%end%><br>
+  <span class="content"><% if feed_item.author %>  by <%= feed_item.author %><br><%end%>
   <%= truncate(feed_item.description, :length => 100, :omission =>"...", :separator => ' ') %> </span>
     
 
