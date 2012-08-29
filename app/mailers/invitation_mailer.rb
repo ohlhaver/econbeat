@@ -7,7 +7,9 @@ class InvitationMailer < ActionMailer::Base
   #   en.invitation_mailer.invitation.subject
   #
   def invitation(invitation, signup_url)
+    @invitation = invitation 
+    @subject = @invitation.sender.name + ' invited you'
     @signup_url = signup_url
-    mail :to => invitation.recipient_email, :subject => 'Invitation'
+    mail :to => invitation.recipient_email, :subject => @subject
   end
 end

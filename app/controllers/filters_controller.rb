@@ -23,7 +23,7 @@ before_filter :authorize
 
 
 	  	@filter = Filter.find(params[:filter])
-	   @filter.destroy
+	   @filter.destroy if @filter.user == current_user
 	   redirect_to :controller => "users", :action => "show", :id => @utopic.user_id, :topic => @utopic.topic_id, :only_path => true
     end
  
