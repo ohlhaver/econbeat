@@ -1,5 +1,6 @@
 <div class ="hidden-phone">
       <ul class="nav nav-tabs">
+        
        <% if params[:topic] == nil %> 
        <li class="active"> 
        <%else%>
@@ -8,16 +9,18 @@
         <%= link_to "All", :topic => nil %>
       </li>
 
-      <% @topics.each do |topic| %>
-
-       <% if params[:topic] == topic.id.to_s %> 
+      <% @utopics.each do |utopic| %>
+      <% if utopic.topic_id != 0 %>
+       <% if params[:topic] == utopic.topic.id.to_s %> 
        <li class="active"> 
        <%else%>
        <li>
         <%end%>
+
        
-       <%= link_to topic.name, :topic => topic.id %> </li>
-       
+       <%= link_to utopic.topic.name, :topic => utopic.topic.id %> </li>
+
+       <%end%>
        <%end%>
       
   </ul>

@@ -28,8 +28,7 @@ group :production do
 end
 
 
-
-gem 'bootstrap-sass', '2.0.0'
+gem 'bootstrap-sass', '~> 2.0.4.0'
 
 gem 'pismo'
 

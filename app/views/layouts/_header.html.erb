@@ -1,45 +1,62 @@
+
 <header>
-<header class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <%= link_to image_tag( 'logo.gif'), root_path, id: "logo" %>
-      <nav>
-        <ul class="nav pull-right">
-          <li><%= link_to "Home", root_path %></li>
+  <div class="navbar navbar-static-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class ="jlogo">
+        <%= link_to image_tag( 'logo.gif'), root_path, id: "logo" %>
+        </div>
+        <nav>
 
-          <% if current_user %>
+          <ul class="nav pull-left">
 
-        
-            <li id="fat-menu" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Account <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "Profile", current_user %></li>
-                <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-                <li class="divider"></li>
-                <li>
-                  <%= link_to "Log out", logout_path %>
-                </li>
-              </ul>
-
-            </li>
+          </ul>
+          <ul class="nav pull-right">
+            
+            <% if current_user %>
               <% if current_user.invitation_limit > 0 %>
-              <li>
-            <p>
+                      <li>
+                          
+                            <%= link_to 'invite', new_invitation_path %> 
+                         
+                      </li>
+              <% end %>
+            <%end%>
+            
 
-              <%= link_to 'Send invitation', new_invitation_path %>
-              (<%= current_user.invitation_limit %> left)
-            </p>
-          <% end %>
-        </li>
+            <% if current_user %>
+              <li id="fat-menu" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <%= current_user.name %><b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
 
-          <% else %>
-            <li><%= link_to "Log in", login_path %></li>
-          <% end %>
-        </ul>
 
-      </nav>
+                  <li><%= link_to (current_user.followers.count.to_s + " followers") , followers_user_path(current_user) %></li>
+                  <li><%= link_to (current_user.followed_users.count.to_s + " following") , following_user_path(current_user) %></li>
+                  <li><%= link_to "Profile", current_user %></li>
+                  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                  
+                  <li class="divider"></li>
+                  <li>
+                    <%= link_to "Log out", logout_path %>
+                  </li>
+                </ul>
+
+
+              </li>
+
+              <li><div class ="visible-phone"> <%= button_to "Post", new_post_path, :class => "btn btn-small btn-primary btn-posting", :method => :get %></div> </li>
+
+                
+                
+
+            <% else %>
+              <li><%= link_to "Log in", login_path %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
     </div>
   </div>
 </header>

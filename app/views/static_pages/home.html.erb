@@ -1,19 +1,12 @@
 <% if current_user %>
   <div class="row">
-    <aside class="span4">
-      <section>
-        <%= render 'shared/user_info' %>
-      </section>
-      <section>
-        <%= render 'shared/stats' %>
-      </section>
-      <section>
-        <%= render 'shared/post_form' %>
-      </section>
-    </aside>
+    <div class = "span12">  
+      <div class ="hidden-phone"><%= render 'shared/post_form' %> </div>  
       <%= render 'shared/topic_menu' %>
-      <h3>Feed</h3>
       <%= render 'shared/feed' %>
+    </div>
+    
+
     </div>
   </div>  
 <% else %>

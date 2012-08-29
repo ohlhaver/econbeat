@@ -2,16 +2,20 @@
 <span class="content"><b><%= link_to post.headline, post.url %></b></span>
 <% if post.author %>  <%= post.author %><%end%>
   <span class="content"><%= truncate(post.description, :length => 100, :omission =>"...", :separator => ' ') %>  
-    <% if current_user == post.user %>
-    <%= link_to "delete", post, method: :delete,
+  	</span> 
+
+  <span class="timestamp">
+    
+
+   <%= post.topic.name + " - " unless post.topic == nil  %> <%= time_ago_in_words(post.created_at) %> ago
+  </span>
+  
+  <% if current_user == post.user %>
+    <%= link_to "x", post, method: :delete,
                                      data: { confirm: "You sure?" },
                                      title: post.url %>
   <% end %>
-</span> 
-
-  <span class="timestamp">
-   <%= post.topic.name + " - " unless post.topic == nil  %> <%= time_ago_in_words(post.created_at) %> ago
-  </span>
+	
   
 </li>
 

@@ -32,9 +32,9 @@ resources :users do
 end
 
 resources :filters, only: [:new, :create, :destroy]
-resources :posts, only: [:create, :destroy]
+resources :posts, only: [:new, :create, :destroy]
 resources :sessions
-resources :relationships, only: [:create, :destroy]
+resources :relationships, only: [:new, :create, :destroy]
 resources :password_resets
 
   # The priority is based upon order of creation:

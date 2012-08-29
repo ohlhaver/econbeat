@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "bootstrap-responsive";
 
 
 /* mixins, variables, etc. */
@@ -6,19 +7,28 @@
 $grayMediumLight: #eaeaea;
 
 @mixin box_sizing {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
   box-sizing: border-box;
 }
 
 /* universal */
 
+.container {
+    
+    width: 97%;
+
+}
+
 html {
   overflow-y: scroll;
 }
 
+
+
+
 body {
-  padding-top: 60px;
+  
 }
 
 section {
@@ -35,6 +45,8 @@ textarea {
     margin-bottom: 10px;
   }
 }
+
+
 
 /* typography */
 
@@ -66,6 +78,34 @@ p {
 
 /* header */
 
+
+.navbar-inner {
+  background-color: white; /* background color will be black for all browsers */
+  background-image: none;
+  background-repeat: no-repeat;
+  filter: none;
+
+
+}
+
+.jlogo {
+  margin-top: -5px;
+  margin-left: 1%;
+}
+
+.navbar .nav li {
+      a {
+    color: #3B5998;
+    text-decoration: none;
+    font-weight: bold;
+    }
+    a:hover {
+    color: #3B5998;
+    text-decoration: underline;
+    font-weight: bold;
+    }
+}
+
 #logo {
   float: left;
   margin-right: 10px;
@@ -76,45 +116,15 @@ p {
   padding-top: 9px;
   font-weight: bold;
   line-height: 1;
-
   &:hover {
-    color: black;
+    color: white;
     text-decoration: none;
   }
 }
-.navbar-inner {
-  background-color: white; /* background color will be black for all browsers */
-  background-image: none;
-  background-repeat: no-repeat;
-  filter: none;
-}
-
 
 /* footer */
 
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
-  a {
-    color: $gray;
-    &:hover {
-      color: $grayDarker;
-    }
-  }
-  small {
-    float: left;
-  }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 10px;
-    }
-  }
-}
+
 
 /* miscellaneous */
 
@@ -186,13 +196,63 @@ aside {
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
+.form-inline {
+
+}
+
+.form-horizontal .controls {
+  margin-left: 10px;
+}
+
+#post_box{
+  display: inline-block;
+  width: 172px;
+}
+
+#select_box{
+  display: inline-block;
+  width: 80px;
+
+}
+
+#button_box{
+  display: inline-block;
+
+}
+
+
+
+
+input, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   padding: 10px;
   height: auto;
   margin-bottom: 15px;
-  @include box_sizing;
+  font-size: 30px;
+
+
+}
+textarea, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  height: auto;
+  margin-bottom: 15px;
+
+}
+ select, .uneditable-input {
+
+  width: 100%;
+  margin-left: 0%;
+
+
+
+}
+
+.btn-posting {
+  margin-left: 0px;
+
 }
 
 #error_explanation {
@@ -231,7 +291,7 @@ input, textarea, select, .uneditable-input {
   
   li {
     padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
   }
 }
 
@@ -248,4 +308,70 @@ aside {
     height: 100px;
     margin-bottom: 5px;
   }
+}
+
+/* stagely */
+
+body {
+    background-color: #FFFFFF;
+    color: #333333;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 12px;
+    line-height: 1.38;
+    margin: 0;
+
+    a {
+    color: #3B5998;
+    text-decoration: none;
+    font-weight: bold;
+    }
+    a:hover {
+    color: #3B5998;
+    text-decoration: underline;
+    font-weight: bold;
+    }
+
+      .rsvp {
+        float: left;
+        a {
+          font-weight: normal;
+        }
+      }
+
+      .subtext {
+      font-size: 11px;
+    line-height: 1.28;
+    }
+
+          .user {
+      font-weight: bold;
+        font-size: 11px;
+    line-height: 1.28;
+      color: #000000;
+       a {
+          color: #000000;
+        }
+
+    }
+
+
+
+
+}
+
+
+input {
+font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+}
+
+.controls .text {
+height: 18px;
+width: 55%;
+}
+
+footer {
+font-size: 12px;
+text-align: center;
+margin-top: 50px;
+margin-bottom: 20px
 }

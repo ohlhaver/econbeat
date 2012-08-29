@@ -36,7 +36,14 @@ class UsersController < ApplicationController
 
 	def show
     @user = User.find(params[:id])
-    @topics = Topic.find(:all)
+   
+      @utopics = @user.utopics
+      @utopic = @utopics.find_by_topic_id(params[:topic])
+      
+      #@topics = Topic.find(:all)
+
+      
+      #@topic = Topic.find(params[:topic]) if params[:topic]
       if params[:topic]
         @posts = @user.posts.where("topic_id = ?", params[:topic]) 
       else
@@ -53,14 +60,14 @@ class UsersController < ApplicationController
                 
 
   def following
-    @title = "Following"
+    @title = "is following"
     @user = User.find(params[:id])
     @users = @user.followed_users.page params[:page]
     render 'show_follow'
   end
 
   def followers
-    @title = "Followers"
+    @title = "is followed by"
     @user = User.find(params[:id])
     @users = @user.followers.page params[:page]
     render 'show_follow'

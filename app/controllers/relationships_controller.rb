@@ -1,6 +1,16 @@
 class RelationshipsController < ApplicationController
 	before_filter :authorize
 
+def new
+   @user = User.find(params[:followed_id])
+       current_user.follow!(@user)
+        respond_to do |format|
+          format.html { redirect_to @user, :only_path => true }
+          format.js
+        end
+end
+
+
 
   def create
     @user = User.find(params[:relationship][:followed_id])

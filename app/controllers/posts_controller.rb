@@ -3,6 +3,10 @@ class PostsController < ApplicationController
 	before_filter :authorize, only: [:create, :destroy]
 	before_filter :correct_user,   only: :destroy
 
+	def new
+
+      @post  = current_user.posts.build if current_user
+	end
 
 	def create
 
