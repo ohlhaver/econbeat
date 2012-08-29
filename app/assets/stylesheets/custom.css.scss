@@ -88,6 +88,8 @@ p {
 
 }
 
+
+
 .jlogo {
   margin-top: -5px;
   margin-left: 1%;
@@ -196,6 +198,10 @@ aside {
 
 /* forms */
 
+#follow-form {
+  display: inline-block;
+}
+
 .form-inline {
 
 }
@@ -218,10 +224,13 @@ aside {
 #button_box{
   display: inline-block;
 
+
 }
 
 
-
+.user_show .nav-tabs {
+  margin-top: 40px;
+}
 
 input, .uneditable-input {
   border: 1px solid #bbb;

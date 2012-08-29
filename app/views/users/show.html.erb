@@ -1,29 +1,34 @@
+<div class ="user_show">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="span4">
+            <h3>
+          <%= @user.name %>
+            <% if @utopic %>
 
-<div class="row-fluid">
-  <div class="span12">
-    <div class="span4">
-          <h3>
-        <%= @user.name %>
-          <% if @utopic %> @ <%= @utopic.topic.name.downcase %> 
-              <% if current_user.following?(@user) %>
-                <%= render @utopic %>
-              <%end%> 
-            <%else%>
-              <%= render 'follow_form' if current_user %>
-            <%end%>
-       </h3>
+              <%end%>
+         </h3>
+      </div>
+      <div class="span3">
+      <%= render 'shared/stats' %>
+      </div>
+      <div class="span5">
+      <% if current_user.following?(@user) && @utopic %>
+                  <%= render @utopic %>
+                <%else%> 
+      <%= render 'follow_form' if current_user %>
+      <%end%>
+      </div>
+      <% if @user.posts.any? %>
+      <%= render 'shared/utopic_menu' %>
+         <ol class="microposts">
+          <%= render @posts %>
+          </ol>
+        <%= paginate @posts %>
+      <% end %>       
     </div>
-    <div class="span8">
-    <%= render 'shared/stats' %>
-  </div>
-    <% if @user.posts.any? %>
-    <%= render 'shared/utopic_menu' %>
-       <ol class="microposts">
-        <%= render @posts %>
-        </ol>
-      <%= paginate @posts %>
-    <% end %>       
-  </div>
- 
-  
-</div> 
+   
+    
+  </div> 
+
+</div>
