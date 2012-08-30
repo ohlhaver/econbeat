@@ -10,8 +10,11 @@
 
   </head>
   <body>
+      
     <%= render 'layouts/header' %>
-        <div class="container">
+    <div class="container">
+    <div class="span8 offset2">
+        
     
       <% flash.each do |key, value| %>
             <div class="alert alert-<%= key %>"><%= value %></div>
@@ -20,6 +23,9 @@
       <%= yield %>
     
     </div>
+    </div>
+    <div class="span12">
     <footer>(c) Jurnalo </footer>
+  
   </body>
 </html>

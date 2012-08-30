@@ -1,12 +1,15 @@
 class Post < ActiveRecord::Base
+  
   attr_accessible :topic_id, :url
   belongs_to :user
   belongs_to :topic
   belongs_to :utopic
   validates :user_id, presence: true
-  validates :topic_id, presence: true
-  validates :url, presence: true
+  #validates :topic_id, presence: true
+  validates_presence_of :url, :message => 'is required'
+  #validates_presence_of :headline, :message => 'is required'
   validates :headline, presence: true
+  
 
   default_scope order: 'posts.created_at DESC'
 

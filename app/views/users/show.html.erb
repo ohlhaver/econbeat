@@ -1,7 +1,8 @@
 <div class ="user_show">
-  <div class="row-fluid">
-    <div class="span12">
-      <div class="span4">
+  <div class="row">
+    
+    
+      <div class="span3">
             <h3>
           <%= @user.name %>
             <% if @utopic %>
@@ -12,7 +13,7 @@
       <div class="span3">
       <%= render 'shared/stats' %>
       </div>
-      <div class="span5">
+      <div class="span2">
       <% if current_user.following?(@user) && @utopic %>
                   <%= render @utopic %>
                 <%else%> 
@@ -26,7 +27,7 @@
           </ol>
         <%= paginate @posts %>
       <% end %>       
-    </div>
+    
    
     
   </div> 

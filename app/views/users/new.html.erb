@@ -1,7 +1,7 @@
 <h1>Sign Up</h1>
 
 <div class="row">
-  <div class="span6 offset3">
+
 
 <%= form_for @user do |f| %>
   <%= f.hidden_field :invitation_token %>
@@ -25,5 +25,4 @@
   <div class="actions"><%= f.submit "Sign Up", class: "btn btn-large btn-primary" %></div>
 <% end %>
 
-  </div>
 </div>

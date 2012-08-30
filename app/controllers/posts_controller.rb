@@ -11,17 +11,39 @@ class PostsController < ApplicationController
 	def create
 
 	    @post = current_user.posts.build(params[:post])
-	    @doc = Pismo::Document.new(@post.url)
-	    @headline = @doc.titles[1]
-	    @headline = @doc.titles[2] if @headline == ""
-	    @post.headline = @headline[0,250]
-	    @post.description = @doc.description[0,250] if @doc.description != nil
-	    @post.author = @doc.author[0,250] if @doc.author != nil
-	    @post.topic_id = 0 if @post.topic_id == nil
-	    #@utopic = @post.topic_id
-	    @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
+	    	unless @post.url == ""
+			    @doc = Pismo::Document.new(@post.url)
+			    	unless @doc == nil
+			     
+					    @headline = @doc.titles[1]
 
-	    @post.utopic_id = @utopic.id
+					    if @headline == nil
+					    	@headline = @doc.titles[2] 
+					    elsif @headline.length < 20
+					    	@headline = @doc.titles[2] 
+					    end
+
+					    if @headline == nil
+					    	@headline = @doc.title 
+					    elsif @headline.length < 20
+					    	@headline = @doc.title 
+					    end
+
+
+
+					    @post.headline = @headline[0,250] if @headline != nil
+					    @post.description = @doc.description[0,250] if @doc.description != nil
+					    @post.author = @doc.author[0,250] if @doc.author != nil
+					end
+				    @post.topic_id = 0 if @post.topic_id == nil
+				    #@utopic = @post.topic_id
+				    @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
+
+				    @post.utopic_id = @utopic.id
+
+				  
+		    end
+		
 
 	    if @post.save
 	     
@@ -32,8 +54,8 @@ class PostsController < ApplicationController
 		      flash[:success] = "Post created!"
 		      redirect_to root_url
 	    else
-	      @feed_items = []
-      	  render 'static_pages/home'
+
+	       render "new"
    		end
   	end
 
