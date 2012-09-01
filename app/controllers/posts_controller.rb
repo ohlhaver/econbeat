@@ -34,6 +34,8 @@ class PostsController < ApplicationController
 					    @post.headline = @headline[0,250] if @headline != nil
 					    @post.description = @doc.description[0,250] if @doc.description != nil
 					    @post.author = @doc.author[0,250] if @doc.author != nil
+					    @post.fbid = Time.now.to_i.to_s + " " + current_user.id.to_s 
+					    #@post.fbid = @post.url
 					end
 				    @post.topic_id = 0 if @post.topic_id == nil
 				    #@utopic = @post.topic_id

@@ -2,24 +2,24 @@ class UsersController < ApplicationController
 	before_filter :correct_user, only: [:index, :edit, :update, :destroy]
   before_filter :authorize, only: [:following, :followers, :show]
 
- def new
-  @user = User.new(:invitation_token => params[:invitation_token])
-  @user.email = @user.invitation.recipient_email if @user.invitation
- end
+ #def new
+ # @user = User.new(:invitation_token => params[:invitation_token])
+ # @user.email = @user.invitation.recipient_email if @user.invitation
+ #end
 
- def create
-  @user = User.new(params[:user])
-  if @user.save
-    if @user.invitation
-      @inviter = User.find(@user.invitation.sender_id) 
-      @user.follow!(@inviter)
-    end
-    cookies.permanent[:auth_token] = @user.auth_token
-    redirect_to root_url, notice: "Thank you for signing up!"
-  else
-    render "new"
-  end
- end
+ #def create
+ # @user = User.new(params[:user])
+ # if @user.save
+ #   if @user.invitation
+ #     @inviter = User.find(@user.invitation.sender_id) 
+ #     @user.follow!(@inviter)
+ #   end
+ #   cookies.permanent[:auth_token] = @user.auth_token
+ #   redirect_to root_url, notice: "Thank you for signing up!"
+ # else
+ #   render "new"
+ # end
+ #end
 
  def edit
     @user = User.find(params[:id])

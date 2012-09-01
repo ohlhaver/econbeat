@@ -43,3 +43,7 @@ gem 'delayed_job_active_record'
 gem "daemons"
 
 gem "brakeman"
+
+gem 'omniauth-facebook'
+
+gem 'koala'

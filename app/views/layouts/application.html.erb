@@ -26,12 +26,7 @@
     </div>
     <div class="span12">
     <footer>
-      <%if current_user %>
-               <% if current_user.invitation_limit > 0 %>     
-                            <%= link_to 'Send invitation (' +  current_user.invitation_limit.to_s + ' left)' , new_invitation_path %>
-                 <br>     
-              <% end %>
-            <%end%>
+     
       (c) Jurnalo </footer>
   
   </body>

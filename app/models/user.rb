@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :password, :name, :password_confirmation, :invitation_token
-  has_secure_password
-  has_many :posts
+  #has_secure_password
+  has_many :posts, :dependent => :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
   has_many :reverse_relationships, foreign_key: "followed_id",
@@ -12,24 +12,124 @@ class User < ActiveRecord::Base
   has_many :filters
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
   belongs_to :invitation
+  validates_uniqueness_of :uid
 
-  validates :name, presence: true, length: { maximum: 50 },
-                    uniqueness: { case_sensitive: false }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
-  validates :password, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
+  #validates :name, presence: true, length: { maximum: 50 },
+  #                  uniqueness: { case_sensitive: false }
+  #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  #validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
+  #                  uniqueness: { case_sensitive: false }
+  #validates :password, length: { minimum: 6 }
+  #validates :password_confirmation, presence: true
 
-  validates_presence_of :invitation_id, :message => 'is required'
-  validates_uniqueness_of :invitation_id
+  #validates_presence_of :invitation_id, :message => 'is required'
+  #validates_uniqueness_of :invitation_id
 
-  before_save { |user| user.email = email.downcase }
-  before_save { |user| user.name = name.downcase }
+  #before_save { |user| user.email = email.downcase }
+  #before_save { |user| user.name = name.downcase }
 
 
-  before_create { generate_token(:auth_token) }
-  before_create :set_invitation_limit
+  #before_create { generate_token(:auth_token) }
+  #before_create :set_invitation_limit
+
+
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user = User.find_or_create_by_uid(auth.uid)
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.name
+      user.email = auth.info.email
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.picture = user.facebook.get_picture("me")
+      user.save!
+    end
+  end
+
+
+  def sync_fb
+    @fb_posts = self.facebook.fql_query("SELECT title,summary,url,created_time,link_id,picture FROM link WHERE owner=me()")
+    @fb_posts.each do |fb_post|
+
+      @post = Post.new
+      @post.user = self
+      @post.url = fb_post["url"]
+      @post.fbid = fb_post["link_id"]
+      @post.headline = fb_post["title"]
+      @post.description = fb_post["summary"]
+      @post.topic_id = 0
+      @post.picture = fb_post["picture"]
+      @post.created_at = Time.at(fb_post["created_time"])
+      @post.save
+   
+    end
+  end
+
+
+  def load_friends_posts
+    @friends = self.facebook.get_connections("me", "friends").first(5)
+    @friends.each do |friend|
+      @user=User.new
+      #@user=User.find_or_create_by_uid(friend["id"])
+      @user.uid = friend["id"]
+      @user.name = friend["name"]
+      @user.picture = self.facebook.get_picture(friend["id"])
+      
+
+      if @user.save
+        @fb_posts = self.facebook.get_connections(@user.uid,"links")
+        @fb_posts.each do |fb_post|
+
+            @post = Post.new
+            @post.user = @user
+            @post.url = fb_post["link"]
+            @post.fbid = fb_post["id"]
+            @post.headline = fb_post["name"]
+            @post.description = fb_post["description"]
+            @post.topic_id = 0
+            @post.picture = fb_post["picture"]
+            @post.created_at = Time.at(fb_post["created_time"].to_time)
+            @post.save
+        end
+        self.follow!(@user)
+        
+       
+      end
+      
+    end
+
+  end
+
+  def reload_authors
+    self.posts.where(:author => nil).each do |post|
+      begin
+      @doc = Pismo::Document.new(post.url) 
+      rescue => ex
+        post.author = ""
+        next
+      end 
+        if @doc.author != nil
+          post.author = @doc.author[0,250]
+        else
+          post.author = ""
+        end
+        post.save
+      end
+  end
+
+  
+
+
+
+
+  def facebook
+    @facebook ||= Koala::Facebook::API.new(oauth_token)
+    block_given? ? yield(@facebook) : @facebook
+  rescue Koala::Facebook::APIError => e
+    logger.info e.to_s
+    nil # or consider a custom null object
+  end
 
   def send_password_reset
     generate_token(:password_reset_token)
@@ -72,6 +172,7 @@ class User < ActiveRecord::Base
   def invitation_token=(token)
     self.invitation = Invitation.find_by_token(token)
   end
+
 
   private
 

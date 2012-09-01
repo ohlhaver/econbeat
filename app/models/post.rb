@@ -4,11 +4,12 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :topic
   belongs_to :utopic
-  validates :user_id, presence: true
+  validates_uniqueness_of :fbid
+  #validates :user_id, presence: true
   #validates :topic_id, presence: true
-  validates_presence_of :url, :message => 'is required'
+  #validates_presence_of :url, :message => 'is required'
   #validates_presence_of :headline, :message => 'is required'
-  validates :headline, presence: true
+  #validates :headline, presence: true
   
 
   default_scope order: 'posts.created_at DESC'

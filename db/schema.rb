@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120827091249) do
+ActiveRecord::Schema.define(:version => 20120901162657) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -92,8 +92,12 @@ ActiveRecord::Schema.define(:version => 20120827091249) do
     t.string   "author"
     t.integer  "topic_id"
     t.integer  "utopic_id"
+    t.string   "fbid"
+    t.string   "comment"
+    t.string   "picture"
   end
 
+  add_index "posts", ["fbid"], :name => "index_posts_on_fbid", :unique => true
   add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
   add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id_and_created_at"
   add_index "posts", ["utopic_id"], :name => "index_posts_on_utopic_id"
@@ -126,10 +130,16 @@ ActiveRecord::Schema.define(:version => 20120827091249) do
     t.datetime "password_reset_sent_at"
     t.integer  "invitation_id"
     t.integer  "invitation_limit"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.string   "picture"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true
+  add_index "users", ["uid"], :name => "index_users_on_uid", :unique => true
 
   create_table "utopics", :force => true do |t|
     t.integer  "user_id"
