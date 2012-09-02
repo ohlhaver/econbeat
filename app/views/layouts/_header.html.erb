@@ -10,22 +10,22 @@
 
           <ul class="nav pull-left">
             
-            
-
-          </ul>
-          <ul class="nav pull-right">
-            
-            <% if current_user %>
-            <li><%= link_to "Profile", current_user %></li>
+                        <% if current_user %> 
+            <li><%= link_to current_user.name, current_user %></li>
              
 
             <%end%>
             
 
+          </ul>
+          <ul class="nav pull-right">
+            
+
+
             <% if current_user %>
               <li id="fat-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                 <%= current_user.name %><b class="caret"></b>
+                 Account<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
 

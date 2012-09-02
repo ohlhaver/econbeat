@@ -1,11 +1,17 @@
 <li id="<%= feed_item.id %>">
 
 
-	<span class = "user"><%= image_tag feed_item.user.picture, :width => "20" %> <%= link_to feed_item.user.name, feed_item.user %> </span>
 
 
 
+	<div id ="user_image">
+<%= link_to (image_tag feed_item.user.picture, :width => "20"), feed_item.user  %>
+</div> 
+<div id ="post_user">
+ 		<span class = "user"><%= link_to feed_item.user.name, feed_item.user %> </span>
 
+<br>
+ 
 		   <span class="content"><%= link_to feed_item.headline, feed_item.url %><br>
 		 <% if feed_item.author %>  by <%= feed_item.author %><br><%end%>
 		  <%= truncate(feed_item.description, :length => 100, :omission =>"...", :separator => ' ') %> </span>
@@ -24,6 +30,7 @@
 		  <% end %>
 </span>
 
+</div>
    
  
 </li>

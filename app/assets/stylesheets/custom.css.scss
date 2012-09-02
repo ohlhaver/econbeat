@@ -301,6 +301,7 @@ textarea, .uneditable-input {
   li {
     padding: 10px 0;
     border-bottom: 1px solid #e8e8e8;
+
   }
 }
 
@@ -318,6 +319,49 @@ aside {
     margin-bottom: 5px;
   }
 }
+
+#post_image {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 4px;
+
+}
+
+#user_image {
+  display: inline-block;
+  vertical-align: top;
+
+
+}
+
+#feed_item_image {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 44px;
+ 
+
+}
+
+#post_text {
+  margin-left: 10px;
+  display: inline-block;
+  width: 60%;
+
+
+}
+
+#post_user {
+  margin-left: 5px;
+  display: inline-block;
+  width: 60%;
+  margin-bottom: 10px;
+
+
+}
+
+
+
+
 
 /* stagely */
 

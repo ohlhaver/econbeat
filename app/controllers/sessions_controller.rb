@@ -3,8 +3,8 @@ class SessionsController < ApplicationController
 	def create
 	    user = User.from_omniauth(env["omniauth.auth"])
 	    session[:user_id] = user.id
-	    user.sync_fb
-	    user.load_friends_posts
+	    user.delay.sync_fb
+	    #user.load_friends_posts
 	    redirect_to root_url
   	end
 

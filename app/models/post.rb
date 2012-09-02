@@ -11,6 +11,7 @@ class Post < ActiveRecord::Base
   #validates_presence_of :headline, :message => 'is required'
   #validates :headline, presence: true
   
+  after_create :ensure_picture
 
   default_scope order: 'posts.created_at DESC'
 
@@ -20,5 +21,10 @@ class Post < ActiveRecord::Base
                          WHERE follower_id = :user_id"
     where("user_id IN (#{followed_user_ids}) OR user_id = :user_id", 
           user_id: user.id)
+  end
+
+  def ensure_picture
+    self.picture ="https://fbexternal-a.akamaihd.net/safe_image.php" if self.picture == nil
+    self.save
   end
 end

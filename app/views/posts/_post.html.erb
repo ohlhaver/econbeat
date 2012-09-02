@@ -1,23 +1,28 @@
-<li>
-<span class="content"><b><%= link_to post.headline, post.url %></b></span>
-<% if post.author %>  <%= post.author %><%end%>
-  <span class="content"><%= truncate(post.description, :length => 100, :omission =>"...", :separator => ' ') %>  
-  	</span> 
+ 
+<li id="<%= post.id %>">
+  <div id ="post_image"><%= link_to (image_tag post.picture, :width => "30"), post.picture if post.picture != nil  %></div>
+  <div id ="post_text">
+    <span class="content"><b><%= link_to post.headline, post.url %></b></span>
+    <% if post.author %>  <%= post.author %><%end%>
+      <span class="content"><%= truncate(post.description, :length => 100, :omission =>"...", :separator => ' ') %>  
+      	</span> 
 
-  <span class="timestamp">
-    
+      <span class="timestamp">
+        
 
-   <%= post.topic.name + " - " unless post.topic == nil  %> <%= time_ago_in_words(post.created_at) %> ago
-  </span>
-  
-  <% if current_user == post.user %>
-    <%= link_to "x", post, method: :delete,
-                                     data: { confirm: "You sure?" },
-                                     title: post.url %>
-  <% end %>
-	
+       <%= post.topic.name + " - " unless post.topic == nil  %> <%= time_ago_in_words(post.created_at) %> ago
+      </span>
+      
+      <% if current_user == post.user %>
+        <%= link_to "x", post, method: :delete,
+                                         data: { confirm: "You sure?" },
+                                         title: post.url %>
+      <% end %>
+	</div>
+
   
 </li>
+
 
 
 
