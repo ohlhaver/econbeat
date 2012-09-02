@@ -4,9 +4,16 @@ class FacebookUpdatesController < ApplicationController
   layout nil
 
   def create
-    FacebookUpdate.create(:uid => params["entry"][0]["uid"])
+  	real_time_update!(params)
     render :text=>'success'
   end
+
+  def real_time_update!(params)
+  	@update = FacebookUpdate.new
+  	@update.uid = params["entry"][0]["uid"]
+	@update.save
+  end
+
 
   def index
     Rails.logger.info("FacebookUpdatesController verification")
