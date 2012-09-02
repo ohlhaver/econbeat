@@ -7,7 +7,7 @@ if Rails.env.development?
 else
 
 	Rails.application.config.middleware.use OmniAuth::Builder do
-	  provider :facebook, '198036786877634', '	a9c8a0fdadd66430a25df6724d4c19de', scope: "email"
+	  provider :facebook, '198036786877634', 'a9c8a0fdadd66430a25df6724d4c19de', scope: "email"
 	end
 
 end
