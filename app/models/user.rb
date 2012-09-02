@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
       @post.description = fb_post["summary"]
       @post.topic_id = 0
       @post.picture = fb_post["picture"]
-      @post.created_at = Time.at(fb_post["created_time"].to_time)
+      @post.created_at = Time.at(fb_post["created_time"])
       @post.save
    
     end

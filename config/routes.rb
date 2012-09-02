@@ -43,6 +43,8 @@ resources :sessions
 resources :relationships, only: [:new, :create, :destroy]
 resources :password_resets
 
+resources :facebook_updates, :only=>[:create, :index]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
