@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
   #validates_presence_of :headline, :message => 'is required'
   #validates :headline, presence: true
   
-  after_create :ensure_picture
+  after_create :ensure_picture, :filter_bad_posts
 
   default_scope order: 'posts.created_at DESC'
 
@@ -27,4 +27,12 @@ class Post < ActiveRecord::Base
     self.picture ="https://fbexternal-a.akamaihd.net/safe_image.php" if self.picture == nil
     self.save
   end
+
+  def filter_bad_posts
+    if self.url.first == "/" || (self.url.starts_with? "http://www.facebook.com/")
+      self.hidden = true
+      self.save
+    end
+  end
+
 end

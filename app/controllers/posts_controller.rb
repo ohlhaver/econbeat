@@ -62,7 +62,9 @@ class PostsController < ApplicationController
   	end
 
   def destroy
-    @post.destroy
+  	@post.hidden=true
+  	@post.save
+    #@post.destroy
     redirect_to root_url
   end
 

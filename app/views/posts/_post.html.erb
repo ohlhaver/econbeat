@@ -1,4 +1,4 @@
- 
+<% unless post.hidden? %> 
 <li id="<%= post.id %>">
   <div id ="post_image"><%= link_to (image_tag post.picture, :width => "30"), post.picture if post.picture != nil  %></div>
   <div id ="post_text">
@@ -22,7 +22,7 @@
 
   
 </li>
-
+<%end%>
 
 
 
