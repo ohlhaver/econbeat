@@ -4,7 +4,7 @@ class FacebookUpdatesController < ApplicationController
   layout nil
 
   def create
-    FacebookUpdate.create(params)
+    FacebookUpdate.create(:uid => params["entry"][0]["uid"])
     render :text=>'success'
   end
 
