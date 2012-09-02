@@ -23,25 +23,14 @@
 
 
             <% if current_user %>
-              <li id="fat-menu" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                 Account<b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
 
-                  <li><%= link_to "Profile", current_user %></li>
-                  <li><%= link_to (current_user.followers.count.to_s + " followers") , followers_user_path(current_user) %></li>
-                  <li><%= link_to (current_user.followed_users.count.to_s + " following") , following_user_path(current_user) %></li>
-                  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-                  
-                  <li class="divider"></li>
                   <li>
                     <%= link_to "Sign out", signout_path, id: "sign_out" %>
                   </li>
-                </ul>
+               
 
 
-              </li>
+            
 
               <li><div class ="visible-phone"> <%= button_to "Post", new_post_path, :class => "btn btn-small btn-primary btn-posting", :method => :get %></div> </li>
 
@@ -50,7 +39,7 @@
                 
 
             <% else %>
-              <li><%= link_to "Sign in", "/auth/facebook", id: "sign_in" %></li>
+              <li><%= link_to "Join!", "/auth/facebook", id: "sign_in" %></li>
             <% end %>
           </ul>
         </nav>

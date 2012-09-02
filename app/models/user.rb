@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-      user = User.find_or_create_by_uid(auth.uid)
+      #user = User.find_or_create_by_uid(auth.uid)
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
       @post.description = fb_post["summary"]
       @post.topic_id = 0
       @post.picture = fb_post["picture"]
-      @post.created_at = Time.at(fb_post["created_time"])
+      @post.created_at = Time.at(fb_post["created_time"].to_time)
       @post.save
    
     end
