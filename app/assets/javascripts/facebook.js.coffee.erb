@@ -1,0 +1,25 @@
+jQuery ->
+  $('body').prepend('<div id="fb-root"></div>')
+
+
+  $.ajax
+    url: "#{window.location.protocol}//connect.facebook.net/en_US/all.js"
+    dataType: 'script'
+    cache: true
+
+
+window.fbAsyncInit = ->
+<% if Rails.env.development? %>
+  FB.init(appId: '<%= 266726516779542 %>', cookie: true)
+  <% else %>
+  FB.init(appId: '<%= 198036786877634 %>', cookie: true)
+  <% end %>
+
+
+
+  
+
+  $('#sign_out').click (e) ->
+    FB.getLoginStatus (response) ->
+      FB.logout() if response.authResponse
+    true
