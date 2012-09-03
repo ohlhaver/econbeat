@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
   belongs_to :invitation
   validates_uniqueness_of :uid
+  after_create :follow_fb_friends
+  
 
   #validates :name, presence: true, length: { maximum: 50 },
   #                  uniqueness: { case_sensitive: false }
@@ -65,6 +67,8 @@ class User < ActiveRecord::Base
    
     end
   end
+
+
 
 
   def load_friends_posts
@@ -161,6 +165,13 @@ class User < ActiveRecord::Base
     relationships.create!(followed_id: other_user.id)
   end
 
+  def follow_back(other_user)
+    r=Relationship.new
+    r.follower_id = other_user.id
+    r.followed_id = self.id
+    r.save
+  end
+
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user.id).destroy
   end
@@ -179,6 +190,25 @@ class User < ActiveRecord::Base
     def set_invitation_limit
       self.invitation_limit = 10
     end
+
+  #def follow_fb_friends
+  #  follow_fb_friends_loop.delay
+  #end
+
+  def follow_fb_friends
+    follow_fb_friends_action.delay
+  end
+
+  def follow_fb_friends_action
+    @friends = self.facebook.get_connections("me", "friends")
+    @friends.each do |friend|
+      jurnalo_user = User.find_by_uid(friend["id"])
+      if jurnalo_user
+        self.follow!(jurnalo_user)
+        follow_back(jurnalo_user)
+      end
+    end
+  end
 
 
 end
