@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 	include ActionView::Helpers::TextHelper
 	before_filter :authorize, only: [:create, :destroy]
-	before_filter :correct_user,   only: :destroy
+	before_filter :correct_user,   only: [:destroy, :star, :unstar]
 
 	def new
 
@@ -37,11 +37,11 @@ class PostsController < ApplicationController
 					    @post.fbid = Time.now.to_i.to_s + " " + current_user.id.to_s 
 					    #@post.fbid = @post.url
 					end
-				    @post.topic_id = 0 if @post.topic_id == nil
+				    #@post.topic_id = 0 if @post.topic_id == nil
 				    #@utopic = @post.topic_id
-				    @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
+				    #@utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
 
-				    @post.utopic_id = @utopic.id
+				    #@post.utopic_id = @utopic.id
 
 				  
 		    end
@@ -67,6 +67,26 @@ class PostsController < ApplicationController
     #@post.destroy
     redirect_to root_url
   end
+
+  def star
+  	@starred = current_user.posts.where(:starred =>true)
+  	if @starred.size > 2
+  		@starred.last.starred=nil
+  		@starred.last.save
+  	end
+  	@post = Post.find(params[:id])
+  	@post.starred=true
+  	@post.save
+  	redirect_to current_user
+  end
+
+  def unstar
+  	@post = Post.find(params[:id])
+  	@post.starred=nil
+  	@post.save
+  	redirect_to current_user
+  end
+
 
 	private
 

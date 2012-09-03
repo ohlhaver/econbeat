@@ -37,19 +37,23 @@ class UsersController < ApplicationController
 	def show
     @user = User.find(params[:id])
    
-      @utopics = @user.utopics
-      @utopic = @utopics.find_by_topic_id(params[:topic])
+      #@utopics = @user.utopics
+      #@utopic = @utopics.find_by_topic_id(params[:topic])
       
       #@topics = Topic.find(:all)
 
       
       #@topic = Topic.find(params[:topic]) if params[:topic]
-      if params[:topic]
-        @posts = @user.posts.where("topic_id = ?", params[:topic]) 
-      else
-        @posts = @user.posts
-      end
-    @posts = @posts.page params[:page]
+      #if params[:topic]
+      #  @posts = @user.posts.where("topic_id = ?", params[:topic]) 
+      #else
+
+      @posts = @user.posts.where(:starred => nil)
+      #end
+      
+      @favorites = @user.posts.where(:starred =>true)
+
+      @posts = @posts.page params[:page]
   end
 
   def feed

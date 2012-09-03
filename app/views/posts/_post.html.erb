@@ -1,5 +1,16 @@
 <% unless post.hidden? %> 
 <li id="<%= post.id %>">
+  <div id ="star">
+    <% if current_user == post.user %> 
+        <% if post.starred == true%>
+          <%= link_to raw('<i class="icon-star"></i>'), :controller => "posts", :action => "unstar", :id => post.id %>
+        <%else%>
+
+          <%= link_to raw('<i class="icon-star-empty"></i>'), :controller => "posts", :action => "star", :id => post.id %>
+          
+        <%end%>
+        <%end%>
+       </div>
   <div id ="post_image"><%= link_to (image_tag post.picture, :width => "30"), post.picture if post.picture != nil  %></div>
   <div id ="post_text">
     <span class="content"><b><%= link_to post.headline, post.url %></b></span>

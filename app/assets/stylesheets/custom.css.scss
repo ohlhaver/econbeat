@@ -1,5 +1,7 @@
+
 @import "bootstrap";
 @import "bootstrap-responsive";
+
 
 
 /* mixins, variables, etc. */
@@ -16,7 +18,7 @@ $grayMediumLight: #eaeaea;
 
 .container {
     
-    width: 97%;
+    width: 100%;
 
 }
 
@@ -223,6 +225,7 @@ aside {
 
 #button_box{
   display: inline-block;
+  margin-left: 10px;
 
 
 }
@@ -337,7 +340,7 @@ aside {
 #feed_item_image {
   display: inline-block;
   vertical-align: top;
-  margin-top: 44px;
+  margin-top: 22px;
  
 
 }
@@ -345,7 +348,7 @@ aside {
 #post_text {
   margin-left: 10px;
   display: inline-block;
-  width: 60%;
+  width: 80%;
 
 
 }
@@ -353,14 +356,33 @@ aside {
 #post_user {
   margin-left: 5px;
   display: inline-block;
-  width: 60%;
+  width: 80%;
   margin-bottom: 10px;
 
 
 }
 
+#star {
+    display: inline-block;
+    float: right;
+  
+  
+}
 
 
+#favorite_posts {
+  border: 1px solid #e8e8e8;
+  padding: 10px 10px 10px;
+  margin-top: 30px;
+  display: inline-block;
+  -moz-border-radius: 15px;
+border-radius: 10px;
+
+  h4 {
+    color: grey;
+  }
+
+}
 
 
 /* stagely */
@@ -428,3 +450,7 @@ text-align: center;
 margin-top: 50px;
 margin-bottom: 20px
 }
+
+
+
+

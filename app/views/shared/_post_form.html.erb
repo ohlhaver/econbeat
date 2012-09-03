@@ -7,9 +7,7 @@
   <div id="post_box">
     <%= f.text_field :url, placeholder: "Submit a url..." %>
   </div>
- <div id="select_box">
-  <%= f.association :topic, :prompt => "topic", :label => false %>
-</div>
+
 <div id="button_box">
   <%= f.submit "Post", class: "btn btn-medium btn-primary btn-posting" %>
 </div>

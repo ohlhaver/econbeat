@@ -22,14 +22,35 @@
       <%= render 'follow_form' if current_user %>
       <%end%>
       </div>
-      <% if @user.posts.any? %>
-      <%= render 'shared/utopic_menu' %>
+       <div class="span8">
+      <% if @favorites.any? %>
+
+      <div id = "favorite_posts">
+        Starred
+
+     
+
+
+
+          <ol class="microposts">
+          <%= render @favorites %>
+          </ol>
+
+      </div>
+       <% end %> 
+       <% if @posts.any? %>
+
+      <div id = "favorite_posts">
+        Latest
+
          <ol class="microposts">
           <%= render @posts %>
           </ol>
         <%= paginate @posts %>
-      <% end %>       
-    
+      </div>
+        <%end%>
+           
+    </div>
    
     
   </div> 

@@ -37,6 +37,12 @@ resources :users do
     end
 end
 
+resources :posts do
+    member do
+      get :star, :unstar
+    end
+end
+
 resources :filters, only: [:new, :create, :destroy]
 resources :posts, only: [:new, :create, :destroy]
 resources :sessions
