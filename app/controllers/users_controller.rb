@@ -37,23 +37,25 @@ class UsersController < ApplicationController
 	def show
     @user = User.find(params[:id])
    
-      #@utopics = @user.utopics
-      #@utopic = @utopics.find_by_topic_id(params[:topic])
+      @utopics = @user.utopics.find_all{|i| i.posts.where(:hidden=>nil).count > 0}
       
-      #@topics = Topic.find(:all)
+      @utopic = @user.utopics.find_by_topic_id(params[:topic])
+      
+      @topics = Topic.find(:all)
 
       
-      #@topic = Topic.find(params[:topic]) if params[:topic]
-      #if params[:topic]
-      #  @posts = @user.posts.where("topic_id = ?", params[:topic]) 
-      #else
-
-      @posts = @user.posts.where(:starred => nil)
-      #end
+      @topic = Topic.find(params[:topic]) if params[:topic]
+      if params[:topic]
+        @posts = @user.posts.where("topic_id = ?", params[:topic]) 
+      else
+        @posts = @user.posts
       
-      @favorites = @user.posts.where(:starred =>true)
+      end
+      
+      @favorites = @posts.where(:starred =>true, :hidden=>nil)
+      @latest = @posts.where(:starred => nil, :hidden=>nil)
 
-      @posts = @posts.page params[:page]
+      @latest = @latest.page params[:page]
   end
 
   def feed
@@ -64,14 +66,14 @@ class UsersController < ApplicationController
                 
 
   def following
-    @title = "is following"
+    @title = "Following"
     @user = User.find(params[:id])
     @users = @user.followed_users.page params[:page]
     render 'show_follow'
   end
 
   def followers
-    @title = "is followed by"
+    @title = "Followers"
     @user = User.find(params[:id])
     @users = @user.followers.page params[:page]
     render 'show_follow'

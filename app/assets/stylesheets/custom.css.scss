@@ -98,6 +98,7 @@ p {
 }
 
 .navbar .nav li {
+  margin-top: 8px;
       a {
     color: #3B5998;
     text-decoration: none;
@@ -175,15 +176,19 @@ aside {
     float: left;
     padding: 0 10px;
     border-left: 1px solid $grayLighter;
-    color: gray;
+    color: #3B5998;
+    
     &:first-child {
       padding-left: 0;
       border: 0;
     }
+
     &:hover {
-      text-decoration: none;
-      color: $blue;
+    color: #3B5998;
+    text-decoration: underline;
+    font-weight: bold;
     }
+
   }
   strong {
     display: block;
@@ -199,6 +204,11 @@ aside {
 }
 
 /* forms */
+
+#follow_button {
+  display: inline-block;
+
+}
 
 #follow-form {
   display: inline-block;
@@ -232,7 +242,8 @@ aside {
 
 
 .user_show .nav-tabs {
-  margin-top: 50px;
+  margin-top: 20px;
+  margin-bottom: 0px;
 }
 
 input, .uneditable-input {
@@ -299,11 +310,14 @@ textarea, .uneditable-input {
 
 .microposts {
   list-style: none;
-  margin: 10px 0 0 0;
-  
+  margin: 0px 0 0 0;
+
   li {
-    padding: 10px 0;
-    border-bottom: 1px solid #e8e8e8;
+    padding: 20px 0 20px;
+    border-bottom: 1px solid #F1F7FA
+
+  
+
 
   }
 }
@@ -346,7 +360,7 @@ aside {
 }
 
 #post_text {
-  margin-left: 10px;
+  margin-left: 5px;
   display: inline-block;
   width: 80%;
 
@@ -371,16 +385,24 @@ aside {
 
 
 #favorite_posts {
-  border: 1px solid #e8e8e8;
-  padding: 10px 10px 10px;
-  margin-top: 30px;
-  display: inline-block;
-  -moz-border-radius: 15px;
-border-radius: 10px;
 
-  h4 {
-    color: grey;
-  }
+  border: 1px solid $grayLighter;
+ 
+  margin-top: 20px;
+  display: inline-block;
+  
+  padding: 6px 8px 0px;
+  width: 96%;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+
+}
+
+#latest_posts {
+  margin-top: 20px;
+  display: inline-block;
+  padding: 6px 8px 5px;
+  width: 96%;
 
 }
 
@@ -390,7 +412,7 @@ border-radius: 10px;
 body {
     background-color: #FFFFFF;
     color: #333333;
-    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 12px;
     line-height: 1.38;
     margin: 0;
@@ -419,12 +441,13 @@ body {
     }
 
           .user {
-      font-weight: bold;
+      font-weight: normal;
         font-size: 11px;
     line-height: 1.28;
       color: #000000;
        a {
-          color: #000000;
+          color: #3B5998;
+          font-weight: normal;
         }
 
     }

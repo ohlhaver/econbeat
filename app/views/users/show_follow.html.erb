@@ -1,32 +1,46 @@
-<div class="row">
-  
-    <div class="span2"> 
-
-<h3><%=@user.name%></h3> <span><%= link_to "view profile", @user %></span>
-
-</div>
-
-  
-    <div class="span2">
-          
-          <br><h3><%= @title %><h3>   
-    </div>
 
 
-
-     <div class="span4"> 
-      
-     
-      <%= render 'shared/stats' %>
-    </div>
-    <br><br><br><br>
+  <div class="row">
     
+    
+      <div class="span5">
+
+            <h4>
+         <%= link_to (image_tag @user.picture), @user %> <%= link_to @user.name, @user %> </h4>
+         
+
+
+         
+      </div>
+      <div class="span3">
+        <div id = "follow_button">
+                <%if current_user.following?(@user) && @utopic %>
+                  <%= render @utopic %>
+          <%else%> 
+                <%= render 'follow_form' if current_user %>            
+         <%end%>    
+       </div>
+        <%= render 'shared/stats' %>  
+      </div>
+
+
+
+  
+  <div class="span8">
+          
+          <br><br><h4><%= @title %> </h4><br><br>
+ 
+
+
+      
       <% if @users.any? %>
         <ul class="users">
           <%= render @users %>
         </ul>
         <%= paginate @users %>
       <% end %>
+    </div>
+  
    
 
 

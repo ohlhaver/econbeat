@@ -3,50 +3,46 @@
   <div class="row">
     
     
-      <div class="span3">
+      <div class="span5">
 
-            <h3>
-         <%= image_tag @user.picture %> <%= @user.name %>
-            <% if @utopic %>
+            <h4>
+         <%= image_tag @user.picture %> <%= @user.name %> </h4>
+         
 
-              <%end%>
-         </h3>
+
+         
       </div>
       <div class="span3">
-      <%= render 'shared/stats' %>
-      </div>
-      <div class="span2">
-      <% if current_user.following?(@user) && @utopic %>
+        <div id = "follow_button">
+                <%if current_user.following?(@user) && @utopic %>
                   <%= render @utopic %>
-                <%else%> 
-      <%= render 'follow_form' if current_user %>
-      <%end%>
+          <%else%> 
+                <%= render 'follow_form' if current_user %>            
+         <%end%>    
+       </div>
+        <%= render 'shared/stats' %>  
       </div>
        <div class="span8">
+       <% if @utopics.any? %>
+        <%= render "shared/utopic_menu" %>
+        <%end%>
       <% if @favorites.any? %>
 
       <div id = "favorite_posts">
-        Starred
-
-     
-
-
-
+         Favorites
           <ol class="microposts">
           <%= render @favorites %>
           </ol>
 
       </div>
        <% end %> 
-       <% if @posts.any? %>
+       <% if @latest.any? %>
 
-      <div id = "favorite_posts">
-        Latest
-
+      <div id = "latest_posts">
          <ol class="microposts">
-          <%= render @posts %>
+          <%= render @latest %>
           </ol>
-        <%= paginate @posts %>
+        <%= paginate @latest %>
       </div>
         <%end%>
            

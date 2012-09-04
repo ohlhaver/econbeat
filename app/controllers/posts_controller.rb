@@ -37,11 +37,11 @@ class PostsController < ApplicationController
 					    @post.fbid = Time.now.to_i.to_s + " " + current_user.id.to_s 
 					    #@post.fbid = @post.url
 					end
-				    #@post.topic_id = 0 if @post.topic_id == nil
+				    @post.topic_id = 0 if @post.topic_id == nil
 				    #@utopic = @post.topic_id
-				    #@utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
+				    @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
 
-				    #@post.utopic_id = @utopic.id
+				    @post.utopic_id = @utopic.id
 
 				  
 		    end

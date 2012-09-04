@@ -1,5 +1,6 @@
 
 <header>
+  <div class ="span8 offset2">
   <div class="navbar navbar-static-top">
     <div class="navbar-inner">
       <div class="container">
@@ -17,30 +18,25 @@
             <%end%>
             
 
-          </ul>
-          <ul class="nav pull-right">
+
 
             
-
+              <% if params[:controller] == "static_pages" %>
               <li><div class ="visible-phone"> <%= button_to "Post", new_post_path, :class => "btn btn-small btn-primary btn-posting", :method => :get %></div> </li>
             
-
+              <%else%>
+              <li> <%= button_to "Post", new_post_path, :class => "btn btn-small btn-primary btn-posting", :method => :get %> </li>
+              <%end%>
+            </ul>
+             <ul class="nav pull-right">
 
             <% if current_user %>
-
-                  <li>
-                    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+              <li>
+                    <div class ="hidden-phone"><%= link_to "Sign out", signout_path, id: "sign_out" %></div>
                   </li>
                
 
-
-            
-
-
-                
-                
-
-            <% else %>
+              <%else%>
               <li><%= link_to "Join!", "/auth/facebook", id: "sign_in" %></li>
             <% end %>
           </ul>
@@ -48,4 +44,5 @@
       </div>
     </div>
   </div>
+</div>
 </header>
