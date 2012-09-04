@@ -1,7 +1,7 @@
 <% unless feed_item.hidden? %> 
 <li id="<%= feed_item.id %>">
 	<div id ="user_image">
-<%= link_to (image_tag feed_item.user.picture, :width => "20"), feed_item.user  %>
+<%= link_to (image_tag feed_item.user.picture, :width => "25"), feed_item.user  %>
 </div> 
 <div id ="post_user">
  		<span class = "user"><%= link_to feed_item.user.name, feed_item.user %> </span>

@@ -224,7 +224,8 @@ aside {
 
 #post_box{
   display: inline-block;
-  width: 172px;
+  width: 300px;
+  margin-left: 30px
 }
 
 #select_box{
@@ -362,7 +363,7 @@ aside {
 #post_text {
   margin-left: 5px;
   display: inline-block;
-  width: 80%;
+  width: 70%;
 
 
 }
@@ -370,7 +371,7 @@ aside {
 #post_user {
   margin-left: 5px;
   display: inline-block;
-  width: 80%;
+  width: 70%;
   margin-bottom: 10px;
 
 
@@ -412,8 +413,8 @@ aside {
 body {
     background-color: #FFFFFF;
     color: #333333;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    
+    
     line-height: 1.38;
     margin: 0;
 
@@ -459,7 +460,7 @@ body {
 
 
 input {
-font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+
 }
 
 .controls .text {
