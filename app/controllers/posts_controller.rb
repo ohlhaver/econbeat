@@ -19,6 +19,7 @@ def update
   				    @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
 
 				    @post.utopic_id = @utopic.id
+				    @post.save
   respond_with @post
 end
 
@@ -68,7 +69,7 @@ end
 		    	PostMailer.delay.notification(@post, alerted_users)
 			end
 		      flash[:success] = "Post created!"
-		      redirect_to root_url
+		      redirect_to current_user
 	    else
 
 	       render "new"
@@ -79,7 +80,7 @@ end
   	@post.hidden=true
   	@post.save
     #@post.destroy
-    redirect_to root_url
+    redirect_to current_user
   end
 
   def star
