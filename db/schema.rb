@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903120147) do
+ActiveRecord::Schema.define(:version => 20120904232639) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -156,5 +156,7 @@ ActiveRecord::Schema.define(:version => 20120903120147) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "utopics", ["user_id"], :name => "index_utopics_on_user_id"
 
 end

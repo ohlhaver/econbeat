@@ -28,6 +28,12 @@ private
       redirect_to root_path, alert: "Not authorized" unless current_user == @user
     end
 
+    def correct_post_user
+      @post = Post.find(params[:id])
+      redirect_to root_path, alert: "Not authorized" unless current_user == @post.user
+    end
+
+
     def redirect_back_or(default)
    	 redirect_to(session[:return_to] || default)
    	 session.delete(:return_to)

@@ -11,6 +11,7 @@
         <%end%>
         <%end%>
        </div>
+
   <div id ="post_image"><%= link_to (image_tag post.picture, :width => "50"), post.picture if post.picture != nil  %></div>
   <div id ="post_text">
     <span class="content"><b><%= link_to post.headline, post.url %></b></span>
@@ -20,19 +21,25 @@
 
       <span class="timestamp">
         
-
-       <%= post.topic.name + " - " unless post.topic == nil  %> <%= time_ago_in_words(post.created_at) %> ago
+ <% selected_topic = "Select topic!" %>
+<% selected_topic = post.topic.name if post.topic %>
+<%= best_in_place post, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%> -
+       <%= time_ago_in_words(post.created_at) %> ago
       </span>
+
       
       <% if current_user == post.user %>
         <%= link_to "x", post, method: :delete,
                                          data: { confirm: "You sure?" },
                                          title: post.url %>
       <% end %>
+
 	</div>
 
   
 </li>
+
+
 <%end%>
 
 

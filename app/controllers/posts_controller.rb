@@ -1,12 +1,26 @@
 class PostsController < ApplicationController
 	include ActionView::Helpers::TextHelper
+
 	before_filter :authorize, only: [:create, :destroy]
 	before_filter :correct_user,   only: [:destroy, :star, :unstar]
+	before_filter :correct_post_user,   only: [:update]
+	respond_to :html, :json
+
 
 	def new
 
       @post  = current_user.posts.build if current_user
 	end
+
+
+def update
+  @post = Post.find(params[:id])
+  @post.update_attributes(params[:post])
+  				    @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
+
+				    @post.utopic_id = @utopic.id
+  respond_with @post
+end
 
 	def create
 

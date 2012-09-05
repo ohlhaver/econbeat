@@ -2,6 +2,15 @@ class UsersController < ApplicationController
 	before_filter :correct_user, only: [:index, :edit, :update, :destroy]
   before_filter :authorize, only: [:following, :followers, :show]
 
+
+
+  respond_to :html, :json
+
+def update
+  @user = User.find(params[:id])
+  @user.update_attributes(params[:user])
+  respond_with @user
+end
  #def new
  # @user = User.new(:invitation_token => params[:invitation_token])
  # @user.email = @user.invitation.recipient_email if @user.invitation
@@ -78,6 +87,7 @@ class UsersController < ApplicationController
     @users = @user.followers.page params[:page]
     render 'show_follow'
   end
+
 
 
 

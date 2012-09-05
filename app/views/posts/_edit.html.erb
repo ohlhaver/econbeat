@@ -1,0 +1,9 @@
+<%= simple_form_for post , :html => { :class => 'form-horizontal' } do |f| %>
+
+  
+ <div id="select_box">
+  <%= f.association :topic, :prompt => "topic", :label => false %>
+</div>
+
+
+<% end %>
