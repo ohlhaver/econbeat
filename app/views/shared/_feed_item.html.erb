@@ -1,10 +1,10 @@
 <% unless feed_item.hidden? %> 
 <li id="<%= feed_item.id %>">
 	<div id ="user_image">
-<%= link_to (image_tag feed_item.user.picture, :width => "25"), feed_item.user  %>
+<%= link_to (image_tag feed_item.user.picture, :width => "25"), feed_item.user  %> 
 </div> 
 <div id ="post_user">
- 		<span class = "user"><%= link_to feed_item.user.name, feed_item.user %> </span>
+ 		<span class = "user"><%= link_to feed_item.user.name, feed_item.user %> <% unless feed_item.via == nil %> via <%= link_to feed_item.via.name, feed_item.via %> <%end%></span>
 
 <br>
  
@@ -14,15 +14,23 @@
 		    
 
 
-		<span class="timestamp">  
-		 <%= feed_item.topic.name + " - " unless feed_item.topic == nil  %> <%= time_ago_in_words(feed_item.created_at) %> ago 
+		<span class="timestamp"> 
+		<% if feed_item.user == current_user %> 
+		 <% selected_topic = "Select topic!" %>
+<% selected_topic = feed_item.topic.name if feed_item.topic %>
+<span class="editable_topic"><%= best_in_place feed_item, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%></span> -
+<%else%>
+		 <%= feed_item.topic.name + " - " unless feed_item.topic == nil  %> <%end%>
+		  <%= time_ago_in_words(feed_item.created_at) %> ago 
 		
 
 		<% if current_user == feed_item.user %> 
 		    <%= link_to "x", feed_item, method: :delete,
 		                                     data: { confirm: "You sure?" },
 		                                     title: feed_item.url %>
-
+<% else %>
+        
+  <%= link_to raw('<i class="icon-share"></i>'), :controller => "posts", :action => "share", :id => feed_item.id %>
 		  <% end %>
 </span>
 

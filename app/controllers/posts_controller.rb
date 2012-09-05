@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 	include ActionView::Helpers::TextHelper
 
-	before_filter :authorize, only: [:create, :destroy]
+	before_filter :authorize, only: [:create, :destroy, :share]
 	before_filter :correct_user,   only: [:destroy, :star, :unstar]
 	before_filter :correct_post_user,   only: [:update]
 	respond_to :html, :json
@@ -99,6 +99,24 @@ end
   	@post = Post.find(params[:id])
   	@post.starred=nil
   	@post.save
+  	redirect_to current_user
+  end
+
+  def share
+  	@post = Post.find(params[:id])
+  	@new_post = Post.new
+  	@new_post.user_id = current_user.id
+  	@new_post.url = @post.url
+  	@new_post.headline = @post.headline
+  	@new_post.description = @post.description
+  	@new_post.author = @post.author
+  	@new_post.topic_id = @post.topic_id
+  	@new_post.picture = @post.picture
+  	@new_post.fbid = @post.fbid + current_user.id.to_s
+  	@new_post.via_id = @post.user_id
+  	@utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
+				    @new_post.utopic_id = @utopic.id
+				    @new_post.save
   	redirect_to current_user
   end
 

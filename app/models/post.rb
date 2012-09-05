@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
   belongs_to :topic
   belongs_to :utopic
   validates_uniqueness_of :fbid
+  belongs_to :via, class_name: "User"
   #validates :user_id, presence: true
   #validates :topic_id, presence: true
   #validates_presence_of :url, :message => 'is required'

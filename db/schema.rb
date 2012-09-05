@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120904232639) do
+ActiveRecord::Schema.define(:version => 20120905161349) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20120904232639) do
     t.string   "picture"
     t.boolean  "hidden"
     t.boolean  "starred"
+    t.integer  "via_id"
   end
 
   add_index "posts", ["fbid"], :name => "index_posts_on_fbid", :unique => true
