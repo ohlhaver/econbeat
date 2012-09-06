@@ -49,3 +49,4 @@ gem 'omniauth-facebook'
 gem 'koala'
 
 gem 'best_in_place'
+

@@ -7,6 +7,12 @@ class PostsController < ApplicationController
 	respond_to :html, :json
 
 
+def show
+	@post = Post.find(params[:id])
+end
+
+
+
 	def new
 
       @post  = current_user.posts.build if current_user
