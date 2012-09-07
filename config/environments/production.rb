@@ -79,4 +79,7 @@ config.action_mailer.smtp_settings = {
   password: "rockybeach"
 }
 
+ENV['FACEBOOK_APP_ID'] = '198036786877634'
+ENV['FACEBOOK_SECRET'] = 'a9c8a0fdadd66430a25df6724d4c19de'
+
 end

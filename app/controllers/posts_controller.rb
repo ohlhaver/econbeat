@@ -69,6 +69,8 @@ end
 		
 
 	    if @post.save
+
+  			current_user.delay.fbpost(post_url(@post))
 	     
 	     	alerted_users = @post.user.followers - @post.utopic.users
 	    	if alerted_users != []
@@ -77,7 +79,6 @@ end
 		      flash[:success] = "Post created!"
 		      redirect_to current_user
 	    else
-
 	       render "new"
    		end
   	end
@@ -94,18 +95,22 @@ end
   	if @starred.size > 2
   		@starred.last.starred=nil
   		@starred.last.save
+  		current_user.delay.fbunstar(post_url(@starred.last))
   	end
   	@post = Post.find(params[:id])
   	@post.starred=true
   	@post.save
-  	redirect_to current_user
+  	
+  	current_user.delay.fbstar(post_url(@post))
+  	redirect_to current_user, :notice => "Article has been starred."
   end
 
   def unstar
   	@post = Post.find(params[:id])
   	@post.starred=nil
   	@post.save
-  	redirect_to current_user
+  	current_user.delay.fbunstar(post_url(@post))
+  	redirect_to current_user, :notice => "Article has been unstarred."
   end
 
   def share
@@ -123,6 +128,7 @@ end
   	@utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
 				    @new_post.utopic_id = @utopic.id
 				    @new_post.save
+	current_user.delay.fbpost(post_url(@new_post))
   	redirect_to current_user
   end
 

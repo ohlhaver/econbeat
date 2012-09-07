@@ -50,4 +50,8 @@ config.action_mailer.smtp_settings = {
 
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
 
+  ENV['FACEBOOK_APP_ID'] = '266726516779542'
+  ENV['FACEBOOK_SECRET'] = '8400807f19e2ca49f4dea8f47751c3d2'
+
+
 end

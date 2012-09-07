@@ -1,3 +1,14 @@
+<% content_for :head do %>
+  <%= tag :meta, property: "fb:app_id", content: ENV['FACEBOOK_APP_ID'] %>
+  <%= tag :meta, property: "og:site_name", content: "Jurnalo" %>
+  <%= tag :meta, property: "og:type", content: "article" %>
+  <%= tag :meta, property: "og:title", content: @post.headline %>
+  <%= tag :meta, property: "og:section", content: @post.topic.name if @post.topic %>
+  <%= tag :meta, property: "og:description", content: @post.description %>
+  <%= tag :meta, property: "og:url", content: post_url(@post) %>
+  <%= tag :meta, property: "og:image", content: @post.picture unless @post.picture =="https://fbexternal-a.akamaihd.net/safe_image.php" %>
+<% end %>
+
 <div class="row">
 <div class = "span8">
 <ol class="microposts">

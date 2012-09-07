@@ -18,7 +18,7 @@
 		<% if feed_item.user == current_user %> 
 		 <% selected_topic = "Select topic!" %>
 <% selected_topic = feed_item.topic.name if feed_item.topic %>
-<span class="editable_topic"><%= best_in_place feed_item, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%></span> -
+<span class="editable_topic"><i class="icon-edit"></i> <%= best_in_place feed_item, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%></span> -
 <%else%>
 		 <%= feed_item.topic.name + " - " unless feed_item.topic == nil  %> <%end%>
 		  <%= time_ago_in_words(feed_item.created_at) %> ago 
