@@ -61,6 +61,10 @@ end
       
       end
       
+      @access = true if current_user.facebook.get_object(@user.uid)
+
+      
+
       @favorites = @posts.where(:starred =>true, :hidden=>nil)
       @latest = @posts.where(:starred => nil, :hidden=>nil)
 

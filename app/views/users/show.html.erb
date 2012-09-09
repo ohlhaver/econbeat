@@ -31,7 +31,7 @@
 
       <div id = "favorite_posts">
          Favorites
-          <ol class="microposts">
+          <ol class="profile_microposts">
           <%= render @favorites %>
           </ol>
 
@@ -40,7 +40,7 @@
        <% if @latest.any? %>
 
       <div id = "latest_posts">
-         <ol class="microposts">
+         <ol class="profile_microposts">
           <%= render @latest %>
           </ol>
         <%= paginate @latest %>

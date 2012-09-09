@@ -314,6 +314,20 @@ textarea, .uneditable-input {
   margin: 0px 0 0 0;
 
   li {
+    padding: 20px 0 10px;
+    border-bottom: 1px solid #F1F7FA
+
+  
+
+
+  }
+}
+
+.profile_microposts {
+  list-style: none;
+  margin: 0px 0 0 0;
+
+  li {
     padding: 20px 0 20px;
     border-bottom: 1px solid #F1F7FA
 
@@ -391,7 +405,7 @@ aside {
   margin-left: 5px;
   display: inline-block;
   width: 70%;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 
 
 }
