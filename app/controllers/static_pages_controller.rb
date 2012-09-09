@@ -18,6 +18,22 @@ class StaticPagesController < ApplicationController
         @feed_items = current_user.feed.find_all{|v| v.topic_id == params[:topic].to_i } 
       end
 
+      @feed_items.each do |i|
+          if i.fbaction_id 
+            if current_user.facebook.get_object(i.fbaction_id) 
+              c = current_user.facebook.get_object(i.fbaction_id)["comments"]
+              i.comments = c["data"]
+              i.count = c["count"]
+            else
+              i.box= false
+            end
+          else
+            i.box= false
+          end
+
+
+      end
+
         @feed_items = Kaminari.paginate_array(@feed_items).page(params[:page])
 
 

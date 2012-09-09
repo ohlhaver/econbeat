@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+
+  attr_accessor :comments, :box, :count
   
   attr_accessible :topic_id, :url
   belongs_to :user
@@ -35,5 +37,7 @@ class Post < ActiveRecord::Base
       self.save
     end
   end
+
+
 
 end

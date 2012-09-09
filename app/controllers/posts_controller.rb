@@ -9,6 +9,22 @@ class PostsController < ApplicationController
 
 def show
 	@post = Post.find(params[:id])
+
+	#@fb_action_id = find_fbaction_id(@post)
+  
+	@comments = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"] if @post.fbaction_id && current_user.facebook.get_object(@post.fbaction_id)
+
+
+
+end
+
+def add_comment
+@post = Post.find(params[:id])
+	current_user.facebook.put_comment(@post.fbaction_id, params[:comment] )
+  #count = current_user.facebook.get_object(@post.fbaction_id)["comments"]["count"]
+  #@post.comments_count= count
+  #@post.save
+  redirect_to @post
 end
 
 
@@ -70,7 +86,7 @@ end
 
 	    if @post.save
 
-  			current_user.delay.fbpost(post_url(@post))
+  			current_user.delay.fbpost(post_url(@post), @post)
 	     
 	     	alerted_users = @post.user.followers - @post.utopic.users
 	    	if alerted_users != []
@@ -128,9 +144,26 @@ end
   	@utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
 				    @new_post.utopic_id = @utopic.id
 				    @new_post.save
-	current_user.delay.fbpost(post_url(@new_post))
+	current_user.delay.fbpost(post_url(@new_post), @new_post)
   	redirect_to current_user
   end
+
+  def new_comment
+  end
+
+    def find_fbaction_id(post)
+      if Rails.env.development?  
+        user = post.user
+     a=user.facebook.get_connections("me","jurnalo_local:share")
+    else
+      a=user.facebook.get_connections("me","jurnalo:share")
+    end
+    s=a.select {|f| f["data"]["article"]["url"] == post_url(post)}
+    return s.first["id"] if s != []
+
+
+  end
+
 
 
 	private

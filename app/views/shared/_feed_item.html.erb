@@ -32,10 +32,49 @@
         
   <%= link_to raw('<i class="icon-share"></i>'), :controller => "posts", :action => "share", :id => feed_item.id %>
 		  <% end %>
+		 
 </span>
+<br> <br>
 
-</div>
-   
+
+<% if feed_item.comments %>
+    
+    	<% if feed_item.count > 3 %>
+
+		  	<%= link_to ("View all " + feed_item.count.to_s + " comments "), feed_item %>
+		  	<br><br>
+		 <%end%>
+
+		  	
+		<% feed_item.comments.last(3).each do |comment|%>
+				<div id ="user_image">
+			<%= image_tag User.find_by_uid(comment["from"]["id"]).picture, :width => "25" %> 
+			</div> 
+			<span class = "user"><%= comment["from"]["name"] %></span><br><span class = "content"> <%= comment["message"] %> </span><br> <span class="timestamp"> <%= time_ago_in_words(comment["created_time"]) %> ago </span>
+			<br><br>
+
+
+		<%end%>
+
+<%end%>
+
+<% if feed_item.box != false %>
+		<%= form_tag(:controller => "posts", :action => "add_comment", :id => feed_item.id) do %>
+    <%= text_field_tag :comment, nil, :placeholder => 'Write a comment...'%>
+<% end %>
+<%end%>
+
+
+
+
+		  
+
+
+
+
+</div> 
+
+
  
 </li>
 <%end%>

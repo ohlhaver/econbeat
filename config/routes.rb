@@ -40,6 +40,7 @@ end
 resources :posts do
     member do
       get :star, :unstar, :share
+      post :add_comment
     end
 end
 

@@ -61,5 +61,23 @@
 
 <%end%>
 </ol>
+
+
 </div>
 </div>
+<br>
+<div class="row">
+  <%= form_tag(:controller => "posts", :action => "add_comment") do %>
+    <%= text_field_tag :comment, nil, :placeholder => 'Comment...'%>
+<% end %>
+
+</div>
+
+<% if @comments %>
+<% @comments.each do |comment|%>
+<%= comment["message"] %>
+<br><br>
+<%end%>
+<%end%>
+
+

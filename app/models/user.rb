@@ -142,12 +142,16 @@ class User < ActiveRecord::Base
     self.facebook.delete_object(s.first["id"])
   end
 
-  def fbpost(post_url)
+  def fbpost(post_url, post)
     if Rails.env.development? 
-      self.facebook.put_connections("me", "jurnalo_local:share", article: post_url)
+      p=self.facebook.put_connections("me", "jurnalo_local:share", article: post_url)
     else
-      self.facebook.put_connections("me", "jurnalo:share", article: post_url)
+      p=self.facebook.put_connections("me", "jurnalo:share", article: post_url)
     end
+    post.fbaction_id = p["id"]
+    post.save
+
+
   end
 
 
