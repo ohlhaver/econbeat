@@ -38,25 +38,23 @@
 
   <%= link_to raw('<i class="icon-share"></i>'), :controller => "posts", :action => "share", :id => post.id %>
   <%end%>
-
-    <% if @access == true %>
-      <% if post.fbaction_id %>
-             
-             <div class = "all_comments_link">
-               <% post.count = current_user.facebook.get_object(post.fbaction_id)["comments"]["count"] %>
-               <% if post.count == 1 %>
-               <%= link_to (raw('<i class="icon-comment"></i>') + " " + post.count.to_s), post%>
-               <%elsif post.count > 1 %>
-               <%= link_to (raw('<i class="icon-comment"></i>') + " "+ post.count.to_s), post%>
-              <% else %>
-              <%= link_to raw('<i class="icon-comment"></i>'), post%>
-            </div>
+   <div class = "all_comments_link">
+   <% if post.comments %>
+            
+               
+               <% if post.comments.count == 1 %>
+               <%= link_to (raw('<i class="icon-comment"></i>') + " " + post.comments.count.to_s), post%>
+               <% elsif post.comments.count >= 2 %>
+               <%= link_to (raw('<i class="icon-comment"></i>') + " "+ post.comments.count.to_s), post%>
               <%end%>
-    <%end%>
-          
+    <%elsif post.fb_object %>          
+              <%= link_to raw('<i class="icon-comment"></i>'), post%>
            
-  <% end %>
-       
+    <%end%>
+     </div>
+              
+
+ 
 
 	</div>
 

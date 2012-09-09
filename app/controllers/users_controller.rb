@@ -60,15 +60,33 @@ end
         @posts = @user.posts
       
       end
-      
-      @access = true if current_user.facebook.get_object(@user.uid)
-
-      
 
       @favorites = @posts.where(:starred =>true, :hidden=>nil)
       @latest = @posts.where(:starred => nil, :hidden=>nil)
+      
+      #@access = true if current_user.facebook.get_object(@user.uid)
+      #if @access == true
+        @favorites.each do |f|
+          if f.fbaction_id
+            f.fb_object = current_user.facebook.get_object(f.fbaction_id) 
+            c = f.fb_object["comments"] if f.fb_object
+            f.comments = c["data"] if c
+            #f.count = c["count"] if c
+          end
+        end
 
-      @latest = @latest.page params[:page]
+        @latest.each do |l|
+          if l.fbaction_id
+            l.fb_object = current_user.facebook.get_object(l.fbaction_id) 
+            c = l.fb_object["comments"] if l.fb_object
+            l.comments = c["data"] if c
+            #l.count = c["count"] if c
+          end
+        end
+
+
+
+      #@latest = @latest.page params[:page]
   end
 
   def feed

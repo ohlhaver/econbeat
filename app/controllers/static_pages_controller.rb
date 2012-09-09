@@ -22,8 +22,8 @@ class StaticPagesController < ApplicationController
           if i.fbaction_id 
             if current_user.facebook.get_object(i.fbaction_id) 
               c = current_user.facebook.get_object(i.fbaction_id)["comments"]
-              i.comments = c["data"]
-              i.count = c["count"]
+              i.comments = c["data"] if c
+              #i.count = c["count"] if c
             else
               i.box= false
             end

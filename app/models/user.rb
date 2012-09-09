@@ -58,6 +58,7 @@ class User < ActiveRecord::Base
       @post.user = self
       @post.url = fb_post["url"]
       @post.fbid = fb_post["link_id"]
+      @post.fbaction_id = fb_post["link_id"]
       @post.headline = fb_post["title"]
       @post.description = fb_post["summary"]
       @post.topic_id = 0

@@ -40,8 +40,8 @@
 
 			<% if feed_item.comments %>
 	    
-	    		<% if feed_item.count > 3 %>
-			  		<div class = "all_comments_link"><%= link_to ("View all " + feed_item.count.to_s + " comments "), feed_item %></div>
+	    		<% if feed_item.comments.count > 3 %>
+			  		<div class = "all_comments_link"><%= link_to ("View all " + feed_item.comments.count.to_s + " comments "), feed_item %></div>
 			  		<br>
 			 	<%end%>
 
