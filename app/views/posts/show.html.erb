@@ -10,74 +10,85 @@
 <% end %>
 
 <div class="row">
-<div class = "span8">
-<ol class="microposts">
-<% unless @post.hidden? %> 
-<div id="<%= @post.id %>">
-  <div id ="star">
-    <% if current_user == @post.user %> 
-        <% if @post.starred == true%>
-          <%= link_to raw('<i class="icon-star"></i>'), :controller => "@posts", :action => "unstar", :id => @post.id %>
-        <%else%>
+  <div class = "span8">
+    <ol class="microposts">
+      <% unless @post.hidden? %> 
+              <div id ="user_image">
+      <%= link_to (image_tag @post.user.picture, :width => "25"), @post.user  %> 
+    </div> 
+    
+      <span class = "user"><%= link_to @post.user.name + " (view profile)", @post.user %> <% unless @post.via == nil %> via <%= link_to @post.via.name, @post.via %> <%end%></span>
+      <br><br>
 
-          <%= link_to raw('<i class="icon-star-empty"></i>'), :controller => "@posts", :action => "star", :id => @post.id %>
-          
+      <div id="<%= @post.id %>">  
+      <div id ="post_image"><%= link_to (image_tag @post.picture, :width => "50"), @post.picture if @post.picture != nil  %></div>
+
+      <div id ="item_text">
+
+          <span class="content"><b><%= link_to @post.headline, @post.url %></b></span>
+          <% if @post.author %>  <%= @post.author %><%end%>
+            <span class="content"><%= truncate(@post.description, :length => 100, :omission =>"...", :separator => ' ') %>  
+            	</span> 
+
+            <span class="timestamp">
+       <% if @user == current_user %>        
+       <% selected_topic = "Select topic!" %>
+      <% selected_topic = @post.topic.name if @post.topic %>
+      <span class="editable_topic"><%= best_in_place @post, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%> </span> -
+      <%else%>
+         <%= @post.topic.name + " - " unless @post.topic == nil  %> <%end%>
+             <%= time_ago_in_words(@post.created_at) %> ago
+            </span>
+
+            
+            <% if current_user == @post.user %>
+              <%= link_to "x", @post, method: :delete,
+                                               data: { confirm: "You sure?" },
+                                               title: @post.url %>
+            <% else %>
+
+        <%= link_to raw('<i class="icon-share"></i>'), :controller => "@posts", :action => "share", :id => @post.id %>
         <%end%>
-        <%end%>
-       </div>
 
-  <div id ="@post_image"><%= link_to (image_tag @post.picture, :width => "50"), @post.picture if @post.picture != nil  %></div>
-  <div id ="@post_text">
-    <span class="content"><b><%= link_to @post.headline, @post.url %></b></span>
-    <% if @post.author %>  <%= @post.author %><%end%>
-      <span class="content"><%= truncate(@post.description, :length => 100, :omission =>"...", :separator => ' ') %>  
-      	</span> 
+      	</div>
 
-      <span class="timestamp">
- <% if @user == current_user %>        
- <% selected_topic = "Select topic!" %>
-<% selected_topic = @post.topic.name if @post.topic %>
-<span class="editable_topic"><%= best_in_place @post, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%> </span> -
-<%else%>
-   <%= @post.topic.name + " - " unless @post.topic == nil  %> <%end%>
-       <%= time_ago_in_words(@post.created_at) %> ago
-      </span>
+        
+      </div>
+
 
       
-      <% if current_user == @post.user %>
-        <%= link_to "x", @post, method: :delete,
-                                         data: { confirm: "You sure?" },
-                                         title: @post.url %>
-      <% else %>
 
-  <%= link_to raw('<i class="icon-share"></i>'), :controller => "@posts", :action => "share", :id => @post.id %>
-  <%end%>
 
-	</div>
+        
+          <% if @post.box != false %>
+            <br><br>
+                 <%= form_tag(:controller => "posts", :action => "add_comment", :id => @post) do %>
+                        <div id ="comment_image"> <%= link_to (image_tag current_user.picture, :width => "26"), current_user  %></div>
+                        <div id ="comment_field"><%= text_field_tag :comment, nil, :placeholder => 'Write a comment...'%> </div>
+                  <% end %>
+            
+          <%end%>
+          <% if @comments %>
+          <br>
+                  <% @comments.reverse.each do |comment|%>
+                  <div class = "comment">
+                    <div id ="user_image">
+                      <%= image_tag User.find_by_uid(comment["from"]["id"]).picture, :width => "25" %> 
+                    </div> 
+                    <div id ="comment_text">
 
-  
+                      <span class = "user"><%= link_to comment["from"]["name"], User.find_by_uid(comment["from"]["id"]) %></span>
+                      <span class = "content"> <%= comment["message"] %> </span>
+                      <span class="timestamp"> <%= time_ago_in_words(comment["created_time"]) %> ago </span>
+                      
+                    </div>
+                    </div>
+                  <%end%>
+          <%end%>
+      <%end%>
+    </ol>
+  </div>
+  <br>
 </div>
-
-
-<%end%>
-</ol>
-
-
-</div>
-</div>
-<br>
-<div class="row">
-  <%= form_tag(:controller => "posts", :action => "add_comment") do %>
-    <%= text_field_tag :comment, nil, :placeholder => 'Comment...'%>
-<% end %>
-
-</div>
-
-<% if @comments %>
-<% @comments.each do |comment|%>
-<%= comment["message"] %>
-<br><br>
-<%end%>
-<%end%>
 
 

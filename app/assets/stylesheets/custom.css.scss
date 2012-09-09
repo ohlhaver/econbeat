@@ -359,6 +359,7 @@ aside {
   vertical-align: top;
   margin-top: 4px;
 
+
 }
 
 #feed_item_image {
@@ -385,6 +386,45 @@ aside {
 
 
 }
+
+#item_text {
+  margin-left: 5px;
+  display: inline-block;
+  width: 70%;
+  margin-bottom: 10px;
+
+
+}
+
+#comment_text {
+  margin-left: 5px;
+  display: inline-block;
+  width: 89%;
+  margin-bottom: 10px;
+
+
+}
+
+.comment {
+  border-bottom: 1px solid #F1F7FA;
+  margin-bottom: 5px;
+  padding: 5px 0px;
+}
+
+#comment_field {
+  margin-left: 5px;
+  display: inline-block;
+  width: 80%;
+}
+
+#comment_image {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 0px;
+
+
+}
+
 
 #star {
     display: inline-block;
@@ -459,6 +499,21 @@ body {
           color: #3B5998;
           font-weight: normal;
         }
+
+    }
+
+
+    .all_comments_link {
+          a {
+    color: #3B5998;
+    text-decoration: none;
+    font-weight: normal;
+    }
+    a:hover {
+    color: #3B5998;
+    text-decoration: underline;
+    font-weight: normal;
+    }
 
     }
 

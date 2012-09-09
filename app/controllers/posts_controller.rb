@@ -11,11 +11,16 @@ def show
 	@post = Post.find(params[:id])
 
 	#@fb_action_id = find_fbaction_id(@post)
-  
-	@comments = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"] if @post.fbaction_id && current_user.facebook.get_object(@post.fbaction_id)
-
-
-
+  if @post.fbaction_id 
+    if current_user.facebook.get_object(@post.fbaction_id)
+      @comments = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"]
+    else
+      @post.box= false
+    end
+  else
+    @post.box= false
+  end
+	
 end
 
 def add_comment

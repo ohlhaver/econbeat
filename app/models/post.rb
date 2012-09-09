@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
 
-  attr_accessor :comments, :box, :count
+  attr_accessor :comments, :box, :count, :author
   
   attr_accessible :topic_id, :url
   belongs_to :user
