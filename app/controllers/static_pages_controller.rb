@@ -20,8 +20,9 @@ class StaticPagesController < ApplicationController
 
       @feed_items.each do |i|
           if i.fbaction_id 
-            if current_user.facebook.get_object(i.fbaction_id) 
-              c = current_user.facebook.get_object(i.fbaction_id)["comments"]
+            object = current_user.facebook.get_object(i.fbaction_id) 
+            if object
+              c = object["comments"]
               i.comments = c["data"] if c
               #i.count = c["count"] if c
             else

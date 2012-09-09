@@ -75,7 +75,7 @@
                   <% @comments.reverse.each do |comment|%>
                   <div class = "comment">
                     <div id ="user_image">
-                      <%= image_tag User.find_by_uid(comment["from"]["id"]).picture, :width => "25" %> 
+                      <%= image_tag User.find_by_uid(comment["from"]["id"]).picture, :width => "25" if User.find_by_uid(comment["from"]["id"]) %> 
                     </div> 
                     <div id ="comment_text">
 

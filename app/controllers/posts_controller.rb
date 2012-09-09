@@ -12,8 +12,11 @@ def show
 
 	#@fb_action_id = find_fbaction_id(@post)
   if @post.fbaction_id && current_user
-    if current_user.facebook.get_object(@post.fbaction_id)
-      @comments = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"]
+    @object = current_user.facebook.get_object(@post.fbaction_id)
+    if @object
+      @comments_object = @object["comments"]
+        @comments= @comments_object["data"] if @comments_object
+
     else
       @post.box= false
     end
