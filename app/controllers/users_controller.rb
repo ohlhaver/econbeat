@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	before_filter :correct_user, only: [:index, :edit, :update, :destroy]
-  before_filter :authorize, only: [:following, :followers, :show]
+  before_filter :authorize, only: [:following, :followers, :show, :new]
 
 
 

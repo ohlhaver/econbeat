@@ -21,7 +21,7 @@
       <br><br>
 
       <div id="<%= @post.id %>">  
-      <div id ="post_image"><%= link_to (image_tag @post.picture, :width => "50"), @post.picture if @post.picture != nil  %></div>
+      <div id ="post_image"><%= link_to (image_tag @post.picture, :width => "50"), @post.url if @post.picture != nil  %></div>
 
       <div id ="item_text">
 
@@ -31,24 +31,26 @@
             	</span> 
 
             <span class="timestamp">
-       <% if @user == current_user %>        
-       <% selected_topic = "Select topic!" %>
-      <% selected_topic = @post.topic.name if @post.topic %>
-      <span class="editable_topic"><%= best_in_place @post, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%> </span> -
-      <%else%>
-         <%= @post.topic.name + " - " unless @post.topic == nil  %> <%end%>
+       <% if @post.user == current_user %>        
+       <span class="editable_topic">
+          <% if @post.topic %><i class="icon-cog"></i><% selected_topic = @post.topic.name %> <%else%><i class="icon-list"></i>
+          <% selected_topic = "Select topic!" %> <%end%>
+           <%= best_in_place @post, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%></span> · <%else%>
+          <%= @post.topic.name + " · " unless @post.topic == nil  %> 
+        <%end%>
              <%= time_ago_in_words(@post.created_at) %> ago
-            </span>
+            
 
             
             <% if current_user == @post.user %>
-              <%= link_to "x", @post, method: :delete,
+              &nbsp;<%= link_to "x", @post, method: :delete,
                                                data: { confirm: "You sure?" },
                                                title: @post.url %>
             <% else %>
 
-        <%= link_to raw('<i class="icon-share"></i>'), :controller => "@posts", :action => "share", :id => @post.id %>
+        · <%= link_to "share", :controller => "@posts", :action => "share", :id => @post.id %>
         <%end%>
+        </span>
 
       	</div>
 

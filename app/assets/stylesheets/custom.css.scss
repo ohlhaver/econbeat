@@ -352,6 +352,17 @@ textarea, .uneditable-input {
 
 .timestamp {
   color: $grayLight;
+      a {
+    
+    text-decoration: none;
+    font-weight: normal;
+    }
+    a:hover {
+    
+    text-decoration: underline;
+    
+    }
+
 }
 
 aside {
@@ -531,7 +542,22 @@ body {
 
     }
 
+#comments_symbol {
+  display: inline-block;
 
+          a {
+    color: #3B5998;
+    text-decoration: none;
+    font-weight: normal;
+    }
+    a:hover {
+    color: #3B5998;
+    text-decoration: underline;
+    font-weight: normal;
+    }
+
+   
+}
 
 
 }

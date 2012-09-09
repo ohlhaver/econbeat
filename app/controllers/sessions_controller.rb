@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+	before_filter :authorize, only: [:new]
 	
 	def create
 	    user = User.from_omniauth(env["omniauth.auth"])

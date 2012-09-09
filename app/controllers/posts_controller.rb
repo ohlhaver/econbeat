@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 	include ActionView::Helpers::TextHelper
 
-	before_filter :authorize, only: [:create, :destroy, :share]
+	before_filter :authorize, only: [:create, :destroy, :share, :add_comment, :new]
 	before_filter :correct_user,   only: [:destroy, :star, :unstar]
 	before_filter :correct_post_user,   only: [:update]
 	respond_to :html, :json
@@ -11,7 +11,7 @@ def show
 	@post = Post.find(params[:id])
 
 	#@fb_action_id = find_fbaction_id(@post)
-  if @post.fbaction_id 
+  if @post.fbaction_id && current_user
     if current_user.facebook.get_object(@post.fbaction_id)
       @comments = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"]
     else
@@ -144,7 +144,7 @@ end
   	@new_post.author = @post.author
   	@new_post.topic_id = @post.topic_id
   	@new_post.picture = @post.picture
-  	@new_post.fbid = @post.fbid + current_user.id.to_s
+  	@new_post.fbid = Time.now.to_i.to_s + " " + current_user.id.to_s 
   	@new_post.via_id = @post.user_id
   	@utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
 				    @new_post.utopic_id = @utopic.id

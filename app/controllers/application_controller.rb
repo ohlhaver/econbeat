@@ -19,7 +19,7 @@ private
 	def authorize
 		if current_user.nil?	
 		  store_location
-		  redirect_to login_url, alert: "Not authorized" 
+		  redirect_to root_url, alert: "Not authorized" 
 		end
 	end
 
