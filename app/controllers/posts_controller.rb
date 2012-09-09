@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 	include ActionView::Helpers::TextHelper
 
-	before_filter :authorize, only: [:create, :destroy, :share, :add_comment, :new]
+	before_filter :authorize, only: [:create, :destroy, :share, :add_comment, :new, :show]
 	before_filter :correct_user,   only: [:destroy, :star, :unstar]
 	before_filter :correct_post_user,   only: [:update]
 	respond_to :html, :json
