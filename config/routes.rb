@@ -39,7 +39,7 @@ end
 
 resources :posts do
     member do
-      get :star, :unstar, :share
+      get :star, :unstar, :share, :like
       post :add_comment
     end
 end

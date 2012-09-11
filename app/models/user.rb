@@ -133,6 +133,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def fblike(post_url, post)
+          a=self.facebook.get_connections("me","og.likes")
+          s=a.select {|f| f["data"]["object"]["url"] == post_url}
+          unless s.empty?
+           self.facebook.delete_object(s.first["id"])
+          end
+          self.facebook.put_connections("me", "og.likes", object: post_url)
+          post.likes_count = self.facebook.get_object(post_url)["shares"]
+          post.save
+
+  end
+
   def fbunstar(post_url)
     if Rails.env.development?  
      a=self.facebook.get_connections("me","jurnalo_local:star")

@@ -35,6 +35,20 @@ def add_comment
   redirect_to @post
 end
 
+  def like
+    @post = Post.find(params[:id])
+
+    #a=current_user.facebook.get_connections("me","og.likes")
+    #s=a.select {|f| f["data"]["object"]["url"] == post_url(@post)}
+    #unless s.empty?
+    #  current_user.facebook.delete_object(s.first["id"])
+    #end
+    #current_user.facebook.put_connections("me", "og.likes", object: post_url(@post))
+    current_user.delay.fblike(post_url(@post), @post)
+    #current_user.facebook.put_like(@post.fbaction_id)
+    redirect_to current_user, :notice => "Article has been liked."
+  end
+
 
 
 	def new
@@ -134,7 +148,7 @@ end
   	@post.starred=nil
   	@post.save
   	current_user.delay.fbunstar(post_url(@post))
-  	redirect_to current_user, :notice => "Article has been unstarred."
+  	redirect_to current_user, :notice => post_url(@post)
   end
 
   def share
@@ -152,7 +166,7 @@ end
   	@utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
 				    @new_post.utopic_id = @utopic.id
 				    @new_post.save
-	current_user.delay.fbpost(post_url(@new_post), @new_post)
+	 current_user.delay.fbpost(post_url(@new_post), @new_post)
   	redirect_to current_user
   end
 

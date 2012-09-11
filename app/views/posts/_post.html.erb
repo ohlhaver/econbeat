@@ -30,6 +30,12 @@
         <%end%>
          
          <% if post.fbaction_id %>
+
+         <%if post.likes_count && post.likes_count > 0  %>  
+            <%= link_to 'like (' + post.likes_count.to_s + ")", :controller => "posts", :action => "like", :id => post.id %> · 
+            <%else%>
+             <%= link_to 'like', :controller => "posts", :action => "like", :id => post.id %> · 
+           <%end%>
           
       <%if post.comments_count && post.comments_count > 0  %> 
           <%= link_to "comment (" + post.comments_count.to_s + ")" , post %> · 
@@ -40,7 +46,7 @@
       
 
         <% if current_user != post.user %> 
-       <%= link_to "share", :controller => "posts", :action => "share", :id => post.id %>  · 
+       <%= link_to "repost", :controller => "posts", :action => "share", :id => post.id %>  · 
       <%end%><%= time_ago_in_words(post.created_at) %> ago 
       <% if current_user == post.user %> 
             &nbsp;<%= link_to "x", post, method: :delete,
