@@ -19,35 +19,36 @@
       <span class="content"><%= truncate(post.description, :length => 100, :omission =>"...", :separator => ' ') %>  
       	</span> 
 
-      <span class="timestamp">
- <% if @user == current_user %>
-
- <span class="editable_topic">
+<span class="timestamp"> 
+        <% if post.user == current_user %> 
+          <span class="editable_topic">
           <% if post.topic %><i class="icon-cog"></i><% selected_topic = post.topic.name %> <%else%><i class="icon-list"></i>
-          <% selected_topic = "Select topic!" %> <%end%>
-           <%= best_in_place post, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%></span> · <%else%>
+          <% selected_topic = "select topic!" %> <%end%>
+           <%= best_in_place post, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%></span> · 
+        <%else%>
           <%= post.topic.name + " · " unless post.topic == nil  %> 
         <%end%>
-               <div id = "comments_symbol">
-                <% if post.comments %>           
-               <% if post.comments.count == 1 %>
-               <%= link_to (raw('<i class="icon-comment"></i>') + " " + post.comments.count.to_s), post%>
-               <% elsif post.comments.count >= 2 %>
-               <%= link_to (raw('<i class="icon-comment"></i>') + " "+ post.comments.count.to_s), post%>
-              <%end%> ·&nbsp;  
-    <%elsif post.fb_object %>          
-              <%= link_to raw('<i class="icon-comment"></i>'), post%> ·&nbsp;             
-    <%end%></div><%= time_ago_in_words(post.created_at) %> ago
-      <% if current_user == post.user %>
-        &nbsp;<%= link_to "x", post, method: :delete,
-                                         data: { confirm: "You sure?" },
-                                         title: post.url %>
-      <% else %>
+         
+         <% if post.fbaction_id %>
+          
+      <%if post.comments_count && post.comments_count > 0  %> 
+          <%= link_to "comment (" + post.comments_count.to_s + ")" , post %> · 
+          <%else%>
+            <%= link_to "comment", post %> · 
+            <%end%>
+      <%end%>  
+      
 
-  · <%= link_to 'share', :controller => "posts", :action => "share", :id => post.id %>
-  <%end%>
+        <% if current_user != post.user %> 
+       <%= link_to "share", :controller => "posts", :action => "share", :id => post.id %>  · 
+      <%end%><%= time_ago_in_words(post.created_at) %> ago 
+      <% if current_user == post.user %> 
+            &nbsp;<%= link_to "x", post, method: :delete,
+                                           data: { confirm: "You sure?" },
+                                           title: post.url %> <%end%>
+          
+             
   </span>
-  
               
 
  

@@ -5,6 +5,7 @@
 		</div> 
 		<div id ="item_text">
 	 		<span class = "user"><%= link_to feed_item.user.name, feed_item.user %> <% unless feed_item.via == nil %> via <%= link_to feed_item.via.name, feed_item.via %> <%end%></span>
+	 		
 
 			<br>
 	 
@@ -18,58 +19,40 @@
 				<% if feed_item.user == current_user %> 
 					<span class="editable_topic">
 				 	<% if feed_item.topic %><i class="icon-cog"></i><% selected_topic = feed_item.topic.name %> <%else%><i class="icon-list"></i>
-				 	<% selected_topic = "Select topic!" %> <%end%>
+				 	<% selected_topic = "select topic!" %> <%end%>
 					 <%= best_in_place feed_item, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%></span> · 
 				<%else%>
 			 		<%= feed_item.topic.name + " · " unless feed_item.topic == nil  %> 
 			 	<%end%>
-			 	 <%= time_ago_in_words(feed_item.created_at) %> ago 
-			
+			 	 
+			 	 <% if feed_item.fbaction_id %>
+				 	<%if feed_item.comments_count && feed_item.comments_count > 0  %>	
+				 	<%= link_to "comment (" + feed_item.comments_count.to_s + ")" , feed_item %> · 
+				 	<%else%>
+	   				<%= link_to "comment", feed_item %> · 
+	   				<%end%>
+	    <%end%>  
+	    
 
-				<% if current_user == feed_item.user %> 
+				<% if current_user != feed_item.user %> 
+			<%= link_to "share", :controller => "posts", :action => "share", :id => feed_item.id %> · 
+	    <%end%><%= time_ago_in_words(feed_item.created_at) %> ago 
+	    <% if current_user == feed_item.user %> 
 			  		&nbsp;<%= link_to "x", feed_item, method: :delete,
 			                                     data: { confirm: "You sure?" },
-			                                     title: feed_item.url %>
-				<% else %>
+			                                     title: feed_item.url %> <%end%>
 	        
-	  				· <%= link_to "share", :controller => "posts", :action => "share", :id => feed_item.id %>
-			 	<% end %>	 
-			</span>
-
-			<br><br>
-
-
-			<% if feed_item.comments %>
-	    
-	    		<% if feed_item.comments.count > 3 %>
-			  		<div class = "all_comments_link"><%= link_to ("View all " + feed_item.comments.count.to_s + " comments "), feed_item %></div>
-			  		<br>
-			 	<%end%>
-
-			  	
-				<% feed_item.comments.last(3).each do |comment|%>
-				<div class = "comment">
-					<div id ="user_image">
-						<%= image_tag User.find_by_uid(comment["from"]["id"]).picture, :width => "25" if User.find_by_uid(comment["from"]["id"]) %> 
-					</div> 
-					<div id ="comment_text">
-
-						<span class = "user"><%= link_to comment["from"]["name"], User.find_by_uid(comment["from"]["id"]) %></span>
-						<span class = "content"> <%= comment["message"] %> </span>
-						<span class="timestamp"> <%= time_ago_in_words(comment["created_time"]) %> ago </span>
-						
-					</div>
-					</div>
-				<%end%>
+	  				 
 			
-			<%end%>
 
-			<% if feed_item.box != false %>
-				<%= form_tag(:controller => "posts", :action => "add_comment", :id => feed_item.id) do %>
-	    			<div id ="comment_image"> <%= link_to (image_tag current_user.picture, :width => "26"), current_user  %></div>
-	    			<div id ="comment_field"><%= text_field_tag :comment, nil, :placeholder => 'Write a comment...'%> </div>
-				<% end %>
-			<%end%>
+			
+
+
+
+
+			 	
+			</span>
+			
 		</div> 	 
 	</li>
 <%end%>

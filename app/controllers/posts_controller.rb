@@ -29,9 +29,9 @@ end
 def add_comment
 @post = Post.find(params[:id])
 	current_user.facebook.put_comment(@post.fbaction_id, params[:comment] )
-  #count = current_user.facebook.get_object(@post.fbaction_id)["comments"]["count"]
-  #@post.comments_count= count
-  #@post.save
+  count = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"].count
+  @post.comments_count= count
+  @post.save
   redirect_to @post
 end
 
