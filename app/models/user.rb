@@ -58,9 +58,9 @@ class User < ActiveRecord::Base
       @post.user = self
       @post.url = fb_post["url"]
       @post.fbid = fb_post["link_id"]
-      @post.fbaction_id = fb_post["link_id"]
-      @post.headline = fb_post["title"]
-      @post.description = fb_post["summary"]
+      @post.fbaction_id = fb_post["link_id"] 
+      @post.headline = fb_post["title"][0,250] if fb_post["title"] != nil
+      @post.description = fb_post["summary"][0,250] if fb_post["summary"] != nil
       @post.topic_id = 0
       @post.picture = fb_post["picture"]
       @post.created_at = Time.at(fb_post["created_time"])
