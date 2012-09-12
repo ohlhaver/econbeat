@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  before_filter :authorize, only: [:fb_new]
   def home
     if current_user
       @post  = current_user.posts.build
@@ -41,6 +42,12 @@ class StaticPagesController < ApplicationController
     end
  
   end
+
+  def fb_new
+    redirect_to root_url
+
+  end
+
 
   def about
   end

@@ -27,6 +27,34 @@
     </div>
     <div class="span12">
     <footer>
+      <div id="fb-root"></div>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <p>
+
+    <p>
+    <input type="button"
+      onclick="sendRequestViaMultiFriendSelector(); return false;"
+      value="Invite friends" class = "btn btn-small btn-primary btn-posting"
+    />
+    </p>
+    
+    <script>
+      FB.init({
+        appId  : ENV['FACEBOOK_APP_ID'],
+        frictionlessRequests: true
+      });
+
+      function sendRequestViaMultiFriendSelector() {
+        FB.ui({method: 'apprequests',
+          message: 'invites you to Jurnalo',
+    new_style_message: true
+        }, requestCallback);
+      }
+      
+      function requestCallback(response) {
+        // Handle callback here
+      }
+    </script>
                        
                    <div class ="visible-phone"><%= link_to "Sign out", signout_path, id: "sign_out" if current_user%><br></div>
                   

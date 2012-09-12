@@ -15,6 +15,8 @@ Jurnalo::Application.routes.draw do
 
   get "static_pages/contact"
 
+  get "static_pages/fb_new"
+
 
 
 #get '/signup', to: 'users#new', as: 'signup'
