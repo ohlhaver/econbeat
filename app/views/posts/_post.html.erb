@@ -3,10 +3,11 @@
   <div id ="star">
     <% if current_user == post.user %> 
         <% if post.starred == true%>
-          <%= link_to raw('<i class="icon-star"></i>'), :controller => "posts", :action => "unstar", :id => post.id %>
+       
+          <%= link_to raw('<i class="icon-star"></i>'), "/posts/#{post.id}/unstar", :class => "btn btn-small"  %>
         <%else%>
 
-          <%= link_to raw('<i class="icon-star-empty"></i>'), :controller => "posts", :action => "star", :id => post.id %>
+          <%= link_to raw('<i class="icon-star-empty"></i>'), "/posts/#{post.id}/star", :class => "btn btn-small"  %>
           
         <%end%>
         <%end%>
@@ -21,9 +22,11 @@
 
 <span class="timestamp"> 
         <% if post.user == current_user %> 
-          <span class="editable_topic">
-          <% if post.topic %><i class="icon-cog"></i><% selected_topic = post.topic.name %> <%else%><i class="icon-list"></i>
-          <% selected_topic = "select topic!" %> <%end%>
+          
+            <% if post.topic %><span class="editable_topic"><i class="icon-cog"></i><% selected_topic = post.topic.name %> 
+          <%else%><i class="icon-list"></i><span class ="edit_topic">
+          <% selected_topic = "select topic!" %> 
+          <%end%>
            <%= best_in_place post, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%></span> · 
         <%else%>
           <%= post.topic.name + " · " unless post.topic == nil  %> 

@@ -61,8 +61,18 @@ end
       
       end
 
+      
+
       @favorites = @posts.where(:starred =>true, :hidden=>nil)
       @latest = @posts.where(:starred => nil, :hidden=>nil)
+
+      if @posts.empty?
+      flash[:notice] = "Importing your posts from Facebook. Please refresh in a few seconds!" 
+      elsif @favorites.empty?
+      flash[:notice] = "Star your favorite posts by clicking the star buttons on the right." 
+      elsif @utopics.empty?
+      flash[:notice] = "Click 'select topic!' underneath any headline to categorize a post."
+      end
       
       #@access = true if current_user.facebook.get_object(@user.uid)
       #if @access == true

@@ -356,9 +356,14 @@ textarea, .uneditable-input {
     
     color: #3B5998;
     font-weight: normal;
-   
+       
+}
 
+.edit_topic {
     
+    color: $red;
+    font-weight: bold;
+       
 }
 
 .content {
@@ -504,8 +509,6 @@ aside {
 body {
     background-color: #FFFFFF;
     color: #333333;
-    
-    
     line-height: 1.38;
     margin: 0;
 

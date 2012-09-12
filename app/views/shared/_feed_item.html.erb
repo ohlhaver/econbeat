@@ -17,8 +17,9 @@
 
 			<span class="timestamp"> 
 				<% if feed_item.user == current_user %> 
-					<span class="editable_topic">
-				 	<% if feed_item.topic %><i class="icon-cog"></i><% selected_topic = feed_item.topic.name %> <%else%><i class="icon-list"></i>
+					
+				 	<% if feed_item.topic %><span class="editable_topic"><i class="icon-cog"></i><% selected_topic = feed_item.topic.name %> <%else%><i class="icon-list"></i><span class ="edit_topic">
+
 				 	<% selected_topic = "select topic!" %> <%end%>
 					 <%= best_in_place feed_item, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%></span> · 
 				<%else%>

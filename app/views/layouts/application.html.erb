@@ -11,6 +11,7 @@
 
   </head>
   <body>
+    <script>$('.best_in_place').bind("ajax:success", function(){$(this).closest('tr').effect('highlight'));});</script>
       
     <%= render 'layouts/header' if current_user || params[:action] == "contact" || params[:action] == "privacy" %>
     <div class="container">
@@ -18,7 +19,7 @@
         
     
       <% flash.each do |key, value| %>
-            <div class="alert alert-<%= key %>"><%= value %></div>
+            <div class="alert alert-<%= key %>"><b><%= value %></b></div>
       <% end %>
 
       <%= yield %>
