@@ -13,7 +13,7 @@
   <body>
     <script>$('.best_in_place').bind("ajax:success", function(){$(this).closest('tr').effect('highlight'));});</script>
       
-    <%= render 'layouts/header' if current_user || params[:action] == "contact" || params[:action] == "privacy" %>
+    <%= render 'layouts/header' if current_user || params[:action] == "contact" || params[:action] == "privacy" || params[:action] == "show"%>
     <div class="container">
     <div class="span8 offset2">
         
@@ -62,7 +62,7 @@
     <% end %>
                   
                
-      (c) Jurnalo · <%= link_to "Privacy", privacy_path %> · <%= link_to "Contact", contact_path %>  </footer>
+      (c) Jurnalo · <%= link_to "Privacy", privacy_path %>  </footer>
   
   </body>
 </html>

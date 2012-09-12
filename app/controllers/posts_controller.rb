@@ -150,7 +150,7 @@ end
   	@post.starred=nil
   	@post.save
   	current_user.delay.fbunstar(post_url(@post))
-  	redirect_to current_user, :notice => post_url(@post)
+  	redirect_to current_user
   end
 
   def share
