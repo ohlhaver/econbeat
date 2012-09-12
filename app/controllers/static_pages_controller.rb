@@ -48,6 +48,11 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def privacy
+  end
+  
+  def terms
+  end
 
   def about
   end

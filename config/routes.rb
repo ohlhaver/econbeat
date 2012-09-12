@@ -13,12 +13,14 @@ Jurnalo::Application.routes.draw do
 
   get "static_pages/about"
 
+  get "static_pages/privacy"
+
   get "static_pages/contact"
 
   get "static_pages/fb_new"
 
-
-
+get 'contact', to: 'static_pages#contact', as: 'contact'
+get 'privacy', to: 'static_pages#privacy', as: 'privacy'
 #get '/signup', to: 'users#new', as: 'signup'
 get 'login', to: 'sessions#new', as: 'login'
 get 'logout', to: 'sessions#destroy', as: 'logout'
