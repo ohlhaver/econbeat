@@ -68,7 +68,7 @@ end
 
       if @posts.empty?
       flash[:notice] = "Importing your posts from Facebook. Please refresh in a few seconds!" 
-      elsif @favorites.empty?
+      elsif @favorites.empty? && @utopic == nil
       flash[:notice] = "Star your favorite posts by clicking the star buttons on the right." 
       elsif @utopics.empty?
       flash[:notice] = "Click 'select topic!' underneath any headline to categorize a post."

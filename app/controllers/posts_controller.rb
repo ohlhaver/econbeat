@@ -127,7 +127,7 @@ end
   	@post.hidden=true
   	@post.save
     #@post.destroy
-    redirect_to current_user
+    redirect_to :back
   end
 
   def star
