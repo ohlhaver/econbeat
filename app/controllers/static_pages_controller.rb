@@ -1,6 +1,5 @@
 class StaticPagesController < ApplicationController
   def home
-  	
     if current_user
       @post  = current_user.posts.build
       @topics = Topic.find(:all)

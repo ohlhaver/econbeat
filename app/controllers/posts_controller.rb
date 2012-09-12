@@ -32,10 +32,11 @@ def add_comment
   count = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"].count
   @post.comments_count= count
   @post.save
-  redirect_to @post
+  redirect_to :back
 end
 
   def like
+    
     @post = Post.find(params[:id])
 
     #a=current_user.facebook.get_connections("me","og.likes")
@@ -46,7 +47,8 @@ end
     #current_user.facebook.put_connections("me", "og.likes", object: post_url(@post))
     current_user.delay.fblike(post_url(@post), @post)
     #current_user.facebook.put_like(@post.fbaction_id)
-    redirect_to current_user, :notice => "Article has been liked."
+    redirect_to :back, :notice => "Article has been liked."
+    #redirect_back_or root_url#, :notice => "Article has been liked."
   end
 
 
@@ -115,7 +117,7 @@ def create
     	PostMailer.delay.notification(@post, alerted_users)
 	end
       flash[:success] = "Post created!"
-      redirect_to current_user
+      redirect_to :back
   else
      render "new"
    		end
@@ -167,7 +169,7 @@ end
 				    @new_post.utopic_id = @utopic.id
 				    @new_post.save
 	 current_user.delay.fbpost(post_url(@new_post), @new_post)
-  	redirect_to current_user
+  	redirect_to root_url
   end
 
   def new_comment
