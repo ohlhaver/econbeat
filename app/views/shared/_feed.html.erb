@@ -2,6 +2,7 @@
   <ol class="microposts">
     <%= render partial: 'shared/feed_item', collection: @feed_items %>
   </ol>
+  <br>
   <%= paginate @feed_items %>
   
 <% end %>
