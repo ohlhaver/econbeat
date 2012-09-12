@@ -109,6 +109,21 @@ p {
     text-decoration: underline;
     font-weight: bold;
     }
+
+    .hidden-phone {
+        margin-top: 8px;
+      a {
+    color: #3B5998;
+    text-decoration: none;
+    font-weight: bold;
+    }
+    a:hover {
+    color: #3B5998;
+    text-decoration: underline;
+    font-weight: bold;
+    }
+
+    }
 }
 
 #logo {
@@ -224,7 +239,7 @@ aside {
 
 #post_box{
   display: inline-block;
-  width: 290px;
+  width: 260px;
   margin-left: 0px
 }
 
