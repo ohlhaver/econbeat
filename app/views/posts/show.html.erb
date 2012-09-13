@@ -17,7 +17,7 @@
       <%= link_to (image_tag @post.user.picture, :width => "25"), @post.user  %> 
     </div> 
     
-      <span class = "user"><%= link_to @post.user.name + " (view profile)", @post.user %> <% unless @post.via == nil %> via <%= link_to @post.via.name, @post.via %> <%end%></span>
+      <span class = "user"><%= link_to @post.user.name, @post.user %> <% unless @post.via == nil %> via <%= link_to @post.via.name, @post.via %> <%end%></span>
       <br><br>
 
       <div id="<%= @post.id %>">  
@@ -95,7 +95,8 @@
                     </div>
                   <%end%>
           <%end%>
-      <%end%>
+      <%end%><br>
+      <span class = "user"><%= link_to ("More posts by " + @post.user.name + " &raquo;").html_safe , @post.user %></span>
     </ol>
   </div>
   <br>

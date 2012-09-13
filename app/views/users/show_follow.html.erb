@@ -15,9 +15,9 @@
       <div class="span3">
         <div id = "follow_button">
                 <%if current_user.following?(@user) && @utopic %>
-                  <%= render @utopic %>
+                  <%= render @utopic  unless @friendship == false%>
           <%else%> 
-                <%= render 'follow_form' if current_user %>            
+                <%= render 'follow_form' if current_user  unless @friendship == false%>            
          <%end%>    
        </div>
         <%= render 'shared/stats' %>  

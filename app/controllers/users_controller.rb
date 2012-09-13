@@ -44,7 +44,15 @@ end
  # end
 
 	def show
+
+
     @user = User.find(params[:id])
+    
+    @friendship = check_friendship(@user)
+
+    
+
+
    
       @utopics = @user.utopics.find_all{|i| i.posts.where(:hidden=>nil).count > 0}
       
@@ -65,13 +73,14 @@ end
 
       @favorites = @posts.where(:starred =>true, :hidden=>nil)
       @latest = @posts.where(:starred => nil, :hidden=>nil)
-
-      if @posts.empty?
-      flash[:notice] = "Importing your posts from Facebook. Please refresh in a few seconds!" 
-      elsif @favorites.empty? && @utopic == nil
-      flash[:notice] = "Star your favorite posts by clicking the star buttons on the right." 
-      elsif @utopics.empty?
-      flash[:notice] = "Click 'select topic!' underneath any headline to categorize a post."
+      if current_user == @user
+        if @posts.empty?
+        flash[:notice] = "Importing your posts from Facebook. Please refresh in a few seconds!" 
+        elsif @favorites.empty? && @utopic == nil
+        flash[:notice] = "Star your favorite posts by clicking the star buttons on the right." 
+        elsif @utopics.empty?
+        flash[:notice] = "Click 'select topic!' underneath any headline to categorize a post."
+        end
       end
       
       #@access = true if current_user.facebook.get_object(@user.uid)
@@ -92,6 +101,7 @@ end
   def following
     @title = "Following"
     @user = User.find(params[:id])
+    @friendship = check_friendship(@user)
     @users = @user.followed_users.page params[:page]
     render 'show_follow'
   end
@@ -99,8 +109,16 @@ end
   def followers
     @title = "Followers"
     @user = User.find(params[:id])
+    @friendship = check_friendship(@user)
     @users = @user.followers.page params[:page]
     render 'show_follow'
+  end
+
+  def check_friendship(user)
+        unless current_user == user
+      check = current_user.facebook.fql_query("SELECT uid2 FROM friend WHERE uid1=me() AND uid2 = #{user.uid}")
+      friendship=false if check == []
+    end
   end
 
 
