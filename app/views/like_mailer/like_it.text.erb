@@ -1,0 +1,11 @@
+<%= @liking_user.name %> liked your post:
+
+<%= @post.headline %>
+<%=  @post.url %>
+
+View your entire Jurnalo feed here:
+<%= root_url %>
+
+View posts from <%= @post.user.name %> here:
+<%= user_url(@post.user) %> 
+

@@ -46,6 +46,7 @@ end
     #end
     #current_user.facebook.put_connections("me", "og.likes", object: post_url(@post))
     current_user.delay.fblike(post_url(@post), @post)
+    LikeMailer.delay.like_it(@post, current_user)
     #current_user.facebook.put_like(@post.fbaction_id)
     redirect_to :back, :notice => "Article has been liked."
     #redirect_back_or root_url#, :notice => "Article has been liked."
