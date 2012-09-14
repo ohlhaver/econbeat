@@ -46,7 +46,10 @@ resources :posts do
       get :star, :unstar, :share, :like, :preview
       post :add_comment
     end
+    collection { post :sort }
 end
+
+
 
 resources :filters, only: [:new, :create, :destroy]
 resources :posts, only: [:new, :create, :destroy]

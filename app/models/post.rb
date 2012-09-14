@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-
+  acts_as_list
   attr_accessor :comments, :box, :count, :author, :fb_object
   
   attr_accessible :topic_id, :url, :facebook, :email, :public, :headline, :author, :description, :via_id, :picture
@@ -15,6 +15,7 @@ class Post < ActiveRecord::Base
   #validates :headline, presence: true
   
   after_create :ensure_picture, :filter_bad_posts
+  #before_save :ensure_position
 
   default_scope order: 'posts.created_at DESC'
 
@@ -38,6 +39,11 @@ class Post < ActiveRecord::Base
     end
   end
 
+def ensure_position
+  if self.position == nil 
+    self.position = 0 
+  end
+end
 
 
 end

@@ -50,3 +50,4 @@ gem 'koala'
 
 gem 'best_in_place'
 
+gem "acts_as_list"

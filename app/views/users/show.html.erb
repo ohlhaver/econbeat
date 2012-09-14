@@ -33,9 +33,12 @@
 
       <div id = "favorite_posts">
          Starred
-          <ol class="profile_microposts">
+          
+            <ol class="profile_microposts" id="posts" data-update-url="<%= sort_posts_url %>">
           <%= render @favorites %>
-          </ol>
+        </ol>
+       
+        
 
       </div>
        <% end %> 

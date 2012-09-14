@@ -153,7 +153,13 @@ end
 
   def destroy
   	@post.hidden=true
+    if @post.starred==true
+      @post.starred=nil
+      current_user.delay.fbunstar(post_url(@post))
+    end
+   
   	@post.save
+
     #@post.destroy
     redirect_to :back
   end
@@ -167,6 +173,7 @@ end
   	end
   	@post = Post.find(params[:id])
   	@post.starred=true
+    @post.position = 1
   	@post.save
   	
   	current_user.delay.fbstar(post_url(@post))
@@ -198,6 +205,14 @@ end
 
 
   end
+
+def sort
+  params[:post].each_with_index do |id, index|
+    Post.update_all({position: index+1}, {id: id})
+  end
+  render nothing: true
+end
+
 
 
 

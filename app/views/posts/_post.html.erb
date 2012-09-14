@@ -1,5 +1,6 @@
 <% unless post.hidden? %> 
-<li id="<%= post.id %>">
+  <%= content_tag_for :li, post do %>
+   <% if @user == current_user && post.starred == true %>  <span class="handle"> <%end%>
   <div id ="star">
     <% if current_user == post.user %> 
         <% if post.starred == true%>
@@ -66,8 +67,8 @@
 
   
 </li>
-
-
+</span>
+<%end%>
 <%end%>
 
 

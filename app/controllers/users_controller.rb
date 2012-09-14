@@ -78,7 +78,7 @@ end
         if @posts.empty?
         flash[:notice] = "Importing your posts from Facebook. Please refresh in a few seconds!" 
         elsif @favorites.empty? && @utopic == nil
-        flash[:notice] = "Star your favorite posts by clicking the star buttons on the right." 
+        flash[:notice] = "Star your three favorite posts by clicking the star buttons on the right." 
         elsif @utopics.empty?
         flash[:notice] = "Click 'select topic!' underneath any headline to categorize a post."
         end
@@ -86,7 +86,7 @@ end
       
       #@access = true if current_user.facebook.get_object(@user.uid)
       #if @access == true
-
+      @favorites = @favorites.sort_by(&:position)
 
 
       @latest = @latest.page params[:page]
@@ -121,6 +121,8 @@ end
       friendship=false if check == []
     end
   end
+
+
 
 
 
