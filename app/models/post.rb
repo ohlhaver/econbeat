@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
 
   attr_accessor :comments, :box, :count, :author, :fb_object
   
-  attr_accessible :topic_id, :url
+  attr_accessible :topic_id, :url, :facebook, :email, :public
   belongs_to :user
   belongs_to :topic
   belongs_to :utopic

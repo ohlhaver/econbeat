@@ -48,6 +48,7 @@ end
 
     @user = User.find(params[:id])
     
+    
     @friendship = check_friendship(@user)
 
     

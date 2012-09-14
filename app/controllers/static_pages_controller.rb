@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
   before_filter :authorize, only: [:fb_new]
   def home
     if current_user
-      @post  = current_user.posts.build
+      
       @topics = Topic.find(:all)
       @topics = @topics.find_all{|i| i.posts.where(:hidden=>nil).count > 0}
       @feed_items = current_user.feed

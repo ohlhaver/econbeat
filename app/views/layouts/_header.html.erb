@@ -13,15 +13,9 @@
         
             
 
-
-
-            
-              <% if params[:controller] == "static_pages" %>
-              <li><div class ="visible-phone"> <%= button_to "Post an article", new_post_path, :class => "btn btn-small btn-primary btn-posting", :method => :get %></div> </li>
-            
-              <%else%>
-              <li> <%= button_to "Post an article", new_post_path, :class => "btn btn-small btn-primary btn-posting", :method => :get %> </li>
-              <%end%>
+<li>
+              <li> <%= button_to "Post an article", new_post_path, "data-target" => "#myModal", :class => "btn btn-small btn-primary btn-posting", "data-toggle" => "modal" %> </li>
+              
             </ul>
              <ul class="nav pull-right">
 

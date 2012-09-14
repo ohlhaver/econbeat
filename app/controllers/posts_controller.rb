@@ -110,12 +110,14 @@ def create
 
   if @post.save
 
-		current_user.delay.fbpost(post_url(@post), @post)
+		current_user.delay.fbpost(post_url(@post), @post) if @post.facebook == true
    
+  if @post.email == true
    	alerted_users = @post.user.followers - @post.utopic.users
   	if alerted_users != []
     	PostMailer.delay.notification(@post, alerted_users)
-	end
+	 end
+  end
       flash[:success] = "Post created!"
       redirect_to :back
   else

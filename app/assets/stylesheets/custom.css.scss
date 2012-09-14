@@ -237,25 +237,40 @@ aside {
   margin-left: 10px;
 }
 
+
+#form_image {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 1px;
+
+}
+
 #post_box{
   display: inline-block;
   width: 260px;
-  margin-left: 0px
+  margin-left: 0px;
+  
 }
 
 #select_box{
   display: inline-block;
   width: 80px;
-
-}
-
-#button_box{
-  display: inline-block;
   margin-left: 10px;
 
 
 }
 
+#button_box{
+  display: inline-block;
+  margin-left: 0px;
+  float: left;
+
+
+}
+
+#privacy_checkboxes {
+  margin-bottom: 20px;
+}
 
 .user_show .nav-tabs {
   margin-top: 20px;
