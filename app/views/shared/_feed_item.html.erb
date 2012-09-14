@@ -42,7 +42,7 @@
 	    
 
 				<% if current_user != feed_item.user %> 
-			<%= link_to "repost", :controller => "posts", :action => "share", :id => feed_item.id %> · 
+			<%= link_to "repost", "data-target" => "#preview", "data-toggle" => "modal", "href" => "remote.html", :controller => "posts", :action => "preview", :id => feed_item.id %> · 
 	    <%end%><%= time_ago_in_words(feed_item.created_at) %> ago 
 	    <% if current_user == feed_item.user %> 
 			  		&nbsp;<%= link_to "x", feed_item, method: :delete,

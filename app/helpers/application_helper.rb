@@ -3,5 +3,4 @@ module ApplicationHelper
 		@post  = current_user.posts.build
 	end
 
-
 end

@@ -55,15 +55,36 @@ end
 
 	def new
 
-      @post  = current_user.posts.build if current_user
+     # @post  = current_user.posts.build if current_user
 	end
+
+  def preview
+    @post = Post.find(params[:id])
+    @new_post = Post.new
+    @new_post.user_id = current_user.id
+    @new_post.url = @post.url
+    @new_post.headline = @post.headline
+    @new_post.description = @post.description
+    @new_post.author = @post.author
+    @new_post.topic_id = @post.topic_id
+    @new_post.picture = @post.picture
+    #@new_post.fbid = Time.now.to_i.to_s + " " + current_user.id.to_s 
+    @new_post.via_id = @post.user_id
+   #   @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
+   # @new_post.utopic_id = @utopic.id
+     #@new_post.save
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+  end
 
 
 def update
   @post = Post.find(params[:id])
   @post.update_attributes(params[:post])
-  				    @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
-
+  				  @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
 				    @post.utopic_id = @utopic.id
 				    @post.save
   respond_with @post
@@ -72,8 +93,11 @@ end
 def create
 
   @post = current_user.posts.build(params[:post])
-  	unless @post.url == ""
-	    @doc = Pismo::Document.new(@post.url)
+   
+  unless @post.url == ""
+    if @post.headline == nil
+  	
+	      @doc = Pismo::Document.new(@post.url)
 	    	unless @doc == nil
 	     
 			    @headline = @doc.titles[1]
@@ -95,34 +119,35 @@ def create
 			    @post.headline = @headline[0,250] if @headline != nil
 			    @post.description = @doc.description[0,250] if @doc.description != nil
 			    @post.author = @doc.author[0,250] if @doc.author != nil
-			    @post.fbid = Time.now.to_i.to_s + " " + current_user.id.to_s 
+			     
 			    #@post.fbid = @post.url
-			end
+			  end
+
 		    @post.topic_id = 0 if @post.topic_id == nil
-		    #@utopic = @post.topic_id
-		    @utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
-
-		    @post.utopic_id = @utopic.id
-
-		  
     end
+		    #@utopic = @post.topic_id
+		@utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
+		@post.utopic_id = @utopic.id	
+    @post.fbid = Time.now.to_i.to_s + " " + current_user.id.to_s  
+  end
+  
 
 
   if @post.save
 
-		current_user.delay.fbpost(post_url(@post), @post) if @post.facebook == true
-   
-  if @post.email == true
-   	alerted_users = @post.user.followers - @post.utopic.users
-  	if alerted_users != []
-    	PostMailer.delay.notification(@post, alerted_users)
-	 end
-  end
-      flash[:success] = "Post created!"
-      redirect_to :back
+  		current_user.delay.fbpost(post_url(@post), @post) if @post.facebook == true
+     
+    if @post.email == true
+     	alerted_users = @post.user.followers - @post.utopic.users
+    	if alerted_users != []
+      	PostMailer.delay.notification(@post, alerted_users)
+  	 end
+    end
+        flash[:success] = "Post created!"
+        redirect_to root_url
   else
-     render "new"
-   		end
+       render "new"
+  end
 end
 
   def destroy
@@ -155,24 +180,7 @@ end
   	redirect_to current_user
   end
 
-  def share
-  	@post = Post.find(params[:id])
-  	@new_post = Post.new
-  	@new_post.user_id = current_user.id
-  	@new_post.url = @post.url
-  	@new_post.headline = @post.headline
-  	@new_post.description = @post.description
-  	@new_post.author = @post.author
-  	@new_post.topic_id = @post.topic_id
-  	@new_post.picture = @post.picture
-  	@new_post.fbid = Time.now.to_i.to_s + " " + current_user.id.to_s 
-  	@new_post.via_id = @post.user_id
-  	@utopic = Utopic.find_by_user_id_and_topic_id(current_user.id, @post.topic_id) || Utopic.create(:user_id => current_user.id, :topic_id => @post.topic_id)
-				    @new_post.utopic_id = @utopic.id
-				    @new_post.save
-	 current_user.delay.fbpost(post_url(@new_post), @new_post)
-  	redirect_to root_url
-  end
+
 
   def new_comment
   end
