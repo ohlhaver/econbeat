@@ -51,7 +51,7 @@
                
 
         <% if current_user != @post.user %> 
-        <%= link_to "repost", :controller => "posts", :action => "share", :id => @post.id %> · 
+        <%= link_to "repost", :controller => "posts", :action => "preview", :id => @post.id %> · 
       <%end%><%= time_ago_in_words(@post.created_at) %> ago 
       <% if current_user == @post.user %> 
             &nbsp;<%= link_to "x", @post, method: :delete,
