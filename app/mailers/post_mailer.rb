@@ -33,7 +33,7 @@ class PostMailer < ActionMailer::Base
     alerted_users = post.commenters - Array.wrap(user) - Array.wrap(post.user)
     receipients = alerted_users.collect(&:email).join(",") 
     if post.user == user
-      @subject = @commenting_user.name + " also commented on his post"
+      @subject = @commenting_user.name + " also commented on her/his post"
     else
       @subject = @commenting_user.name + " also commented on the post by " + post.user.name
     end
