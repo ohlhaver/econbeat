@@ -1,11 +1,13 @@
 class Post < ActiveRecord::Base
   acts_as_list
-  attr_accessor :comments, :box, :count, :author, :fb_object
+  attr_accessor :box, :count, :author, :fb_object
   
   attr_accessible :topic_id, :url, :facebook, :email, :public, :headline, :author, :description, :via_id, :picture
   belongs_to :user
   belongs_to :topic
   belongs_to :utopic
+  has_many :comments
+  has_many :commenters, through: :comments, source: :user
   validates_uniqueness_of :fbid
   belongs_to :via, class_name: "User"
   #validates :user_id, presence: true

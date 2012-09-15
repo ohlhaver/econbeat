@@ -10,28 +10,39 @@ class PostsController < ApplicationController
 def show
 	@post = Post.find(params[:id])
 
-	#@fb_action_id = find_fbaction_id(@post)
-  if @post.fbaction_id && current_user
-    @object = current_user.facebook.get_object(@post.fbaction_id)
-    if @object
-      @comments_object = @object["comments"]
-        @comments= @comments_object["data"] if @comments_object
-
-    else
-      @post.box= false
-    end
-  else
-    @post.box= false
-  end
-	
+	##@fb_action_id = find_fbaction_id(@post)
+  #if @post.fbaction_id && current_user
+  #  @object = current_user.facebook.get_object(@post.fbaction_id)
+  #  if @object
+  #    @comments_object = @object["comments"]
+  #      @comments= @comments_object["data"] if @comments_object
+  #
+  #  else
+  #    @post.box= false
+  #  end
+  #else
+  #  @post.box= false
+  #end
+	@comments = @post.comments
 end
 
 def add_comment
 @post = Post.find(params[:id])
-	current_user.facebook.put_comment(@post.fbaction_id, params[:comment] )
-  count = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"].count
-  @post.comments_count= count
-  @post.save
+  comment = Comment.new
+    comment.text = params[:comment]
+    comment.user_id = current_user.id
+    comment.post_id = @post.id
+  comment.save
+  PostMailer.delay.comment(@post, current_user, comment.text) unless @post.user == current_user
+  if @post.commenters
+    PostMailer.delay.also_comment(@post, current_user, comment.text)
+  end
+
+
+	#current_user.facebook.put_comment(@post.fbaction_id, params[:comment] )
+  #count = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"].count
+  #@post.comments_count= count
+  #@post.save
   redirect_to :back
 end
 

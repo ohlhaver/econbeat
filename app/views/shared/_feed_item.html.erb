@@ -32,13 +32,13 @@
 				 	  <%else%>
 				 	   <%= link_to 'like', :controller => "posts", :action => "like", :id => feed_item.id %> · 
 				 	 <%end%>
-
-				 	<%if feed_item.comments_count && feed_item.comments_count > 0  %>	
-				 	<%= link_to "comment (" + feed_item.comments_count.to_s + ")" , feed_item %> · 
+				  <%end%>  
+				 	<%if feed_item.comments && feed_item.comments.count > 0  %>	
+				 	<%= link_to "comments (" + feed_item.comments.count.to_s + ")" , feed_item %> · 
 				 	<%else%>
 	   				<%= link_to "comment", feed_item %> · 
 	   				<%end%>
-	    <%end%>  
+	   
 	    
 
 				<% if current_user != feed_item.user %> 

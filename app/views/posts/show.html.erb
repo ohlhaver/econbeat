@@ -66,37 +66,38 @@
       </div>
 
 
-      
+      <br>
+      <span class = "user"><%= link_to ("More posts by " + @post.user.name + " &raquo;").html_safe , @post.user %></span>
 
 
-        
-          <% if @post.box != false %>
+        <% if current_user %>
+          <!--% if @post.box != false %-->
             <br><br>
                  <%= form_tag(:controller => "posts", :action => "add_comment", :id => @post) do %>
                         <div id ="comment_image"> <%= link_to (image_tag current_user.picture, :width => "26"), current_user  %></div>
                         <div id ="comment_field"><%= text_field_tag :comment, nil, :placeholder => 'Write a comment...'%> </div>
                   <% end %>
             
-          <%end%>
+          <!--%end%-->
           <% if @comments %>
           
                   <% @comments.reverse.each do |comment|%>
                   <div class = "comment">
                     <div id ="user_image">
-                      <%= image_tag User.find_by_uid(comment["from"]["id"]).picture, :width => "25" if User.find_by_uid(comment["from"]["id"]) %> 
+                      <%= image_tag comment.user.picture, :width => "25" %> 
                     </div> 
                     <div id ="comment_text">
 
-                      <span class = "user"><%= link_to comment["from"]["name"], User.find_by_uid(comment["from"]["id"]) %></span>
-                      <span class = "content"> <%= comment["message"] %> </span>
-                      <span class="timestamp"> <%= time_ago_in_words(comment["created_time"]) %> ago </span>
+                      <span class = "user"><%= link_to comment.user.name, comment.user %></span>
+                      <span class = "content"> <%= comment.text %> </span>
+                      <span class="timestamp"> <%= time_ago_in_words(comment.created_at) %> ago </span>
                       
                     </div>
                     </div>
                   <%end%>
           <%end%>
-      <%end%><br>
-      <span class = "user"><%= link_to ("More posts by " + @post.user.name + " &raquo;").html_safe , @post.user %></span>
+        <%end%>
+      <%end%>
     </ol>
   </div>
   <br>

@@ -40,13 +40,15 @@
             <%else%>
              <%= link_to 'like', :controller => "posts", :action => "like", :id => post.id %> · 
            <%end%>
+
+             <%end%> 
           
-      <%if post.comments_count && post.comments_count > 0  %> 
-          <%= link_to "comment (" + post.comments_count.to_s + ")" , post %> · 
+      <%if post.comments && post.comments.count > 0  %> 
+          <%= link_to "comments (" + post.comments.count.to_s + ")" , post %> · 
           <%else%>
             <%= link_to "comment", post %> · 
             <%end%>
-      <%end%>  
+     
       
 
         <% if current_user != post.user %> 
