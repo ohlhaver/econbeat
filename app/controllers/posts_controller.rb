@@ -23,6 +23,23 @@ def show
   #else
   #  @post.box= false
   #end
+  if @post.fbaction_id && current_user.facebook.get_object(@post.fbaction_id)
+    fb_comments = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"]
+    if fb_comments
+      fb_comments.each do |c| 
+        comment = Comment.new
+        comment.text = c["message"]
+        comment.user_id = User.find_by_uid(c["from"]["id"]).id
+        comment.post_id = @post.id
+        comment.fbid = c["id"]
+        comment.created_at = c["created_time"]
+        comment.save
+      end
+    end
+
+  end
+    
+
 	@comments = @post.comments
 end
 
@@ -32,14 +49,18 @@ def add_comment
     comment.text = params[:comment]
     comment.user_id = current_user.id
     comment.post_id = @post.id
+    comment.fbid = Time.now.to_i.to_s + " " + current_user.id.to_s 
   comment.save
   PostMailer.delay.comment(@post, current_user, comment.text) unless @post.user == current_user
   if @post.commenters
     PostMailer.delay.also_comment(@post, current_user, comment.text)
   end
 
-
-	#current_user.facebook.put_comment(@post.fbaction_id, params[:comment] )
+  if @post.fbaction_id && current_user.facebook.get_object(@post.fbaction_id)
+  	a=current_user.facebook.put_comment(@post.fbaction_id, params[:comment] )
+    comment.fbid = a["id"]
+    comment.save
+  end
   #count = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"].count
   #@post.comments_count= count
   #@post.save
