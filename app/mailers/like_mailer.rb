@@ -5,7 +5,7 @@ class LikeMailer < ActionMailer::Base
   def like_it(post, user)
     @liking_user = user
     @liked_user = post.user
-    @subject = @liking_user.name + " liked your post on Jurnalo"
+    @subject = @liking_user.name + " liked your post"
     @post = post
     mail :to => @liked_user.email, :subject => @subject 
   end

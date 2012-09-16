@@ -23,17 +23,20 @@ def show
   #else
   #  @post.box= false
   #end
-  if @post.fbaction_id && current_user.facebook.get_object(@post.fbaction_id)
-    fb_comments = current_user.facebook.get_object(@post.fbaction_id)["comments"]["data"]
-    if fb_comments
-      fb_comments.each do |c| 
-        comment = Comment.new
-        comment.text = c["message"]
-        comment.user_id = User.find_by_uid(c["from"]["id"]).id
-        comment.post_id = @post.id
-        comment.fbid = c["id"]
-        comment.created_at = c["created_time"]
-        comment.save
+  if @post.fbaction_id && current_user
+    object = current_user.facebook.get_object(@post.fbaction_id)
+    if object && object["comments"]
+      fb_comments = object["comments"]["data"]
+      if fb_comments
+        fb_comments.each do |c| 
+          comment = Comment.new
+          comment.text = c["message"]
+          comment.user_id = User.find_by_uid(c["from"]["id"]).id
+          comment.post_id = @post.id
+          comment.fbid = c["id"]
+          comment.created_at = c["created_time"]
+          comment.save
+        end
       end
     end
 

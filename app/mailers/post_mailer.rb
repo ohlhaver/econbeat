@@ -22,7 +22,7 @@ class PostMailer < ActionMailer::Base
   def comment(post, user, text)
     @commenting_user = user
     @addressed_user = post.user
-    @subject = @commenting_user.name + " commented on your post on Jurnalo"
+    @subject = @commenting_user.name + " commented on your post"
     @post = post
     @text = text
     mail :to => @addressed_user.email, :subject => @subject 
