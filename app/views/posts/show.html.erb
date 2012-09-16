@@ -84,11 +84,11 @@
                   <% @comments.reverse.each do |comment|%>
                   <div class = "comment">
                     <div id ="user_image">
-                      <%= image_tag comment.user.picture, :width => "25" %> 
+                      <%= image_tag comment.user.picture, :width => "25" if comment.user %> 
                     </div> 
                     <div id ="comment_text">
 
-                      <span class = "user"><%= link_to comment.user.name, comment.user %></span>
+                      <span class = "user"><%= link_to comment.user.name, comment.user if comment.user %></span>
                       <span class = "content"> <%= comment.text %> </span>
                       <span class="timestamp"> <%= time_ago_in_words(comment.created_at) %> ago </span>
                       

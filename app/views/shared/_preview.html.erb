@@ -1,7 +1,7 @@
 
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h3>Preview</h3>
+		<h3>Repost</h3>
 	</div>
 	
 		<div class="modal-body">
@@ -29,16 +29,19 @@
 		<%= f.hidden_field :topic_id, :value =>  @new_post.topic_id %>
 		<%= f.hidden_field :via_id, :value =>  @new_post.via_id %>
 		<%= f.hidden_field :picture, :value =>  @new_post.picture %>
-			<div id="repost_privacy_checkboxes">
-			 <%= f.input :facebook, :label => "share on Facebook", :input_html => { :checked => true },:wrapper => :inline_checkbox %> 
-			 <%= f.input :email, :label => "email my Jurnalo followers", :input_html => { :checked => true },:wrapper => :inline_checkbox %>
-			 <%= f.input :public, :label => "make visible to all Jurnalo users", :input_html => { :checked => true }, :wrapper => :inline_checkbox %>
-			</div>
+		<br>
+		<div id="privacy_checkboxes" rel="tooltip" title="show this post on my Facebook profile" data-placement="right">
+			 <%= f.input :facebook, :label => "share on Facebook", :input_html => { :checked => true },:wrapper => :inline_checkbox %>  </div>
+			 <div id="privacy_checkboxes" rel="tooltip" title="email my followers on Jurnalo" data-placement="right">
+			 <%= f.input :email, :label => "notify my followers", :input_html => { :checked => true },:wrapper => :inline_checkbox %></div>
+			 <div id="privacy_checkboxes" rel="tooltip" title="make this post visible to all Jurnalo users" data-placement="right">
+			 <%= f.input :public, :label => "make it public", :input_html => { :checked => true }, :wrapper => :inline_checkbox %></div>
+			
 		</div>
 		<div class="modal-footer">
 
 			<div id="button_box">
-			  <%= f.submit "Repost article", class: "btn btn-medium btn-primary btn-posting" %>
+			  <%= f.submit "Repost this article", class: "btn btn-medium btn-primary btn-posting" %>
 			</div>
 		<% end %>
 		

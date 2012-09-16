@@ -18,11 +18,13 @@
 			 <div id="select_box">
 			  <%= f.association :topic, :prompt => "topic", :label => false %>
 			</div>
-			<div id="privacy_checkboxes">
-			 <%= f.input :facebook, :label => "share on Facebook", :input_html => { :checked => true },:wrapper => :inline_checkbox %> 
-			 <%= f.input :email, :label => "email my Jurnalo followers", :input_html => { :checked => true },:wrapper => :inline_checkbox %>
-			 <%= f.input :public, :label => "make visible to all Jurnalo users", :input_html => { :checked => true }, :wrapper => :inline_checkbox %>
-			</div>
+			<div id="privacy_checkboxes" rel="tooltip" title="show this post on my Facebook profile" data-placement="right">
+			 <%= f.input :facebook, :label => "share on Facebook", :input_html => { :checked => true },:wrapper => :inline_checkbox %>  </div>
+			 <div id="privacy_checkboxes" rel="tooltip" title="email my followers on Jurnalo" data-placement="right">
+			 <%= f.input :email, :label => "notify my followers", :input_html => { :checked => true },:wrapper => :inline_checkbox %></div>
+			 <div id="privacy_checkboxes" rel="tooltip" title="make this post visible to all Jurnalo users" data-placement="right">
+			 <%= f.input :public, :label => "make it public", :input_html => { :checked => true }, :wrapper => :inline_checkbox %></div>
+			
 		</div>
 		<div class="modal-footer">
 

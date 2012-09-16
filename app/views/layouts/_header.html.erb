@@ -5,7 +5,7 @@
     <div class="navbar-inner">
       <div class="container">
         <div class ="jlogo">
-        <%= link_to image_tag( 'logo.gif'), root_path, id: "logo" %>
+        <%= link_to image_tag( 'logo.gif'), root_path, id: "logo", title: 'home', rel: 'tooltip', "data-placement"=>"bottom" %>
         </div>
         <nav>
 
@@ -21,12 +21,12 @@
 
             <% if current_user %>
                             
-            <li><%= link_to current_user.name, current_user %></li>
+            <li><%= link_to current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
              
 
             
 
-            <li><%= link_to "Home", root_path%></li>
+            <li><%= link_to "Home", root_path %></li>
 
 
                
