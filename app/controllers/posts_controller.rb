@@ -49,6 +49,10 @@ end
   def like
     
     @post = Post.find(params[:id])
+    like = Like.new
+      like.user_id = current_user.id
+      like.post_id = @post.id
+    like.save
 
     #a=current_user.facebook.get_connections("me","og.likes")
     #s=a.select {|f| f["data"]["object"]["url"] == post_url(@post)}

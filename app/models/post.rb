@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
   belongs_to :utopic
   has_many :comments
   has_many :commenters, through: :comments, source: :user
+  has_many :likes
+  has_many :likers, through: :likes, source: :user
   validates_uniqueness_of :fbid
   belongs_to :via, class_name: "User"
   #validates :user_id, presence: true

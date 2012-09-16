@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :utopics
   has_many :filters
   has_many :comments
+  has_many :likes
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
   belongs_to :invitation
   validates_uniqueness_of :uid

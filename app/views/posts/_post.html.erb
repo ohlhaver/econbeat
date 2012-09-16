@@ -33,15 +33,15 @@
           <%= post.topic.name + " · " unless post.topic == nil  %> 
         <%end%>
          
-         <% if post.fbaction_id %>
+         <!--% if post.fbaction_id %-->
 
          <%if post.likes_count && post.likes_count > 0  %>  
-            <%= link_to 'like (' + post.likes_count.to_s + ")", :controller => "posts", :action => "like", :id => post.id %> · 
+            <%= link_to 'like', :controller => "posts", :action => "like", :id => post.id %> (<%=  post.likes_count.to_s %>) · 
             <%else%>
              <%= link_to 'like', :controller => "posts", :action => "like", :id => post.id %> · 
            <%end%>
 
-             <%end%> 
+             <!--%end%--> 
           
       <%if post.comments && post.comments.count > 0  %> 
           <%= link_to "comments (" + post.comments.count.to_s + ")" , post %> · 

@@ -26,13 +26,13 @@
 			 		<%= feed_item.topic.name + " · " unless feed_item.topic == nil  %> 
 			 	<%end%>
 			 	 
-			 	 <% if feed_item.fbaction_id %>
+			 	 <!--% if feed_item.fbaction_id %-->
 				 	 <%if feed_item.likes_count && feed_item.likes_count > 0  %>	
-				 	  <%= link_to 'like (' + feed_item.likes_count.to_s + ")", :controller => "posts", :action => "like", :id => feed_item.id %> · 
+				 	  <%= link_to 'like', :controller => "posts", :action => "like", :id => feed_item.id %> (<%=  feed_item.likes_count.to_s %>) · 
 				 	  <%else%>
 				 	   <%= link_to 'like', :controller => "posts", :action => "like", :id => feed_item.id %> · 
 				 	 <%end%>
-				  <%end%>  
+				  <!--%end%-->  
 				 	<%if feed_item.comments && feed_item.comments.count > 0  %>	
 				 	<%= link_to "comments (" + feed_item.comments.count.to_s + ")" , feed_item %> · 
 				 	<%else%>
