@@ -2,8 +2,10 @@
   
   <% @filter = Filter.find_by_utopic_id_and_user_id(utopic.id, current_user.id) %>
   <% if @filter == nil %>
-  <%= link_to ("block " + @utopic.topic.name.downcase + " by " + @user.name), :controller => "filters", :action => "new", :utopic => utopic.id, :filter => nil %>
+  
+  <%= button_to ("block " + @utopic.topic.name.downcase + " by " + @user.name), {:controller => "filters", :action => "new", :utopic => utopic.id, :filter => nil}, {:class => "btn btn-small"} %> 
   <% else %>
-  <%= link_to ("unblock " + @utopic.topic.name.downcase + " by " + @user.name), :controller => "filters", :action => "new", :utopic => utopic.id, :filter => @filter.id %>
+  <%= button_to ("unblock " + @utopic.topic.name.downcase + " by " + @user.name), {:controller => "filters", :action => "new", :utopic => utopic.id, :filter => @filter.id}, {:class => "btn btn-small" } %>
+
   <% end %> 
  

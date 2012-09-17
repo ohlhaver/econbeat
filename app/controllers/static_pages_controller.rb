@@ -35,7 +35,7 @@ class StaticPagesController < ApplicationController
 
       #end
 
-        @feed_items = Kaminari.paginate_array(@feed_items).page(params[:page])
+        @feed_items = @feed_items.page params[:page]
 
 
 

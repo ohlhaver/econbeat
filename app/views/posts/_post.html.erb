@@ -5,10 +5,10 @@
     <% if current_user == post.user %> 
         <% if post.starred == true%>
        
-          <%= link_to raw('<i class="icon-star"></i>'), "/posts/#{post.id}/unstar", :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"right" %>
+          <%= link_to raw('<i class="icon-star"></i>'), "/posts/#{post.id}/unstar", :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
         <%else%>
 
-          <%= link_to raw('<i class="icon-star-empty"></i>'), "/posts/#{post.id}/star", :class => "btn btn-small", title: 'click to star this article', rel: 'tooltip', "data-placement"=>"right"  %>
+          <%= link_to raw('<i class="icon-star-empty"></i>'), "/posts/#{post.id}/star", :class => "btn btn-small", title: 'click to star this article', rel: 'tooltip', "data-placement"=>"bottom"  %>
           
         <%end%>
         <%end%>

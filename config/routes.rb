@@ -49,6 +49,11 @@ resources :posts do
     collection { post :sort }
 end
 
+resources :filters do
+    member do
+      post :new
+    end
+end
 
 
 resources :filters, only: [:new, :create, :destroy]

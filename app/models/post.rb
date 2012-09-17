@@ -22,6 +22,7 @@ class Post < ActiveRecord::Base
   #before_save :ensure_position
 
   default_scope order: 'posts.created_at DESC'
+  paginates_per 50
 
 
   def self.from_users_followed_by(user)
