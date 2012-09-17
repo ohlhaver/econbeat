@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
 
       @post = Post.new
       @post.user = self
-      @post.url = fb_post["url"]
+      @post.url = fb_post["url"][0,250]
       @post.fbid = fb_post["link_id"]
       @post.fbaction_id = fb_post["link_id"] 
       @post.headline = fb_post["title"][0,250] if fb_post["title"] != nil
