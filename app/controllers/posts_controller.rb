@@ -85,6 +85,9 @@ def add_comment
   redirect_to :back
 end
 
+
+
+
   def like
     
     @post = Post.find(params[:id])

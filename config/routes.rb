@@ -44,7 +44,7 @@ end
 resources :posts do
     member do
       get :star, :unstar, :share, :like, :preview
-      post :add_comment
+      post :add_comment, :add_message
     end
     collection { post :sort }
 end
@@ -54,6 +54,14 @@ resources :filters do
       post :new
     end
 end
+
+
+resources :static_pages do
+    member do
+      post :add_message
+    end
+end
+
 
 
 resources :filters, only: [:new, :create, :destroy]

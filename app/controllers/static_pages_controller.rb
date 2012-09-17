@@ -57,6 +57,15 @@ class StaticPagesController < ApplicationController
   def about
   end
 
+  def add_message
+    @message = params[:message]
+    @user = current_user
+    unless @message ==nil
+       UserMailer.delay.send_message(@message, @user)
+       redirect_to root_url, :notice => "Message submitted."
+    end
+  end
+
   def contact
   end
 end

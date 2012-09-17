@@ -9,5 +9,10 @@
 View your entire Jurnalo feed here:
 <%= root_url %>
 
-Unfollow or filter messages from <%= @post.user.name %> here:
+View or unfollow all messages from <%= @post.user.name %> here:
 <%= user_url(@post.user) %> 
+
+<% if @post.utopic %>
+View or block <%= @post.utopic.topic.name %> posts from <%= @post.user.name %> here:
+<%= url_for(:controller => "users", :action => "show", :id => @post.user.id,  :topic => @post.utopic.topic.id, :only_path => false) %>
+<%end%>
