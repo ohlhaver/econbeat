@@ -89,7 +89,7 @@ end
       @favorites = @favorites.sort_by(&:position)
 
 
-      @latest = @latest.page params[:page]
+      @latest = Kaminari.paginate_array(@latest).page(params[:page])
   end
 
   def feed
