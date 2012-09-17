@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
       
       @topics = Topic.find(:all)
       @topics = @topics.find_all{|i| i.posts.where(:hidden=>nil).count > 0}
-      @feed_items = current_user.feed
+      @feed_items = Array.wrap(current_user.feed)
       @display_topics=[]
         @topics.each do |topic|
           topic_feed_items = @feed_items.find_all{|i| i.topic_id == topic.id}
