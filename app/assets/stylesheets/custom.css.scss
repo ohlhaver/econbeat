@@ -247,14 +247,14 @@ aside {
 
 #post_box{
   display: inline-block;
-  width: 260px;
+  width: 140px;
   margin-left: 0px;
   
 }
 
 #select_box{
   display: inline-block;
-  width: 80px;
+  width: 62px;
   margin-left: 10px;
 
 
@@ -360,6 +360,10 @@ textarea, .uneditable-input {
   }
 }
 
+.profile_image {
+  margin-left: 8px;
+}
+
 .profile_microposts {
   list-style: none;
   margin: 0px 0 0 0;
@@ -442,7 +446,7 @@ aside {
 #post_text {
   margin-left: 5px;
   display: inline-block;
-  width: 70%;
+  width: 62%;
 
 
 }
