@@ -65,8 +65,11 @@ end
       @topic = Topic.find(params[:topic]) if params[:topic]
       if params[:topic]
         @posts = @user.posts.where("topic_id = ?", params[:topic]) 
+        @posts = @posts.where(:public => true) if @friendship == false
+        
       else
         @posts = @user.posts
+        @posts = @posts.where(:public => true) if @friendship == false
       
       end
 

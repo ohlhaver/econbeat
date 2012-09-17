@@ -110,7 +110,7 @@ end
 
 	def new
 
-     # @post  = current_user.posts.build if current_user
+     #@post  = current_user.posts.build if current_user
 	end
 
   def preview
@@ -201,8 +201,10 @@ def create
         flash[:success] = "Post created!"
         redirect_to root_url
   else
-       render "new"
-  end
+       flash[:error] = "Invalid url!"
+       redirect_to root_url
+
+     end
 end
 
   def destroy

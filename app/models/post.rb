@@ -16,7 +16,7 @@ class Post < ActiveRecord::Base
   #validates :topic_id, presence: true
   #validates_presence_of :url, :message => 'is required'
   #validates_presence_of :headline, :message => 'is required'
-  #validates :headline, presence: true
+  validates :headline, presence: true
   
   after_create :ensure_picture, :filter_bad_posts
   #before_save :ensure_position
