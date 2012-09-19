@@ -54,4 +54,5 @@ config.action_mailer.smtp_settings = {
   ENV['FACEBOOK_SECRET'] = '8400807f19e2ca49f4dea8f47751c3d2'
 
 
+
 end

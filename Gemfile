@@ -51,3 +51,5 @@ gem 'koala'
 gem 'best_in_place'
 
 gem "acts_as_list"
+
+gem 'exception_notification', :require => 'exception_notifier'

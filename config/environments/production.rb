@@ -82,4 +82,9 @@ config.action_mailer.smtp_settings = {
 ENV['FACEBOOK_APP_ID'] = '198036786877634'
 ENV['FACEBOOK_SECRET'] = 'a9c8a0fdadd66430a25df6724d4c19de'
 
+config.middleware.use ExceptionNotifier,
+  :email_prefix => "[Exception] ",
+  :sender_address => %{"Exception Notifier" <noreply@jurnalo.com>},
+  :exception_recipients => %w{ohlhaver@gmail.com}
+
 end

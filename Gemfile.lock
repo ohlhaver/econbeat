@@ -95,6 +95,8 @@ GEM
     domain_name (0.5.3)
       unf (~> 0.0.3)
     erubis (2.7.0)
+    exception_notification (2.6.1)
+      actionmailer (>= 3.0.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     faraday (0.7.6)
@@ -283,6 +285,7 @@ DEPENDENCIES
   coffee-rails (= 3.2.2)
   daemons
   delayed_job_active_record
+  exception_notification
   jquery-rails (= 2.0.2)
   koala
   mechanize
