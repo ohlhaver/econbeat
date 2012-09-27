@@ -202,7 +202,7 @@ def create
   	 end
     end
         flash[:success] = "Post created!"
-        redirect_to root_url
+        redirect_to @post
   else
        flash[:error] = "Invalid url!"
        redirect_to root_url
