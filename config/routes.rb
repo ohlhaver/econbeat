@@ -62,7 +62,9 @@ resources :static_pages do
     end
 end
 
-
+resources :articles
+resources :authors
+resources :catchers
 
 resources :filters, only: [:new, :create, :destroy]
 resources :posts, only: [:new, :create, :destroy]

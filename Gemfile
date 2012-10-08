@@ -5,7 +5,7 @@ gem 'rails', '3.2.8'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.5'
+  gem 'pg', '0.12.2'
   gem 'rspec-rails', '2.10.0'
 end
 
@@ -53,3 +53,9 @@ gem 'best_in_place'
 gem "acts_as_list"
 
 gem 'exception_notification', :require => 'exception_notifier'
+
+gem 'thinking-sphinx', '2.0.10'
+
+gem 'flying-sphinx',   '0.8.3'
+
+
