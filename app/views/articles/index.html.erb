@@ -1,0 +1,11 @@
+<%= form_tag articles_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :q, nil, :placeholder => 'Search articles...'%>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<%= render @authors%>
+
+
+<%= render @articles%>
