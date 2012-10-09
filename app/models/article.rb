@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
   # attr_accessible :title, :body
   belongs_to :catcher
+  default_scope order: 'articles.created_at DESC'
 
   define_index do
     indexes title

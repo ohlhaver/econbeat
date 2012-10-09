@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
   has_many :subscriptions, :dependent => :destroy
+  has_many :authors, through: :subscriptions 
+  has_many :articles, through: :authors
   belongs_to :invitation
   validates_uniqueness_of :uid
   after_create :follow_fb_friends

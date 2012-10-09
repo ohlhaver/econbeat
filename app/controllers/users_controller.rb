@@ -48,6 +48,7 @@ end
 
     @user = User.find(params[:id])
     
+    @authors = @user.authors
     
     @friendship = check_friendship(@user)
 
@@ -100,13 +101,20 @@ end
     Post.where("user_id = ?", id)
   end
 
-                
+  def authors
+    @title = "Followed authors"
+    @user = User.find(params[:id])
+    @friendship = check_friendship(@user)
+    @authors = @user.authors.page params[:page]
+    render 'show_follow'
+  end              
 
   def following
     @title = "Following"
     @user = User.find(params[:id])
     @friendship = check_friendship(@user)
     @users = @user.followed_users.page params[:page]
+    @authors = @user.authors
     render 'show_follow'
   end
 
@@ -115,6 +123,7 @@ end
     @user = User.find(params[:id])
     @friendship = check_friendship(@user)
     @users = @user.followers.page params[:page]
+    @authors = @user.authors
     render 'show_follow'
   end
 

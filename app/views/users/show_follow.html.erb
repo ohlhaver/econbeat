@@ -33,12 +33,19 @@
 
 
       
-      <% if @users.any? %>
+      <% if @users %>
         <ul class="users">
           <%= render @users %>
         </ul>
         <%= paginate @users %>
       <% end %>
+      <% if @authors.any? %>
+        <ul class="users">
+          <%= render @authors %>
+        </ul>
+        <%= paginate @authors %>
+      <% end %>
+
     </div>
   
    
