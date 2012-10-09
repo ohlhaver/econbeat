@@ -1,3 +1,4 @@
 
 
-<%= link_to article.title, article.url %> - <%= link_to article.catcher.author.name, author_path(article.catcher.author)  if article.catcher%> - <%= time_ago_in_words(article.created_at) %> ago <br><br>
+<%= link_to article.title, article.url %> - <%= link_to article.catcher.author.name, author_path(article.catcher.author)  if article.catcher%> - <%= time_ago_in_words(article.created_at) %> ago <br>
+<%= link_to 'like', :controller => "articles", :action => "like", :id => article.id %><br><br>

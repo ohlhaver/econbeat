@@ -18,4 +18,24 @@ class SubscriptionsController < ApplicationController
       format.js
     end
   end
+
+  def star
+    
+    @subscription = Subscription.find(params[:id])
+    @subscription.starred=true
+    #@subscription.position = 1
+    @subscription.save
+    current_user.star_author_action(@subscription)
+    
+    #current_user.delay.fbstar(post_url(@post))
+    redirect_to authors_user_path(current_user), :notice => "Author has been starred."
+  end
+
+  def unstar
+    @subscription = Subscription.find(params[:id])
+    @subscription.starred=nil
+    @subscription.save
+    #current_user.delay.fbunstar(post_url(@post))
+    redirect_to authors_user_path(current_user)
+  end
 end

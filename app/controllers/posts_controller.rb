@@ -59,6 +59,8 @@ def add_comment
     comment.post_id = @post.id
     comment.fbid = Time.now.to_i.to_s + " " + current_user.id.to_s 
   comment.save
+
+  current_user.comment_action(comment)
   PostMailer.delay.comment(@post, current_user, comment.text) unless @post.user == current_user
   if @post.commenters
     PostMailer.delay.also_comment(@post, current_user, comment.text)
@@ -95,6 +97,7 @@ end
       like.user_id = current_user.id
       like.post_id = @post.id
     like.save
+    current_user.like_post_action(like)
 
     #a=current_user.facebook.get_connections("me","og.likes")
     #s=a.select {|f| f["data"]["object"]["url"] == post_url(@post)}
@@ -192,7 +195,7 @@ def create
 
 
   if @post.save
-
+      current_user.post_action(@post)
   		current_user.delay.fbpost(post_url(@post), @post) if @post.facebook == true
      
     if @post.email == true

@@ -49,6 +49,21 @@ resources :posts do
     collection { post :sort }
 end
 
+resources :subscriptions do
+    member do
+      get :star, :unstar, 
+    end
+end
+
+
+resources :articles do
+    member do
+      get  :share, :like, :preview
+      post :add_comment, :add_message
+    end
+    collection { post :sort }
+end
+
 resources :filters do
     member do
       post :new

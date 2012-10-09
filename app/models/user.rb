@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   belongs_to :invitation
   validates_uniqueness_of :uid
   after_create :follow_fb_friends
+  after_create :join_action
   
 
   #validates :name, presence: true, length: { maximum: 50 },
@@ -229,11 +230,47 @@ class User < ActiveRecord::Base
   end
 
   def subscribe!(author)
-    subscriptions.create!(author_id: author.id)
+    subscription = subscriptions.create!(author_id: author.id)
+    subscribe_action(subscription) if subscription.save
   end
 
   def unsubscribe!(author)
     subscriptions.find_by_author_id(author.id).destroy
+  end
+
+  def post_action(post)
+     a=Action.new 
+      a.new_post(post)
+  end
+
+  def like_post_action(like)
+     a=Action.new 
+      a.like_post(like)
+  end
+
+  def like_article_action(like)
+     a=Action.new 
+      a.like_article(like)
+  end
+
+  def subscribe_action(subscription)
+     a=Action.new 
+      a.subscribe_author(subscription)
+  end
+
+  def star_author_action(subscription)
+     a=Action.new 
+      a.star_author(subscription)
+  end
+
+  def join_action
+    a=Action.new
+    a.join(self)
+  end
+
+  def comment_action(comment)
+    a=Action.new
+    a.comment_on_post(comment)
   end
 
 

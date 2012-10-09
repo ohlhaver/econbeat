@@ -105,7 +105,8 @@ end
     @title = "Followed authors"
     @user = User.find(params[:id])
     @friendship = check_friendship(@user)
-    @authors = @user.authors.page params[:page]
+    @starred_authors = @user.subscriptions.where(:starred =>true).map(&:author)
+    @authors = @user.subscriptions.where(:starred => nil).map(&:author)
     render 'show_follow'
   end              
 
@@ -114,7 +115,7 @@ end
     @user = User.find(params[:id])
     @friendship = check_friendship(@user)
     @users = @user.followed_users.page params[:page]
-    @authors = @user.authors
+    #@authors = @user.authors
     render 'show_follow'
   end
 
@@ -123,7 +124,7 @@ end
     @user = User.find(params[:id])
     @friendship = check_friendship(@user)
     @users = @user.followers.page params[:page]
-    @authors = @user.authors
+    #@authors = @user.authors
     render 'show_follow'
   end
 

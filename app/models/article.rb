@@ -2,6 +2,7 @@ class Article < ActiveRecord::Base
   # attr_accessible :title, :body
   belongs_to :catcher
   default_scope order: 'articles.created_at DESC'
+  after_create :publish_action
 
   define_index do
     indexes title
@@ -10,6 +11,11 @@ class Article < ActiveRecord::Base
   end
 
 
+
+  def publish_action
+  	a=Action.new
+  	a.publish_article(self)
+  end
 
   #def self.search(search)
 #	  if search
