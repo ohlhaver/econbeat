@@ -1,0 +1,13 @@
+<% unless current_user == @user %>
+<div id="subscribe_form">
+
+  	<% if current_user.subscribed?(@author) %>
+
+		    <%= render 'unsubscribe' %>
+		
+	<% else %>
+		    <%= render 'subscribe' %>
+	<% end %>
+	</div>
+
+<% end %>

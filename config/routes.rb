@@ -70,6 +70,7 @@ resources :filters, only: [:new, :create, :destroy]
 resources :posts, only: [:new, :create, :destroy]
 resources :sessions
 resources :relationships, only: [:new, :create, :destroy]
+resources :subscriptions, only: [:new, :create, :destroy]
 resources :password_resets
 
 resources :facebook_updates, :only=>[:create, :index]

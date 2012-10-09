@@ -1,0 +1,2 @@
+$("#subscribe_form").html("<%= escape_javascript(render('authors/unsubscribe')) %>")
+$("#subscriptions").html('<%= @author.subscriptions.count %>')

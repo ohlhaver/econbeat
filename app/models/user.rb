@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :likes
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
+  has_many :subscriptions, :dependent => :destroy
   belongs_to :invitation
   validates_uniqueness_of :uid
   after_create :follow_fb_friends
@@ -99,13 +100,9 @@ class User < ActiveRecord::Base
             @post.created_at = Time.at(fb_post["created_time"].to_time)
             @post.save
         end
-        self.follow!(@user)
-        
-       
+        self.follow!(@user)        
       end
-      
     end
-
   end
 
   def reload_authors
@@ -144,7 +141,6 @@ class User < ActiveRecord::Base
           self.facebook.put_connections("me", "og.likes", object: post_url)
           post.likes_count = self.facebook.get_object(post_url)["shares"]
           post.save
-
   end
 
   def fbunstar(post_url)
@@ -165,8 +161,6 @@ class User < ActiveRecord::Base
     end
     post.fbaction_id = p["id"]
     post.save
-
-
   end
 
 
@@ -228,6 +222,19 @@ class User < ActiveRecord::Base
     self.invitation = Invitation.find_by_token(token)
   end
 
+  def subscribed?(author)
+    subscriptions.find_by_author_id(author.id)
+  end
+
+  def subscribe!(author)
+    subscriptions.create!(author_id: author.id)
+  end
+
+  def unsubscribe!(author)
+    subscriptions.find_by_author_id(author.id).destroy
+  end
+
+
 
   private
 
@@ -239,20 +246,20 @@ class User < ActiveRecord::Base
   #  follow_fb_friends_loop.delay
   #end
 
-  def follow_fb_friends
-    follow_fb_friends_action.delay
-  end
+    def follow_fb_friends
+      follow_fb_friends_action.delay
+    end
 
-  def follow_fb_friends_action
-    @friends = self.facebook.get_connections("me", "friends")
-    @friends.each do |friend|
-      jurnalo_user = User.find_by_uid(friend["id"])
-      if jurnalo_user
-        self.follow!(jurnalo_user)
-        follow_back(jurnalo_user)
+    def follow_fb_friends_action
+      @friends = self.facebook.get_connections("me", "friends")
+      @friends.each do |friend|
+        jurnalo_user = User.find_by_uid(friend["id"])
+        if jurnalo_user
+          self.follow!(jurnalo_user)
+          follow_back(jurnalo_user)
+        end
       end
     end
-  end
 
 
 end

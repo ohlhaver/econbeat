@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120915233142) do
+ActiveRecord::Schema.define(:version => 20121009082432) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -46,6 +46,38 @@ ActiveRecord::Schema.define(:version => 20120915233142) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "articles", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.string   "teaser"
+    t.integer  "feed_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "catcher_id"
+    t.integer  "source_id"
+  end
+
+  add_index "articles", ["title", "catcher_id"], :name => "index_articles_on_title_and_catcher_id", :unique => true
+  add_index "articles", ["title", "source_id"], :name => "index_articles_on_title_and_source_id", :unique => true
+  add_index "articles", ["url"], :name => "index_articles_on_url", :unique => true
+
+  create_table "authors", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "authors", ["name"], :name => "index_authors_on_name", :unique => true
+
+  create_table "catchers", :force => true do |t|
+    t.string   "name"
+    t.integer  "author_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "catchers", ["name"], :name => "index_catchers_on_name", :unique => true
+
   create_table "comments", :force => true do |t|
     t.text     "text"
     t.integer  "user_id"
@@ -77,6 +109,24 @@ ActiveRecord::Schema.define(:version => 20120915233142) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "feeds", :force => true do |t|
+    t.string   "name"
+    t.string   "authors"
+    t.text     "url"
+    t.string   "sha"
+    t.boolean  "active"
+    t.integer  "frequency_in_seconds"
+    t.datetime "last_crawled_at"
+    t.datetime "next_crawl_at"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.integer  "source_id"
+    t.boolean  "scraper"
+  end
+
+  add_index "feeds", ["next_crawl_at"], :name => "index_feeds_on_next_crawl_at"
+  add_index "feeds", ["sha"], :name => "index_feeds_on_sha"
 
   create_table "filters", :force => true do |t|
     t.integer  "user_id"
@@ -146,6 +196,40 @@ ActiveRecord::Schema.define(:version => 20120915233142) do
   add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
+
+  create_table "scraper_rules", :force => true do |t|
+    t.integer  "feed_id"
+    t.string   "label"
+    t.text     "value"
+    t.text     "match"
+    t.text     "test_url"
+    t.integer  "position",   :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "scraper_rules", ["feed_id"], :name => "index_scraper_rules_on_feed_id"
+
+  create_table "sources", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "stop_words", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "author_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "subscriptions", ["user_id", "author_id"], :name => "index_subscriptions_on_user_id_and_author_id", :unique => true
 
   create_table "topics", :force => true do |t|
     t.string   "name"
