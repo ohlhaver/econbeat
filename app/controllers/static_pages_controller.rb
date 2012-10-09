@@ -2,21 +2,22 @@ class StaticPagesController < ApplicationController
   before_filter :authorize, only: [:fb_new]
   def home
     if current_user
-      @articles = current_user.articles
-      @topics = Topic.find(:all)
-      @topics = @topics.find_all{|i| i.posts.where(:hidden=>nil).count > 0}
-      @feed_items = current_user.feed
-      @display_topics=[]
-        @topics.each do |topic|
-          topic_feed_items = @feed_items.find_all{|i| i.topic_id == topic.id}
-          @display_topics = @display_topics << topic if topic_feed_items.size >= 1
-        end
-      @topics = @display_topics
+      @actions = current_user.user_action_feed + current_user.author_action_feed
+      #@articles = current_user.articles
+      #@topics = Topic.find(:all)
+      #@topics = @topics.find_all{|i| i.posts.where(:hidden=>nil).count > 0}
+      #@feed_items = current_user.feed
+      #@display_topics=[]
+      #  @topics.each do |topic|
+      #    topic_feed_items = @feed_items.find_all{|i| i.topic_id == topic.id}
+      #    @display_topics = @display_topics << topic if topic_feed_items.size >= 1
+      #  end
+      #@topics = @display_topics
 
-      if params[:topic]
+      #if params[:topic]
         #@feed_items = current_user.feed.where("topic_id = ?", params[:topic])
-        @feed_items = current_user.feed.find_all{|v| v.topic_id == params[:topic].to_i } 
-      end
+      #  @feed_items = current_user.feed.find_all{|v| v.topic_id == params[:topic].to_i } 
+      #end
 
      # @feed_items.each do |i|
      #     if i.fbaction_id 
@@ -35,7 +36,7 @@ class StaticPagesController < ApplicationController
 
       #end
 
-        @feed_items = Kaminari.paginate_array(@feed_items).page(params[:page]).per(50)
+        @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
 
 
 

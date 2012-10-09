@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions, :dependent => :destroy
   has_many :authors, through: :subscriptions 
   has_many :articles, through: :authors
+  has_many :actions
   belongs_to :invitation
   validates_uniqueness_of :uid
   after_create :follow_fb_friends
@@ -196,6 +197,18 @@ class User < ActiveRecord::Base
       a = a - f.utopic.posts if f.utopic != nil
     end
     return a
+  end
+
+  def user_action_feed
+       a = Action.from_users_followed_by(self)
+    return a
+
+  end
+
+   def author_action_feed
+       a = Action.from_authors_followed_by(self)
+    return a
+
   end
 
   def following?(other_user)

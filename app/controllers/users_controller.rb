@@ -56,44 +56,44 @@ end
 
 
    
-      @utopics = @user.utopics.find_all{|i| i.posts.where(:hidden=>nil).count > 0}
+     # @utopics = @user.utopics.find_all{|i| i.posts.where(:hidden=>nil).count > 0}
       
-      @utopic = @user.utopics.find_by_topic_id(params[:topic])
+     # @utopic = @user.utopics.find_by_topic_id(params[:topic])
       
-      @topics = Topic.find(:all)
+     # @topics = Topic.find(:all)
 
       
-      @topic = Topic.find(params[:topic]) if params[:topic]
-      if params[:topic]
-        @posts = @user.posts.where("topic_id = ?", params[:topic]) 
-        @posts = @posts.where(:public => true) if @friendship == false
+     # @topic = Topic.find(params[:topic]) if params[:topic]
+     # if params[:topic]
+     #   @posts = @user.posts.where("topic_id = ?", params[:topic]) 
+     #   @posts = @posts.where(:public => true) if @friendship == false
         
-      else
-        @posts = @user.posts
-        @posts = @posts.where(:public => true) if @friendship == false
+     # else
+        @actions = @user.actions
+     #   @actions = @actions.where(:public => true) if @friendship == false
       
-      end
+     # end
 
       
 
-      @favorites = @posts.where(:starred =>true, :hidden=>nil)
-      @latest = @posts.where(:starred => nil, :hidden=>nil)
-      if current_user == @user
-        if @posts.empty?
-        flash[:notice] = "Importing your posts from Facebook. Please refresh in a few seconds!" 
-        elsif @favorites.empty? && @utopic == nil
-        flash[:notice] = "Star your three favorite posts by clicking the star buttons on the right." 
-        elsif @utopics.empty?
-        flash[:notice] = "Click 'select topic!' underneath any headline to categorize a post."
-        end
-      end
+     # @favorites = @posts.where(:starred =>true, :hidden=>nil)
+     # @latest = @posts.where(:starred => nil, :hidden=>nil)
+     # if current_user == @user
+     #   if @posts.empty?
+     #   flash[:notice] = "Importing your posts from Facebook. Please refresh in a few seconds!" 
+     #   elsif @favorites.empty? && @utopic == nil
+     #   flash[:notice] = "Star your three favorite posts by clicking the star buttons on the right." 
+     #   elsif @utopics.empty?
+     #   flash[:notice] = "Click 'select topic!' underneath any headline to categorize a post."
+     #   end
+     # end
       
       #@access = true if current_user.facebook.get_object(@user.uid)
       #if @access == true
-      @favorites = @favorites.sort_by(&:position)
+     # @favorites = @favorites.sort_by(&:position)
 
 
-      @latest = Kaminari.paginate_array(@latest).page(params[:page]).per(50)
+      @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
   end
 
   def feed

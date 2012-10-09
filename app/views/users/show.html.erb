@@ -18,40 +18,22 @@
       </div>
       <div class="span3">
         <div id = "follow_button">
-                <%if current_user.following?(@user) && @utopic %>
-                  <%= render @utopic unless @friendship == false%>
-          <%else%> 
+
                 <%= render 'follow_form' unless @friendship == false %>            
-         <%end%>    
+ 
        </div>
         <%= render 'shared/stats' %>  
       </div>
-       <div class="span8">
-        
-       <% if @utopics.any? %>
-        <%= render "shared/utopic_menu" %>
-        <%end%>
-      <% if @favorites.any? %>
 
-      <div id = "favorite_posts">
-         Starred
-          
-            <ol class="profile_microposts" id="posts" data-update-url="<%= sort_posts_url %>">
-          <%= render @favorites %>
-        </ol>
        
-        
-
-      </div>
-       <% end %> 
-       <% if @latest.any? %>
+       <% if @actions.any? %>
 
       <div id = "latest_posts">
          <ol class="profile_microposts">
-          <%= render @latest %>
+          <%= render @actions %>
           </ol>
           <br>
-          <%= paginate @latest %>
+          <%= paginate @actions %>
        
       </div>
         <%end%>

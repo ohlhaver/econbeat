@@ -1,13 +1,12 @@
-
-
-<%= render @articles %>
-
-
-<% if @feed_items.any? %>
+<% if @actions.any? %>
   <ol class="microposts">
-    <%= render partial: 'shared/feed_item', collection: @feed_items %>
-  </ol>
+<%= render @actions %>
+</ol>
+
+
+
+
   <br>
-  <%= paginate @feed_items %>
+  <%= paginate @actions %>
   
 <% end %>

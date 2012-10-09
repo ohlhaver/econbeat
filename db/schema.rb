@@ -11,16 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009145451) do
+ActiveRecord::Schema.define(:version => 20121009200811) do
 
   create_table "actions", :force => true do |t|
     t.integer  "subject_type"
-    t.integer  "subject_id"
     t.integer  "action_type"
     t.integer  "object_type"
-    t.integer  "object_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "article_id"
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.integer  "author_id"
+    t.integer  "author_obj_id"
   end
 
   create_table "active_admin_comments", :force => true do |t|

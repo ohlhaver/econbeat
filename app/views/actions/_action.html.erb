@@ -1,0 +1,88 @@
+<li id="<%= action.id %>">
+
+
+	<% if action.subject_type == 1 %>
+		<div id ="user_image">
+			<%= link_to (image_tag action.user.picture, :width => "25"), action.user  %> 
+		</div> 
+		<div id ="item_text">
+			<span class = "user">
+				<% if action.subject_type == 1 %>
+					<%= link_to action.user.name, user_path(action.user) %>
+				<%end%>
+
+			<%= "posted" if action.action_type == 1 %>
+			<%= "likes" if action.action_type == 2 %>
+			<%= "follows" if action.action_type == 3 %>
+			<%= "starred" if action.action_type == 4 %>
+			<%= "commented on" if action.action_type == 5 %>
+			<% if action.action_type == 6 %>
+			<%= "joined Jurnalo" %> <br><span class="timestamp">  <%= time_ago_in_words(action.created_at) %> ago </span>
+			<%end%>
+
+			</span>
+			<br>
+	<% elsif action.subject_type == 2 %>
+		<div id ="item_text">
+			<span class = "user">
+				<%= link_to action.author.name, action.author %>
+			</span>
+
+	<%end%>
+	
+	<% if action.object_type == 1 %>
+		 		<span class="content">
+		 			
+						<%= link_to action.post.headline, action.post.url %>
+						<% if action.post.author %> <br> by <%= action.post.author %><%end%><br>
+					  	<%= truncate(action.post.description, :length => 100, :omission =>"...", :separator => ' ') %>
+
+				</span>
+				<span class="timestamp"> 
+						<%if action.post.likes_count && action.post.likes_count > 0  %>	
+						 	  <%= link_to 'like', :controller => "posts", :action => "like", :id => action.post.id %> (<%=  action.post.likes_count.to_s %>) · 
+						<%else%>
+						 	   <%= link_to 'like', :controller => "posts", :action => "like", :id => action.post.id %> · 
+						<%end%>
+						  <!--%end%-->  
+						<%if action.post.comments && action.post.comments.count > 0  %>	
+						 	<%= link_to "comments (" + action.post.comments.count.to_s + ")" , action.post %> · 
+						<%else%>
+			   				<%= link_to "comment", action.post %> · 
+			   			<%end%>
+			   			<%= time_ago_in_words(action.post.created_at) %> ago 
+		    			<% if current_user == action.post.user %> 
+				  			&nbsp;<%= link_to "x", action.post, method: :delete,
+				                                     data: { confirm: "You sure?" },
+				                                     title: action.post.url %> <%end%>
+			   			
+				</span>
+	<% elsif action.object_type == 2 %>
+		
+				<span class="content">
+		 			
+						<%= link_to action.article.title, action.article.url %>
+						<span class = "user">
+							<% if action.subject_type == 1 && action.article.catcher %> <br> by <%= link_to action.article.catcher.author.name, action.article.catcher.author %><%end%><br>
+						</span>
+
+				</span>
+				<span class="timestamp"> 
+						
+			   			<%= time_ago_in_words(action.article.created_at) %> ago 			   			
+				</span>
+	<% elsif action.object_type == 3 or action.object_type == 4 %>
+				<%= link_to action.author_obj.name, author_path(action.author_obj) %>
+				 <br><span class="timestamp">  <%= time_ago_in_words(action.created_at) %> ago </span>
+	<%end%>
+		</div>
+
+
+	
+
+
+
+
+
+
+</li>
