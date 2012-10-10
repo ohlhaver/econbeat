@@ -5,11 +5,11 @@ class Article < ActiveRecord::Base
   after_create :publish_action
   has_many :likes
 
-  define_index do
-    indexes title
-    indexes catcher.author.name, :as => :author
-    has created_at
-  end
+  #define_index do
+  #  indexes title
+  #  indexes catcher.author.name, :as => :author
+  #  has created_at
+  #end
 
 
 
