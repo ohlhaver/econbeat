@@ -3,6 +3,7 @@ class Article < ActiveRecord::Base
   belongs_to :catcher
   default_scope order: 'articles.created_at DESC'
   after_create :publish_action
+  has_many :likes
 
   define_index do
     indexes title

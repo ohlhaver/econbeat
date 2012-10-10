@@ -78,6 +78,7 @@ resources :static_pages do
 end
 
 resources :articles
+resources :actions
 resources :authors
 resources :catchers
 

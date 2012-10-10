@@ -8,4 +8,13 @@
 <%= render @authors%>
 
 
-<%= render @articles%>
+       <% if @actions.any? %>
+
+      
+         <ol class="profile_microposts">
+          <%= render @actions %>
+          </ol>
+          <br>
+          <%= paginate @actions %>
+  
+        <%end%>

@@ -10,6 +10,14 @@ class Action < ActiveRecord::Base
   default_scope order: 'actions.created_at DESC'
   paginates_per 50
 
+  define_index do
+    indexes article.title, :as => :title
+    indexes post.headline, :as => :headline
+    indexes author.name, :as => :author
+    indexes action_type, :as => :type
+    has created_at, action_type
+  end
+
   def new_post(post)
   	self.subject_type=1
   	self.user_id=post.user_id

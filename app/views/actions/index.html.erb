@@ -1,0 +1,22 @@
+ <% if @authors && @authors.any? %>
+Authors:
+
+<% @authors.each do |a| %>
+<%= link_to a.name, a%>, 
+<% end%>
+
+
+<br><br>
+Articles:
+      <% end %>
+
+
+       <% if @actions.any? %>
+      
+         <ol class="profile_microposts">
+          <%= render @actions %>
+          </ol>
+          <br>
+          <%= paginate @actions %>
+  
+        <%end%>

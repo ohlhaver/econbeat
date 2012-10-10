@@ -3,6 +3,7 @@ class Author < ActiveRecord::Base
   has_many :catchers
   has_many :articles, through: :catchers
   has_many :subscriptions
+  has_many :actions
 
   define_index do
     indexes name
