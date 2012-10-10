@@ -3,7 +3,7 @@
   <div class="row">
     
     
-      <div class="span5">
+      <div class="span3">
 
             <h4>
          <%= link_to (image_tag @user.picture, :width => "50"), @user %>&nbsp; <%= link_to @user.name, @user %> </h4>
@@ -12,7 +12,7 @@
 
          
       </div>
-      <div class="span3">
+      <div class="span5">
         <div id = "follow_button">
                 <%if current_user.following?(@user) && @utopic %>
                   <%= render @utopic  unless @friendship == false%>
@@ -41,7 +41,6 @@
       <% end %>
       <% if @starred_authors && @starred_authors.any? %>
        <div id = "favorite_posts">
-       
         <ol class="profile_microposts">
           Starred
           <%= render @starred_authors %>

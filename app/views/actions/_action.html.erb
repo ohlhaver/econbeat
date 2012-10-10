@@ -73,6 +73,7 @@
 						<%else%>
 						 	   <%= link_to 'like', :controller => "articles", :action => "like", :id => action.article.id %> · 
 						<%end%>
+						  <%= link_to "comment", action.article %> · 
 						
 			   			<%= time_ago_in_words(action.article.created_at) %> ago 	
 

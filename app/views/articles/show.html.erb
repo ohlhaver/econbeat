@@ -1,0 +1,59 @@
+<% content_for :head do %>
+  <%= tag :meta, property: "fb:app_id", content: ENV['FACEBOOK_APP_ID'] %>
+  <%= tag :meta, property: "og:site_name", content: "Jurnalo" %>
+  <%= tag :meta, property: "og:type", content: "article" %>
+  <%= tag :meta, property: "og:title", content: @article.title %>
+  <%= tag :meta, property: "og:url", content: article_url(@article) %>
+  
+<% end %>
+
+<div class="row">
+  <div class = "span8">
+    <ol class="microposts">
+      
+
+    
+      <span class = "user"><%= link_to @article.catcher.author.name, @article.catcher.author %></span>
+      <br><br>
+
+      <div id="<%= @article.id %>">  
+
+      <div id ="star"><div class="fb-send" data-font="arial"></div></div>
+      <div id ="item_text">
+
+          <span class="content"><b><%= link_to @article.title, @article.url %></b></span>
+
+          
+
+           <span class="timestamp"> 
+
+        <!--% if @post.fbaction_id %-->
+
+<%if @article.likes && @article.likes.count > 0  %> 
+                <%= link_to 'like', :controller => "articles", :action => "like", :id => @article.id %> (<%=  @article.likes.count.to_s %>) · 
+            <%else%>
+                 <%= link_to 'like', :controller => "articles", :action => "like", :id => @article.id %> · 
+            <%end%>
+            
+              <%= time_ago_in_words(@article.created_at) %> ago   
+
+        </span>
+     
+          
+             
+  </span>
+        <br><br> 
+      	</div>
+
+       
+      </div>
+
+
+
+     
+      
+    </ol>
+    <div class="fb-comments" data-num-posts="2"></div>
+  </div>
+  <br>
+</div>

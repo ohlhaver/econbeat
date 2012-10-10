@@ -523,7 +523,7 @@ aside {
 
   border: 1px solid $grayLighter;
  
-  margin-top: 20px;
+  margin-top: 0px;
   display: inline-block;
   
   padding: 6px 8px 0px;
@@ -651,5 +651,5 @@ margin-bottom: 20px
 
 .handle:hover{cursor: move;}
 
-
+.fb-comments, .fb-comments span[style], .fb-comments iframe[style] {width: 100% !important;}
 

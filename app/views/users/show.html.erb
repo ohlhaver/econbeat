@@ -4,7 +4,7 @@
    
     
     
-      <div class="span5">
+      <div class="span3">
         
 
             <h4>
@@ -16,7 +16,7 @@
 
          
       </div>
-      <div class="span3">
+      <div class="span5">
         <div id = "follow_button">
 
                 <%= render 'follow_form' unless @friendship == false %>            
@@ -27,6 +27,7 @@
 
        
        <% if @actions.any? %>
+       <div class="span8">
 
       <div id = "latest_posts">
          <ol class="profile_microposts">
@@ -36,6 +37,7 @@
           <%= paginate @actions %>
        
       </div>
+    </div>
         <%end%>
         
            
