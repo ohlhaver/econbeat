@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009200811) do
+ActiveRecord::Schema.define(:version => 20121011193037) do
 
   create_table "actions", :force => true do |t|
     t.integer  "subject_type"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20121009200811) do
     t.integer  "user_id"
     t.integer  "author_id"
     t.integer  "author_obj_id"
+    t.boolean  "hidden"
   end
 
   create_table "active_admin_comments", :force => true do |t|

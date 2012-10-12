@@ -1,3 +1,4 @@
+<% unless action.hidden? %> 
 <li id="<%= action.id %>">
 
 
@@ -17,7 +18,10 @@
 			<%= "starred" if action.action_type == 4 %>
 			<%= "commented on" if action.action_type == 5 %>
 			<% if action.action_type == 6 %>
-			<%= "joined Jurnalo" %> <br><span class="timestamp">  <%= time_ago_in_words(action.created_at) %> ago </span>
+			<%= "joined Jurnalo" %> <br><span class="timestamp">  <%= time_ago_in_words(action.created_at) %> ago
+			<% if current_user == action.user %> 
+				  			&nbsp;<%= link_to "x", action, method: :delete,
+				                                     data: { confirm: "You sure?" } %> <%end%> </span>
 			<%end%>
 
 			</span>
@@ -50,11 +54,10 @@
 						<%else%>
 			   				<%= link_to "comment", action.post %> · 
 			   			<%end%>
-			   			<%= time_ago_in_words(action.post.created_at) %> ago 
-		    			<% if current_user == action.post.user %> 
-				  			&nbsp;<%= link_to "x", action.post, method: :delete,
-				                                     data: { confirm: "You sure?" },
-				                                     title: action.post.url %> <%end%>
+			   			<%= time_ago_in_words(action.created_at) %> ago 
+		    			<% if current_user == action.user %> 
+				  			&nbsp;<%= link_to "x", action, method: :delete,
+				                                     data: { confirm: "You sure?" } %> <%end%>
 			   			
 				</span>
 	<% elsif action.object_type == 2 %>
@@ -75,14 +78,21 @@
 						<%end%>
 						  <%= link_to "comment", action.article %> · 
 						
-			   			<%= time_ago_in_words(action.article.created_at) %> ago 	
+			   			<%= time_ago_in_words(action.created_at) %> ago 
+			   			<% if current_user == action.user %> 
+				  			&nbsp;<%= link_to "x", action, method: :delete,
+				                                     data: { confirm: "You sure?" } %> <%end%>	
 
 				</span>
 	<% elsif action.object_type == 3 or action.object_type == 4 %>
 				<%= link_to action.author_obj.name, author_path(action.author_obj) %>
-				 <br><span class="timestamp">  <%= time_ago_in_words(action.created_at) %> ago </span>
+				 <br><span class="timestamp">  <%= time_ago_in_words(action.created_at) %> ago
+				 <% if current_user == action.user %> 
+				  			&nbsp;<%= link_to "x", action, method: :delete,
+				                                     data: { confirm: "You sure?" } %> <%end%> </span>
 	<%end%>
 		</div>
 
 
 </li>
+<%end%>
