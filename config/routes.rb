@@ -58,7 +58,7 @@ end
 
 resources :articles do
     member do
-      get  :share, :like, :preview
+      get  :share, :like, :preview, :call
       post :add_comment, :add_message
     end
     collection { post :sort }

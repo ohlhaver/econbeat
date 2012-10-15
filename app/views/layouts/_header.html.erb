@@ -14,7 +14,7 @@
           <div class="header_search_box">
               <%= form_tag actions_path, :method => 'get' do %>
             
-              <%= text_field_tag :q, nil, :placeholder => 'Search authors/articles...'%>
+              <%= text_field_tag :q, nil, :placeholder => 'Search ...'%>
               
           
           <% end %>
@@ -28,7 +28,7 @@
 
             <% if current_user %>
                             
-             <li> <%= link_to "Post", new_post_path, "data-target" => "#myModal", "data-toggle" => "modal" %> </li>
+             <li> <%= link_to "Post", new_post_path, "data-target" => "#myModal", "data-toggle" => "modal", title: 'post an article', rel: 'tooltip', "data-placement"=>"bottom"  %> </li>
             <li><%= link_to current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
              
 

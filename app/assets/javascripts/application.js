@@ -23,7 +23,7 @@ jQuery( function($) {
                 offset: 10,
                 trigger: 'hover',
                 animate: false,
-                delay: { show: 500, hide: 2500 },
+                delay: { show: 500, hide: 2000 },
                 html: true,
                 placement: 'right',
                 template: '<div class="popover" onmouseover="$(this).mouseleave(function() {$(this).hide(); });"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'

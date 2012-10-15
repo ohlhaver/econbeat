@@ -15,7 +15,7 @@
       <div id ="item_text">
 
     
-      <span class = "user"><%= link_to @article.catcher.author.name, @article.catcher.author %></span>
+      <span class = "user"><%= link_to @article.catcher.author.name, @article.catcher.author %>&nbsp;&nbsp;</span>
        <div id = "follow_button">
 <%= render 'authors/subscribe_form' %></div>
       </div>
@@ -27,6 +27,7 @@
       <div id ="item_text">
 
           <span class="content"><b><%= link_to @article.title, @article.url %></b></span>
+       
 
           
 
@@ -64,7 +65,7 @@
     <br><br>
       <span class = "user">More articles by <%= link_to (@article.catcher.author.name).html_safe , @article.catcher.author , title: @article.catcher.author.name, "data-content" => "#{popover_link (@article.catcher.author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %></span>
       
-         <ol class="profile_microposts">
+         <ol class="microposts">
           <%= render @actions %>
           </ol>
           <br>
