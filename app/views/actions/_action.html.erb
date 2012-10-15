@@ -28,9 +28,11 @@
 			
 	<% elsif action.subject_type == 2 %>
 		<div id ="item_text">
+			<%  if params[:controller] != "authors" && params[:controller] != "articles" %> 
 			<span class = "user">
-				<%= link_to action.author.name, action.author, title: action.author.name, "data-content" => "#{popover_link (action.author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  if params[:controller] != "authors" && params[:controller] != "articles"%>
-			</span>
+				<%= link_to action.author.name, action.author, title: action.author.name, "data-content" => "#{popover_link (action.author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"%>
+			</span> 
+			<%end%>
 
 	<%end%>
 	

@@ -1,14 +1,23 @@
-<% if params[:controller] == "authors" %>
+<% if params[:controller] == "authors" or params[:controller] == "articles"%>
 
 <%= form_for(current_user.subscriptions.find_by_author_id(@author),
              html: { method: :delete },
              remote: true) do |f| %>
   <%= f.submit "unsubscribe", class: "btn btn-small" %>
 <% end %>
+
 <%else%>
 <%= form_for(current_user.subscriptions.find_by_author_id(@author),
              html: { method: :delete }) do |f| %>
   <%= f.submit "unsubscribe", class: "btn btn-small" %>
 <% end %>
+ <% if current_user.subscriptions.find_by_author_id(@author.id).starred == true%>
+       
+          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/unstar", :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
+        <%else%>
+
+          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/star", :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
+          
+        <%end%>
 
 <%end%>

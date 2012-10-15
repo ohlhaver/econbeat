@@ -40,7 +40,7 @@ class SubscriptionsController < ApplicationController
     current_user.star_author_action(@subscription)
     
     #current_user.delay.fbstar(post_url(@post))
-    redirect_to authors_user_path(current_user), :notice => "Author has been starred."
+    redirect_to :back, :notice => "Author has been starred."
   end
 
   def unstar
@@ -48,7 +48,7 @@ class SubscriptionsController < ApplicationController
     @subscription.starred=nil
     @subscription.save
     #current_user.delay.fbunstar(post_url(@post))
-    redirect_to authors_user_path(current_user)
+    redirect_to :back
   end
 
 

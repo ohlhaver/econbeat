@@ -2,7 +2,8 @@ class StaticPagesController < ApplicationController
   before_filter :authorize, only: [:fb_new]
   def home
     if current_user
-      @actions = (current_user.user_action_feed + current_user.author_action_feed).sort_by{|e| -e[:id]}
+      @starred_actions = current_user.starred_author_action_feed.where("created_at >= :time", {:time => 1.day.ago}).sort_by{|e| -e[:id]}
+      @actions = (current_user.user_action_feed + current_user.author_action_feed - @starred_actions).sort_by{|e| -e[:id]}
       #@articles = current_user.articles
       #@topics = Topic.find(:all)
       #@topics = @topics.find_all{|i| i.posts.where(:hidden=>nil).count > 0}
