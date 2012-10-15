@@ -1,7 +1,19 @@
 
-<%= form_for(current_user.subscriptions.build(author_id: @author.id),
-             remote: true) do |f| %>
-  <div><%= f.hidden_field :author_id %></div>
+<% if params[:controller] == "authors" %>
+		<%= form_for(current_user.subscriptions.build(author_id: @author.id),
+		             remote: true) do |f| %>
+		  <div><%= f.hidden_field :author_id %></div>
 
-  <%= f.submit "subscribe", class: "btn btn-small btn-primary" %>
-<% end %>
+		  <%= f.submit "subscribe", class: "btn btn-small btn-primary" %>
+		<% end %>
+
+	<%else%>
+
+			<%= form_for(current_user.subscriptions.build(author_id: @author.id)) do |f| %>
+		  <div><%= f.hidden_field :author_id %></div>
+
+		  <%= f.submit "subscribe", class: "btn btn-small btn-primary" %>
+		<% end %>
+
+	<%end %>
+

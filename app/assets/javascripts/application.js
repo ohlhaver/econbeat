@@ -19,18 +19,16 @@
 jQuery( function($) {
     $('[rel=tooltip]').tooltip();
     $("a[rel=popover]")
-            .tooltip({
+            .popover({
                 offset: 10,
-                trigger: 'manual',
+                trigger: 'hover',
                 animate: false,
+                delay: { show: 500, hide: 2500 },
                 html: true,
                 placement: 'right',
-                template: '<div class="tooltip" onmouseover="$(this).mouseleave(function() {$(this).hide(); });"><div class="arrow"></div><div class="tooltip-inner"><h3 class="tooltip-title"></h3><div class="tooltip-content"><p></p></div></div></div>'
+                template: '<div class="popover" onmouseover="$(this).mouseleave(function() {$(this).hide(); });"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
 
-            }).click(function(e) {
-                
-            }).mouseenter(function(e) {
-                $(this).tooltip('show');
             });
+            
 });
 

@@ -1,34 +1,39 @@
 module ActionsHelper
-	def pover_link author
+	def ppopover_link author
 		
 
-  	 if current_user.subscribed?(author)
+  		if current_user.subscribed?(author)
 
-  	 	form_for(current_user.subscriptions.find_by_author_id(author),
-             html: { method: :delete },
-             remote: true) do |f| 
-   f.submit "Unfollow", class: "btn btn-link"
-	end 
-	else
-		form_for(current_user.subscriptions.build(author_id: author.id),
-             remote: true) do |f|
- f.hidden_field :author_id
+	  	 	form_for(current_user.subscriptions.find_by_author_id(author),
+	             html: { method: :delete }) do |f| 
+	   			f.submit "Unsubscribe", class: "btn btn-link"
+			end 
+		else
+			form_for(current_user.subscriptions.build(author_id: author.id)) do |f|
+ 				f.hidden_field :author_id
 
-  f.submit "Follow", class: "btn btn-link" 
-end
+  				f.submit "Subscribe", class: "btn btn-link" 
+			end
+		end
 	end
-end
+
+	def popover_link author
+		@author=author
+		render 'authors/subscribe_form'
+
+	end
 
 
-def popover_link author
+
+def ppopover_link author
 		
 
   	 if current_user.subscribed?(author)
 
-  	 	 link_to "unsubscribe", :controller=>"subscriptions", :action => "unsubscribe", :id => author.id
+  	 	 button_to "unsubscribe", :controller=>"subscriptions", :action => "unsubscribe", :id => author.id, :class => "btn btn-link"
 
 	else
-		link_to "subscribe", :controller=>"subscriptions", :action => "subscribe", :id => author.id
+		button_to "subscribe", :controller=>"subscriptions", :action => "subscribe", :id => author.id, :class => "btn btn-link"
 
 	end
 end

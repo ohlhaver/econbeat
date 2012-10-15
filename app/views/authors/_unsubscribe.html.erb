@@ -1,5 +1,14 @@
+<% if params[:controller] == "authors" %>
+
 <%= form_for(current_user.subscriptions.find_by_author_id(@author),
              html: { method: :delete },
              remote: true) do |f| %>
   <%= f.submit "unsubscribe", class: "btn btn-small" %>
 <% end %>
+<%else%>
+<%= form_for(current_user.subscriptions.find_by_author_id(@author),
+             html: { method: :delete }) do |f| %>
+  <%= f.submit "unsubscribe", class: "btn btn-small" %>
+<% end %>
+
+<%end%>
