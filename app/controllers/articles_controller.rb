@@ -28,6 +28,10 @@ class ArticlesController < ApplicationController
 
 	def show
 		@article = Article.find(params[:id])
+		@author = @article.catcher.author
+		@action = Array.wrap(@article.catcher.author.actions.find_by_article_id(params[:id]))
+		@actions = @article.catcher.author.actions - @action
+		@actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
 	end	
 
 end

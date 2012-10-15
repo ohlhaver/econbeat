@@ -51,7 +51,7 @@ end
 
 resources :subscriptions do
     member do
-      get :star, :unstar, 
+      get :star, :unstar, :subscribe, :unsubscribe
     end
 end
 

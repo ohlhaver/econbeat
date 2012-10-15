@@ -9,12 +9,17 @@
 
 <div class="row">
   <div class = "span8">
+    <br>
     <ol class="microposts">
       
+      <div id ="item_text">
 
     
       <span class = "user"><%= link_to @article.catcher.author.name, @article.catcher.author %></span>
-      <br><br>
+       <div id = "follow_button">
+<%= render 'authors/subscribe_form' %></div>
+      </div>
+      <br>
 
       <div id="<%= @article.id %>">  
 
@@ -53,7 +58,20 @@
      
       
     </ol>
+    <br>
     <div class="fb-comments" data-href="<%= request.url%>" data-num-posts="10"></div>
+    <% if @actions.any? %>
+    <br><br>
+      <span class = "user">More articles by <%= link_to (@article.catcher.author.name).html_safe , @article.catcher.author , title: "#{popover_link (@article.catcher.author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %></span>
+      
+         <ol class="profile_microposts">
+          <%= render @actions %>
+          </ol>
+          <br>
+          <%= paginate @actions %>
+
+        <%end%>
   </div>
   <br>
 </div>
+

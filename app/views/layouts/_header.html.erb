@@ -12,7 +12,7 @@
           <ul class="nav nav-pills pull-left">
         <li>
           <div class="header_search_box">
-                      <%= form_tag actions_path, :method => 'get' do %>
+              <%= form_tag actions_path, :method => 'get' do %>
             
               <%= text_field_tag :q, nil, :placeholder => 'Search authors/articles...'%>
               
@@ -28,6 +28,7 @@
 
             <% if current_user %>
                             
+             <li> <%= link_to "Post", new_post_path, "data-target" => "#myModal", "data-toggle" => "modal" %> </li>
             <li><%= link_to current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
              
 
@@ -42,7 +43,7 @@
               <li><%= link_to "Join!", "/auth/facebook", id: "sign_in" %></li>
             <% end %>
 
-              <li> <%= button_to "Post a link", new_post_path, "data-target" => "#myModal", :class => "btn btn-small btn-primary btn-posting", "data-toggle" => "modal" %> </li>
+             
           </ul>
         </nav>
       </div>

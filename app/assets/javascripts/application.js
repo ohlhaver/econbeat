@@ -17,6 +17,20 @@
 //= require best_in_place
 //= require_tree .
 jQuery( function($) {
-    $('[rel=tooltip]').tooltip()
+    $('[rel=tooltip]').tooltip();
+    $("a[rel=popover]")
+            .tooltip({
+                offset: 10,
+                trigger: 'manual',
+                animate: false,
+                html: true,
+                placement: 'right',
+                template: '<div class="tooltip" onmouseover="$(this).mouseleave(function() {$(this).hide(); });"><div class="arrow"></div><div class="tooltip-inner"><h3 class="tooltip-title"></h3><div class="tooltip-content"><p></p></div></div></div>'
+
+            }).click(function(e) {
+                
+            }).mouseenter(function(e) {
+                $(this).tooltip('show');
+            });
 });
 

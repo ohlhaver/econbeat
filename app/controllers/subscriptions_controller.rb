@@ -19,6 +19,18 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def subscribe
+    author = Author.find(params[:id])
+    current_user.subscribe!(author)
+    redirect_to :back
+  end
+
+  def unsubscribe
+    author = Author.find(params[:id])
+    current_user.unsubscribe!(author)
+    redirect_to :back
+  end
+
   def star
     
     @subscription = Subscription.find(params[:id])
@@ -38,4 +50,7 @@ class SubscriptionsController < ApplicationController
     #current_user.delay.fbunstar(post_url(@post))
     redirect_to authors_user_path(current_user)
   end
+
+
+
 end

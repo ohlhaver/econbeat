@@ -1,5 +1,5 @@
 <li>
-<%= link_to author.name, author_path(author)  %>
+<%= link_to author.name, author_path(author), title: "#{popover_link (author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %>
 <% if @user == current_user %>  
 <% if current_user.subscriptions.find_by_author_id(author.id).starred == false %>  <span class="handle"> <%end%>
   <div id ="star">
