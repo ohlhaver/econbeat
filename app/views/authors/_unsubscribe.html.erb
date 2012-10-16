@@ -19,5 +19,7 @@
           <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/star", :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
           
         <%end%>
+        <br><br>
+      <%= link_to "view articles", @author %>
 
 <%end%>

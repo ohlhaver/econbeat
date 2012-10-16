@@ -7,7 +7,7 @@ class AuthorsController < ApplicationController
 
 		@friends = current_user.followed_users
 
-		@subscribed_friends = @friends.find_all{|i| i.subscribed?(@author)}
+		@subscribed_friends = @friends.find_all{|i| i.subscribed?(@author)}.first(10)
 		
 		@all_authors =[]
 		@size = @author.users.size

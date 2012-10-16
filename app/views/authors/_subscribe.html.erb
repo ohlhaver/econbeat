@@ -6,6 +6,7 @@
 
 		  <%= f.submit "subscribe", class: "btn btn-small btn-primary" %>
 		<% end %>
+		
 
 	<%else%>
 
@@ -14,6 +15,7 @@
 
 		  <%= f.submit "subscribe", class: "btn btn-small btn-primary" %>
 		<% end %>
+		<%= link_to "view articles", @author %>
 
 	<%end %>
 
