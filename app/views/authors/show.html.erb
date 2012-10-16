@@ -12,7 +12,7 @@
                 FB.ui({
                     method: 'send',
                     name: '<%= @author.name%>' ,
-                    link: '<%= request.url%>',
+                    link: '<%= author_path(@author)%>',
                     })}
            </script>
 
