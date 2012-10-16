@@ -2,7 +2,7 @@
 Authors:<br>
 
 <% @authors.each do |a| %>
-<%= link_to a.name, a, title: "#{popover_link (a)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %>, 
+<%= link_to a.name, a, title: a.name, "data-content" => "#{popover_link (a)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %>, 
 <% end%>
 
 

@@ -1,8 +1,8 @@
-     <div class ="user_show">
+ <div class ="user_show">
 
   <div class="row">
 
-      <div class="span2"><h3> <%= @author.name %> </h3></div>
+      <div class="span2"><h3> <%= link_to @author.name, @author %> </h3></div>
 
 <div class ="span1">
 <% if current_user.subscribed?(@author)  %> 
@@ -20,26 +20,31 @@
 <%= render 'subscribe_form' %>
 </div></div>
 
-<div class ="span2"></div>
 
-
-
-
-       <% if @actions.any? %>
+<% if @recommended %>
        <div class="span6">
+        <br><br>
+        <b>Subscribers of <%= @author.name %> also subscribe to </b>
+        <br><br>
+        
+
+
+         <ol class="profile_microposts">
+            <% @recommended.each do |r| %>
+            <li>
+          <%= link_to r[0].name, r[0], title: r[0].name, "data-content" => "#{popover_link (r[0])}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %> (<%= (r[1]/Float(@size)*100).to_i.to_s + "%" %>)</li>
+          <%end%>
 
       
-         <ol class="profile_microposts">
-          <%= render @actions %>
+          
           </ol>
           <br>
-          <%= paginate @actions %>
-  </div>
-        <%end%>
+        </div>
 
-         <div class="span2">
+<%end%>
 
-        <% if @subscribed_friends.any? %>
+<% if @subscribed_friends.any? %>
+<div class="span2">
        
         Subscribed friends 
 
@@ -48,30 +53,10 @@
           <%= render @subscribed_friends %>
           </ol>
           <br>
-      
-<%end%>
-
-<% if @recommended %>
-      
-        Subscribers of <%= @author.name %> also subscribe to
-
-        
-
-
-         <ol class="profile_microposts">
-            <% @recommended.each do |r| %>
-          <%=    render r[0] %>
-          <%end%>
-          </ol>
-          <br>
-          <%= link_to "more related authors..", :action => "similar", :id => params[:id] %>
-          
-
-<%end%>
-
-
-
 </div>
+<%end%>
+
+
 
 </div>
 </div>

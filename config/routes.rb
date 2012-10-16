@@ -55,6 +55,12 @@ resources :subscriptions do
     end
 end
 
+resources :authors do
+    member do
+      get :similar
+    end
+end
+
 
 resources :articles do
     member do
