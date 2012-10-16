@@ -48,6 +48,13 @@ def ppopover_link author
 
 	end
 end
+
+def sender action
+	return action.article.title.to_s	
+
+end
+
+
 end
 
 

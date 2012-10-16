@@ -22,8 +22,6 @@
       <br>
 
       <div id="<%= @article.id %>">  
-
-      <div id ="star"><div class="fb-send" data-font="arial"></div></div>
       <div id ="item_text">
 
           <span class="content"><b><%= link_to @article.title, @article.url %></b></span>
@@ -40,6 +38,20 @@
             <%else%>
                  <%= link_to 'like', :controller => "articles", :action => "like", :id => @article.id %> · 
             <%end%>
+
+              <script>
+
+
+                // assume we are already logged in
+
+          function sendMessage() {
+                FB.ui({
+                    method: 'send',
+                    name: '<%= @article.title%>' ,
+                    link: '<%= @article.url%>',
+                    })}
+           </script>
+            <%= link_to_function "send", "sendMessage(); return false;" %> · 
             
               <%= time_ago_in_words(@article.created_at) %> ago   
 
@@ -75,4 +87,5 @@
   </div>
   <br>
 </div>
+
 

@@ -2,9 +2,22 @@
 
   <div class="row">
 
-      <div class="span2"><h3> <%= @author.name %> </h3></div>
+         <div class="span3"><h3> <%= @author.name %> </h3><span class="timestamp"> <%= link_to_function raw('<i class="icon-envelope"></i>'), "sendMessage(); return false;", title: 'send to friend', rel: 'tooltip', "data-placement"=>"bottom"  %></span></div>
+         <script>
 
-<div class ="span1">
+
+                // assume we are already logged in
+
+          function sendMessage() {
+                FB.ui({
+                    method: 'send',
+                    name: '<%= @author.name%>' ,
+                    link: '<%= request.url%>',
+                    })}
+           </script>
+
+
+<div class ="span3">
 <% if current_user.subscribed?(@author)  %> 
   <% if current_user.subscribed?(@author).starred == true%>
        
@@ -16,17 +29,12 @@
         <%end%>
       <%end%>
       </div>
-      <div class ="span3"><div id = "follow_button">
+      <div class ="span2"><div id = "follow_button">
 <%= render 'subscribe_form' %>
 </div></div>
-
-<div class ="span2"></div>
-
-
-
-
+  <div class="span6">
        <% if @actions.any? %>
-       <div class="span6">
+     
 
       
          <ol class="profile_microposts">

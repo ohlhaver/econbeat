@@ -51,6 +51,10 @@
 						 	   <%= link_to 'like', :controller => "posts", :action => "like", :id => action.post.id %> · 
 						<%end%>
 						  <!--%end%-->  
+						 <%= link_to "send", "https://www.facebook.com/dialog/send?app_id=#{ENV['FACEBOOK_APP_ID']}&
+name=#{action.post.headline}&
+link=#{action.post.url}&
+redirect_uri=#{request.url}" %> · 
 						<%if action.post.comments && action.post.comments.count > 0  %>	
 						 	<%= link_to "comments (" + action.post.comments.count.to_s + ")" , action.post %> · 
 						<%else%>
@@ -73,11 +77,16 @@
 
 				</span>
 				<span class="timestamp"> 
+
 						<%if action.article.likes && action.article.likes.count > 0  %>	
 						 	  <%= link_to 'like', :controller => "articles", :action => "like", :id => action.article.id %> (<%=  action.article.likes.count.to_s %>) · 
 						<%else%>
 						 	   <%= link_to 'like', :controller => "articles", :action => "like", :id => action.article.id %> · 
 						<%end%>
+						    <%= link_to "send", "https://www.facebook.com/dialog/send?app_id=#{ENV['FACEBOOK_APP_ID']}&
+name=#{action.article.title}&
+link=#{action.article.url}&
+redirect_uri=#{request.url}" %> · 
 						  <%= link_to "comment", action.article %> · 
 						
 			   			<%= time_ago_in_words(action.created_at) %> ago 

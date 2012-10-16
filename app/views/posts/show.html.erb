@@ -13,7 +13,7 @@
   <div class = "span8">
     <ol class="microposts">
       <% unless @post.hidden? %> 
-        <div id ="star"><div class="fb-send" data-font="arial"></div></div>
+        
               <div id ="user_image">
       <%= link_to (image_tag @post.user.picture, :width => "25"), @post.user  %> 
     </div> 
@@ -53,9 +53,20 @@
          <!--%end%-->
                
 
-        <% if current_user != @post.user %> 
-        <%= link_to "repost", :controller => "posts", :action => "preview", :id => @post.id %> · 
-      <%end%><%= time_ago_in_words(@post.created_at) %> ago 
+                    <script>
+
+
+                // assume we are already logged in
+
+          function sendMessage() {
+                FB.ui({
+                    method: 'send',
+                    name: '<%= @post.headline%>' ,
+                    link: '<%= @post.url%>',
+                    })}
+           </script>
+            <%= link_to_function "send", "sendMessage(); return false;" %> · 
+      <%= time_ago_in_words(@post.created_at) %> ago 
       <% if current_user == @post.user %> 
             &nbsp;<%= link_to "x", @post, method: :delete,
                                            data: { confirm: "You sure?" },

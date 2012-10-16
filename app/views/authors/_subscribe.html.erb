@@ -1,12 +1,12 @@
 
-<% if params[:controller] == "authors" %>
+<% if params[:controller] == "authors" || "articles"  %>
 		<%= form_for(current_user.subscriptions.build(author_id: @author.id),
 		             remote: true) do |f| %>
 		  <div><%= f.hidden_field :author_id %></div>
 
 		  <%= f.submit "subscribe", class: "btn btn-small btn-primary" %>
 		<% end %>
-		
+
 
 	<%else%>
 
