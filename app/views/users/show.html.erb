@@ -8,9 +8,9 @@
         
 
             <h4>
-              <div class = "profile_image">
+              
          <%= image_tag @user.picture, :width => "50" %>&nbsp; <%= @user.name %>
-       </div></h4>
+       </h4>
          
 
 
@@ -27,16 +27,15 @@
 
        
        <% if @actions.any? %>
+       <br><br> <br><br><br>
        <div class="span8">
 
-      <div id = "latest_posts">
          <ol class="profile_microposts">
           <%= render @actions %>
           </ol>
           <br>
           <%= paginate @actions %>
-       
-      </div>
+
     </div>
         <%end%>
         
