@@ -418,6 +418,23 @@ textarea, .uneditable-input {
 
 }
 
+.new_articles {
+  font-size: 12px;
+  color: $grayLight;
+      a {
+    color: #6D84B4;
+    text-decoration: none;
+    font-weight: bold;
+    }
+    a:hover {
+    color: #6D84B4;
+    font-weight: bold;
+    text-decoration: underline;
+    
+    }
+
+}
+
 aside {
   textarea {
     height: 100px;

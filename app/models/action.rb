@@ -111,11 +111,23 @@ class Action < ActiveRecord::Base
           user_id: user.id)
   end
 
-    def self.from_authors_starred_by(user)
+  def self.from_authors_starred_by(user)
       followed_author_ids = "SELECT author_id FROM subscriptions
                            WHERE user_id = :user_id and starred = true"
       where("(author_id IN (#{followed_author_ids})) and subject_type = 2", 
             user_id: user.id)
+  end
+
+  def self.latest_from_authors_followed_by(user)
+    followed_authors = user.authors
+
+    actions = []                    
+    followed_authors.each do |a|
+      actions += Array.wrap(a.actions.first)
     end
+
+    return actions
+
+  end
 
 end

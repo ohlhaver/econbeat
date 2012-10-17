@@ -95,6 +95,13 @@ redirect_uri=#{request.url}" %> ·
 				                                     data: { confirm: "You sure?" } %> <%end%>	
 
 				</span>
+				<% if params[:controller] == "static_pages" && action.subject_type == 2 %>
+					<br>
+					<span class="new_articles"> 
+					<% @size = action.article.catcher.author.actions.where("created_at >= :time", {:time => 1.day.ago}).size %>
+					<%= link_to raw('<i class="icon-list"></i> ') + @size.to_s + " new", action.article.catcher.author,title: 'all articles by ' + action.article.catcher.name, rel: 'tooltip', "data-placement"=>"bottom"  if @size >= 2  %>
+					</span>
+				<%end%>
 	<% elsif action.object_type == 3 or action.object_type == 4 %>
 				<%= link_to action.author_obj.name, author_path(action.author_obj), title: action.author_obj.name, "data-content" => "#{popover_link (action.author_obj)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %>
 				 <br><span class="timestamp">  <%= time_ago_in_words(action.created_at) %> ago

@@ -206,7 +206,7 @@ class User < ActiveRecord::Base
   end
 
    def author_action_feed
-       a = Action.from_authors_followed_by(self)
+       a = Action.latest_from_authors_followed_by(self)
     return a
 
   end
