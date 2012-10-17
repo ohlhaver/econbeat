@@ -28,19 +28,15 @@
 
             <% if current_user %>
                             
-             <li> <%= link_to "Post", new_post_path, "data-target" => "#myModal", "data-toggle" => "modal", title: 'post an article', rel: 'tooltip', "data-placement"=>"bottom"  %> </li>
-            <li><%= link_to current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
-             
-
-            
-
-            <li><%= link_to "Home", root_path %></li>
+             <li> <%= link_to raw('<i class="icon-pencil"></i> ')+ "Post", new_post_path, "data-target" => "#myModal", "data-toggle" => "modal", title: 'post an article', rel: 'tooltip', "data-placement"=>"bottom"  %> </li>
+            <li><%= link_to (image_tag current_user.picture, :width => "15") + " " + current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
+            <li><%= link_to raw('<i class="icon-home"></i> ')+ "Home", root_path %></li>
 
 
                
 
               <%else%>
-              <li><%= link_to "Join!", "/auth/facebook", id: "sign_in" %></li>
+              <li><%= link_to raw('<i class="icon-globe"></i> ')+ "Join!", "/auth/facebook", id: "sign_in" %></li>
             <% end %>
 
              
