@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+	before_filter :authorize, only: [:like]
 
 
 	def like

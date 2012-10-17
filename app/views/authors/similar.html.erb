@@ -2,9 +2,24 @@
 
   <div class="row">
 
-      <div class="span2"><h3> <%= link_to @author.name, @author %> </h3></div>
+       <div class="span6"><h3> <%= link_to @author.name, @author %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
+<%= render 'subscribe_form' %>
+</div></h3><span class="timestamp"> <%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send to friend'), "sendMessage(); return false;" %></span></div>
+         <script>
 
-<div class ="span1">
+
+                // assume we are already logged in
+
+          function sendMessage() {
+                FB.ui({
+                    method: 'send',
+                    name: '<%= @author.name%>' ,
+                    link: '<%= "www.jurnalo.com" + author_path(@author)%>',
+                    description: 'Subscribe to this author via Jurnalo.'
+                    })}
+           </script>
+
+<div class ="span2">
 <% if current_user.subscribed?(@author)  %> 
   <% if current_user.subscribed?(@author).starred == true%>
        
@@ -16,9 +31,6 @@
         <%end%>
       <%end%>
       </div>
-      <div class ="span3"><div id = "follow_button">
-<%= render 'subscribe_form' %>
-</div></div>
 
 
 <% if @recommended %>
@@ -32,7 +44,7 @@
          <ol class="profile_microposts">
             <% @recommended.each do |r| %>
             <li>
-          <%= link_to r[0].name, r[0], title: r[0].name, "data-content" => "#{popover_link (r[0])}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %> (<%= (r[1]/Float(@size)*100).to_i.to_s + "%" %>)</li>
+          <%= link_to raw('<i class="icon-user"></i> ') + r[0].name, r[0], title: r[0].name, "data-content" => "#{popover_link (r[0])}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %> (<%= (r[1]/Float(@size)*100).to_i.to_s + "%" %>)</li>
           <%end%>
 
       
