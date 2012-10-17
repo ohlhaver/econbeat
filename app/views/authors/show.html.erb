@@ -2,7 +2,7 @@
 
   <div class="row">
 
-         <div class="span3"><h3> <%= @author.name %> </h3><span class="timestamp"> <%= link_to_function raw('<i class="icon-envelope"></i>'), "sendMessage(); return false;", title: 'send to friend', rel: 'tooltip', "data-placement"=>"bottom"  %></span></div>
+         <div class="span3"><h3> <%= @author.name %> </h3><span class="timestamp"> <%= link_to_function "send to friend", "sendMessage(); return false;" %></span></div>
          <script>
 
 
@@ -12,13 +12,14 @@
                 FB.ui({
                     method: 'send',
                     name: '<%= @author.name%>' ,
-                    link: '<%= author_path(@author)%>',
+                    link: '<%= author_url(@author)%>',
                     })}
            </script>
 
 
 <div class ="span3">
-<% if current_user.subscribed?(@author)  %> 
+  <p>
+<% if current_user && current_user.subscribed?(@author)  %> 
   <% if current_user.subscribed?(@author).starred == true%>
        
           <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/unstar", :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
@@ -28,6 +29,7 @@
           
         <%end%>
       <%end%>
+    </p>
       </div>
       <div class ="span2"><div id = "follow_button">
 <%= render 'subscribe_form' %>
@@ -47,7 +49,7 @@
 
          <div class="span2">
 
-        <% if @subscribed_friends.any? %>
+        <% if @subscribed_friends && @subscribed_friends.any? %>
        
         Subscribed friends 
 
