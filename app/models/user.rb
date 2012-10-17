@@ -212,7 +212,7 @@ class User < ActiveRecord::Base
   end
 
   def starred_author_action_feed
-       a = Action.from_authors_starred_by(self)
+       a = Action.latest_from_authors_starred_by(self)
     return a
 
   end

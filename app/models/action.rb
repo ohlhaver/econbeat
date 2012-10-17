@@ -130,4 +130,16 @@ class Action < ActiveRecord::Base
 
   end
 
+  def self.latest_from_authors_starred_by(user)
+    
+
+    actions = []                    
+    user.subscriptions.where(:starred => true).each do |a|
+      actions += Array.wrap(a.author.actions.first)
+    end
+
+    return actions
+
+  end
+
 end
