@@ -4,7 +4,7 @@
 
        <div class="span6"><h3> <%= link_to @author.name, @author %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
 <%= render 'subscribe_form' %>
-</div></h3><span class="timestamp"> <%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send to friend'), "sendMessage(); return false;" %></span></div>
+</div></h3><div class ="hidden-phone"><span class="timestamp"> <%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send to friend'), "sendMessage(); return false;" %></span></div></div>
          <script>
 
 

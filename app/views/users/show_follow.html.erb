@@ -40,7 +40,7 @@
         <%= paginate @users %>
       <% end %>
       <% if @starred_authors && @starred_authors.any? %>
-       <div id = "favorite_posts">
+       <div id = "starred_authors">
         <ol class="profile_microposts">
           Starred
           <%= render @starred_authors %>
@@ -48,7 +48,7 @@
       </div>
       <% end %>
       <% if @authors && @authors.any? %>
-      <div id = "latest_posts">
+      <div id = "subscribed_authors">
          <ol class="profile_microposts">
           <%= render @authors %>
         </ol>
