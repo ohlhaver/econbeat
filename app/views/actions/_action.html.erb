@@ -6,7 +6,7 @@
 		<div id ="user_image">
 			<%= link_to (image_tag action.user.picture, :width => "25"), action.user  %> 
 		</div> 
-		<div id ="item_text">
+		<div id ="user_item_text">
 			<span class = "user">
 				<% if action.subject_type == 1 %>
 					<%= link_to action.user.name, user_path(action.user) %>

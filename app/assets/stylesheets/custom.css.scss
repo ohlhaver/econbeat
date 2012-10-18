@@ -133,7 +133,7 @@ p {
   color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  padding-top: 10px;
   font-weight: bold;
   line-height: 1;
   &:hover {
@@ -486,13 +486,30 @@ aside {
   @media (max-width: 480px) { 
   margin-left: 5px;
   display: inline-block;
+  width: 99%;
+  margin-bottom: 0px;
+}
+@media (min-width: 481px) { 
+  margin-left: 5px;
+  display: inline-block;
+  width: 60%;
+  margin-bottom: 0px;
+}
+
+}
+
+
+#user_item_text {
+  @media (max-width: 480px) { 
+  margin-left: 5px;
+  display: inline-block;
   width: 87%;
   margin-bottom: 0px;
 }
 @media (min-width: 481px) { 
   margin-left: 5px;
   display: inline-block;
-  width: 70%;
+  width: 60%;
   margin-bottom: 0px;
 }
 
@@ -554,6 +571,7 @@ aside {
   padding: 6px 8px 0px;
   -moz-border-radius: 6px;
   border-radius: 6px;
+  width: 95%;
 
 }
 #starred_authors {
