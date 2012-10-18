@@ -34,15 +34,8 @@
             	</span> 
 
            <span class="timestamp"> 
-        <% if @post.user == current_user %> 
-          <span class="editable_topic">
-          <% if @post.topic %><i class="icon-cog"></i><% selected_topic = @post.topic.name %> <%else%><i class="icon-list"></i>
-          <% selected_topic = "select topic!" %> <%end%>
-           <%= best_in_place @post, :topic_id, type: :select, collection: Topic::list_topic_options, :nil => "#{selected_topic}"%></span> · 
-        <%else%>
-          <%= @post.topic.name + " · " unless @post.topic == nil  %> 
-        <%end%>
-
+       
+        
         <!--% if @post.fbaction_id %-->
 
          <%if @post.likes_count && @post.likes_count > 0  %>  

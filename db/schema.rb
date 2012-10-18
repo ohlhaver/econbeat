@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121011193037) do
+ActiveRecord::Schema.define(:version => 20121018132325) do
 
   create_table "actions", :force => true do |t|
     t.integer  "subject_type"
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(:version => 20121011193037) do
     t.integer  "author_obj_id"
     t.boolean  "hidden"
   end
+
+  add_index "actions", ["author_id"], :name => "index_actions_on_author_id"
+  add_index "actions", ["user_id"], :name => "index_actions_on_user_id"
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
