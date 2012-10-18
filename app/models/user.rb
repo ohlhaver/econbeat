@@ -255,6 +255,8 @@ class User < ActiveRecord::Base
 
   def unsubscribe!(author)
     subscriptions.find_by_author_id(author.id).destroy
+    a=Action.find_by_user_id_and_author_obj_id(self, author.id)
+    a.hide
   end
 
   def post_action(post)

@@ -142,4 +142,9 @@ class Action < ActiveRecord::Base
 
   end
 
+  def hide
+    self.hidden=true
+    self.save
+  end
+
 end
