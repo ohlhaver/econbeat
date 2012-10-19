@@ -1,5 +1,5 @@
  <% if @authors && @authors.any? %>
-Authors:<br>
+Authors:<br><br>
 
 <% @authors.each do |a| %>
 <%= link_to a.name, a, title: a.name, "data-content" => "#{popover_link (a)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %>, 
