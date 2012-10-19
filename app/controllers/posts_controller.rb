@@ -60,7 +60,7 @@ def add_comment
     comment.fbid = Time.now.to_i.to_s + " " + current_user.id.to_s 
   comment.save
 
-  current_user.comment_action(comment)
+  #current_user.comment_action(comment)
   PostMailer.delay.comment(@post, current_user, comment.text) unless @post.user == current_user
   if @post.commenters
     PostMailer.delay.also_comment(@post, current_user, comment.text)

@@ -8,21 +8,22 @@
 		</div> 
 		<div id ="user_item_text">
 			<span class = "user">
-				<% if action.subject_type == 1 %>
-					<%= link_to action.user.name, user_path(action.user) %>
-				<%end%>
+				
+				<%= link_to action.user.name, user_path(action.user) %>
+				
 
-			<%= "posted" if action.action_type == 1 %>
-			<%= "likes" if action.action_type == 2 %>
-			<%= "subscribes to" if action.action_type == 3 %>
-			<%= "starred" if action.action_type == 4 %>
-			<%= "commented on" if action.action_type == 5 %>
-			<% if action.action_type == 6 %>
-			<%= "joined Jurnalo" %> <br><span class="timestamp">  <%= time_ago_in_words(action.created_at) %> ago
-			<% if current_user == action.user %> 
-				  			&nbsp;<%= link_to "x", action, method: :delete,
-				                                     data: { confirm: "You sure?" } %> <%end%> </span>
-			<%end%>
+				<%= "posted" if action.action_type == 1 %>
+				<%= "likes" if action.action_type == 2 %>
+				<%= "subscribes to" if action.action_type == 3 %>
+				<%= "starred" if action.action_type == 4 %>
+				<%= "commented on" if action.action_type == 5 %>
+				
+				<% if action.action_type == 6 %>
+				<%= "joined Jurnalo" %> <br><span class="timestamp">  <%= time_ago_in_words(action.created_at) %> ago
+					<% if current_user == action.user %> 
+						  			&nbsp;<%= link_to "x", action, method: :delete,
+						                                     data: { confirm: "You sure?" } %> <%end%> </span>
+				<%end%>
 
 			</span>
 			
@@ -52,9 +53,9 @@
 						<%end%>
 						  <!--%end%-->  
 						 <%= link_to "send", "https://www.facebook.com/dialog/send?app_id=#{ENV['FACEBOOK_APP_ID']}&
-name=#{action.post.headline}&
-link=#{action.post.url}&
-redirect_uri=#{request.url}" %> · 
+												name=#{action.post.headline}&
+												link=#{action.post.url}&
+												redirect_uri=#{request.url}" %> · 
 						<%if action.post.comments && action.post.comments.count > 0  %>	
 						 	<%= link_to "comments (" + action.post.comments.count.to_s + ")" , action.post %> · 
 						<%else%>
@@ -84,11 +85,18 @@ redirect_uri=#{request.url}" %> ·
 						 	   <%= link_to 'like', :controller => "articles", :action => "like", :id => action.article.id %> · 
 						<%end%>
 						    <%= link_to "send", "https://www.facebook.com/dialog/send?app_id=#{ENV['FACEBOOK_APP_ID']}&
-name=#{action.article.title}&
-link=#{action.article.url}&
-redirect_uri=#{request.url}" %> · 
-						  <%= link_to "comment", action.article %> · 
-						
+													name=#{action.article.title}&
+													link=#{action.article.url}&
+													redirect_uri=#{request.url}" %> · 
+						  <% if action.action_type == 2 %>
+						  	 <%if action.comments && action.comments.count > 0  %> 
+          <%= link_to "comments (" + action.comments.count.to_s + ")" , action %> · 
+          <%else%>
+            <%= link_to "comment", action %> · 
+            <%end%> 
+						  <%else%>
+						 	 <%= link_to "comment", action.article %> · 
+						<% end %>
 			   			<%= time_ago_in_words(action.created_at) %> ago 
 			   			<% if current_user == action.user %> 
 				  			&nbsp;<%= link_to "x", action, method: :delete,

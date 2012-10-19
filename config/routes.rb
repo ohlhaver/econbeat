@@ -1,8 +1,5 @@
 Jurnalo::Application.routes.draw do
   
-
-
-
   resources :invitations
 
   ActiveAdmin.routes(self)
@@ -82,6 +79,13 @@ resources :static_pages do
     member do
       post :add_message
     end
+end
+
+resources :actions do
+    member do
+      post :add_comment
+    end
+    collection { post :sort }
 end
 
 resources :articles

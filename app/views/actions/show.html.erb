@@ -1,0 +1,137 @@
+	<% if @action.subject_type == 1 %>
+		<div id ="user_image">
+			<%= link_to (image_tag @action.user.picture, :width => "25"), @action.user  %> 
+		</div> 
+		<div id ="user_item_text">
+			<span class = "user">
+				<% if @action.subject_type == 1 %>
+					<%= link_to @action.user.name, user_path(@action.user) %>
+				<%end%>
+
+			<%= "posted" if @action.action_type == 1 %>
+			<%= "likes" if @action.action_type == 2 %>
+			<%= "subscribes to" if @action.action_type == 3 %>
+			<%= "starred" if @action.action_type == 4 %>
+			<%= "commented on" if @action.action_type == 5 %>
+			<% if @action.action_type == 6 %>
+			<%= "joined Jurnalo" %> <br><span class="timestamp">  <%= time_ago_in_words(@action.created_at) %> ago
+			<% if current_user == @action.user %> 
+				  			&nbsp;<%= link_to "x", @action, method: :delete,
+				                                     data: { confirm: "You sure?" } %> <%end%> </span>
+			<%end%>
+
+			</span>
+			
+	<% elsif @action.subject_type == 2 %>
+		<div id ="item_text">
+			<%  if params[:controller] != "authors" && params[:controller] != "articles" %> 
+			<span class = "user">
+				<%= link_to @action.author.name, @action.author, title: @action.author.name, "data-content" => "#{popover_link (@action.author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"%>
+			</span> 
+			<%end%>
+
+	<%end%>
+	
+	<% if @action.object_type == 1 %>
+		 		<span class="content">
+		 			
+						<%= link_to @action.post.headline, @action.post.url %>
+						<% if @action.post.author %> <br> by <%= @action.post.author %><%end%><br>
+					  	<%= truncate(@action.post.description, :length => 100, :omission =>"...", :separator => ' ') %>
+
+				</span>
+				<span class="timestamp"> 
+						<%if @action.post.likes_count && @action.post.likes_count > 0  %>	
+						 	  <%= link_to 'like', :controller => "posts", :action => "like", :id => @action.post.id %> (<%=  @action.post.likes_count.to_s %>) · 
+						<%else%>
+						 	   <%= link_to 'like', :controller => "posts", :action => "like", :id => @action.post.id %> · 
+						<%end%>
+						  <!--%end%-->  
+						 <%= link_to "send", "https://www.facebook.com/dialog/send?app_id=#{ENV['FACEBOOK_APP_ID']}&
+name=#{@action.post.headline}&
+link=#{@action.post.url}&
+redirect_uri=#{request.url}" %> · 
+						<%if @action.post.comments && @action.post.comments.count > 0  %>	
+						 	<%= link_to "comments (" + @action.post.comments.count.to_s + ")" , @action.post %> · 
+						<%else%>
+			   				<%= link_to "comment", @action.post %> · 
+			   			<%end%>
+			   			<%= time_ago_in_words(@action.created_at) %> ago 
+		    			<% if current_user == @action.user %> 
+				  			&nbsp;<%= link_to "x", @action, method: :delete,
+				                                     data: { confirm: "You sure?" } %> <%end%>
+			   			
+				</span>
+	<% elsif @action.object_type == 2 %>
+		
+				<span class="content">
+		 			
+						<%= link_to @action.article.title, @action.article.url %>
+						<span class = "user">
+							<% if @action.subject_type == 1 && @action.article.catcher %> <br> by <%= link_to @action.article.catcher.author.name, @action.article.catcher.author, title: @action.article.catcher.author.name, "data-content" => "#{popover_link (@action.article.catcher.author)}",  rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %><%end%><br>
+						</span>
+
+				</span>
+				<span class="timestamp"> 
+
+						<%if @action.article.likes && @action.article.likes.count > 0  %>	
+						 	  <%= link_to 'like', :controller => "articles", :action => "like", :id => @action.article.id %> (<%=  @action.article.likes.count.to_s %>) · 
+						<%else%>
+						 	   <%= link_to 'like', :controller => "articles", :action => "like", :id => @action.article.id %> · 
+						<%end%>
+						    <%= link_to "send", "https://www.facebook.com/dialog/send?app_id=#{ENV['FACEBOOK_APP_ID']}&
+name=#{@action.article.title}&
+link=#{@action.article.url}&
+redirect_uri=#{request.url}" %> · 
+						
+			   			<%= time_ago_in_words(@action.created_at) %> ago 
+			   			<% if current_user == @action.user %> 
+				  			&nbsp;<%= link_to "x", @action, method: :delete,
+				                                     data: { confirm: "You sure?" } %> <%end%>	
+
+				</span>
+				<% if params[:controller] == "static_pages" && @action.subject_type == 2 %>
+					<br>
+					<span class="new_articles"> 
+					<% @size = @action.author.actions.where("created_at >= :time", {:time => 1.day.ago}).size %>
+					<%= link_to raw('<i class="icon-list"></i> ') + @size.to_s + " new today", @action.author,title: 'all articles by ' + @action.author.name, rel: 'tooltip', "data-placement"=>"bottom"  if @size >= 2  %>
+					</span>
+				<%end%>
+	<% elsif @action.object_type == 3 or @action.object_type == 4 %>
+				<%= link_to @action.author_obj.name, author_path(@action.author_obj), title: @action.author_obj.name, "data-content" => "#{popover_link (@action.author_obj)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %>
+				 <br><span class="timestamp">  <%= time_ago_in_words(@action.created_at) %> ago
+				 <% if current_user == @action.user %> 
+				  			&nbsp;<%= link_to "x", @action, method: :delete,
+				                                     data: { confirm: "You sure?" } %> <%end%> </span>
+	<%end%>
+		</div>
+
+		<% if current_user %>
+          <!--% if @post.box != false %-->
+            <br><br>
+                 <%= form_tag(:controller => "actions", :action => "add_comment", :id => @action) do %>
+                        <div id ="comment_image"> <%= link_to (image_tag current_user.picture, :width => "26"), current_user  %></div>
+                        <div id ="comment_field"><%= text_field_tag :comment, nil, :placeholder => 'Write a comment...'%> </div>
+                  <% end %>
+            
+          <!--%end%-->
+          <% if @comments %>
+          
+                  <% @comments.reverse.each do |comment|%>
+                  <div class = "comment">
+                    <div id ="user_image">
+                      <%= image_tag comment.user.picture, :width => "25" if comment.user %> 
+                    </div> 
+                    <div id ="comment_text">
+
+                      <span class = "user"><%= link_to comment.user.name, comment.user if comment.user %></span>
+                      <span class = "content"> <%= comment.text %> </span>
+                      <span class="timestamp"> <%= time_ago_in_words(comment.created_at) %> ago </span>
+                      
+                    </div>
+                    </div>
+                  <%end%>
+          <%end%>
+        <%end%>
+
+

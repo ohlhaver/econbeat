@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018132325) do
+ActiveRecord::Schema.define(:version => 20121018192541) do
 
   create_table "actions", :force => true do |t|
     t.integer  "subject_type"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20121018132325) do
     t.integer  "author_id"
     t.integer  "author_obj_id"
     t.boolean  "hidden"
+    t.string   "fbaction_id"
   end
 
   add_index "actions", ["author_id"], :name => "index_actions_on_author_id"
@@ -103,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20121018132325) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "article_id"
+    t.integer  "action_id"
   end
 
   create_table "delayed_jobs", :force => true do |t|

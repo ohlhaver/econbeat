@@ -291,7 +291,7 @@ class User < ActiveRecord::Base
 
   def comment_action(comment)
     a=Action.new
-    a.comment_on_post(comment)
+    a.comment_on_action(comment)
   end
 
 

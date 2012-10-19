@@ -22,7 +22,7 @@ class PostMailer < ActionMailer::Base
   def comment(post, user, text)
     @commenting_user = user
     @addressed_user = post.user
-    @subject = @commenting_user.name + " commented on your post"
+    @subject = @commenting_user.name + " commented on your like action"
     @post = post
     @text = text
     mail :to => @addressed_user.email, :subject => @subject 
@@ -30,12 +30,13 @@ class PostMailer < ActionMailer::Base
 
   def also_comment(post, user, text)
     @commenting_user = user
-    alerted_users = post.commenters - Array.wrap(user) - Array.wrap(post.user)
+    #@addressed_user = post.user
+    alerted_users = post.commenters.uniq - Array.wrap(post.user) - Array.wrap(user)
     receipients = alerted_users.collect(&:email).join(",") 
     if post.user == user
-      @subject = @commenting_user.name + " also commented on her/his post"
+      @subject = @commenting_user.name + " also commented on her/his like action"
     else
-      @subject = @commenting_user.name + " also commented on the post by " + post.user.name
+      @subject = @commenting_user.name + " also commented on the like action by " + post.user.name
     end
     @post = post
     @text = text

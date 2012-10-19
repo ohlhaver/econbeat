@@ -5,6 +5,8 @@ class Action < ActiveRecord::Base
   belongs_to :article, class_name: "Article"
   belongs_to :author_obj, class_name: "Author"
   belongs_to :post, class_name: "Post"
+  has_many :comments
+  has_many :commenters, through: :comments, source: :user
 
 
   default_scope order: 'actions.created_at DESC'
@@ -74,6 +76,16 @@ class Action < ActiveRecord::Base
     self.action_type=5
     self.object_type=1
     self.post_id=comment.post_id
+
+    self.save
+  end
+
+  def comment_on_action(comment)
+    self.subject_type=1
+    self.user_id=comment.user_id
+    self.action_type=5
+    self.object_type=2
+    self.article_id=comment.article_id
 
     self.save
   end
