@@ -1,7 +1,7 @@
 class Action < ActiveRecord::Base
   attr_accessible :action_type, :obj_id, :object_type, :subject_id, :subject_type
   belongs_to :user, class_name: "User"
-  belongs_to :author, class_name: "Author"
+  belongs_to :catcher, class_name: "Catcher"
   belongs_to :article, class_name: "Article"
   belongs_to :author_obj, class_name: "Author"
   belongs_to :post, class_name: "Post"
@@ -131,10 +131,10 @@ class Action < ActiveRecord::Base
   end
 
   def self.latest_from_authors_followed_by(user)
-    followed_authors = user.authors
+    
 
     actions = []                    
-    followed_authors.each do |a|
+    user.authors.each do |a|
       actions += Array.wrap(a.actions.first)
     end
 
@@ -146,7 +146,7 @@ class Action < ActiveRecord::Base
     
 
     actions = []                    
-    user.subscriptions.where(:starred => true).each do |a|
+    user.starred_subscriptions.each do |a|
       actions += Array.wrap(a.author.actions.first)
     end
 

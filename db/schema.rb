@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018192541) do
+ActiveRecord::Schema.define(:version => 20121021095552) do
 
   create_table "actions", :force => true do |t|
     t.integer  "subject_type"
@@ -22,13 +22,13 @@ ActiveRecord::Schema.define(:version => 20121018192541) do
     t.integer  "article_id"
     t.integer  "post_id"
     t.integer  "user_id"
-    t.integer  "author_id"
+    t.integer  "catcher_id"
     t.integer  "author_obj_id"
     t.boolean  "hidden"
     t.string   "fbaction_id"
   end
 
-  add_index "actions", ["author_id"], :name => "index_actions_on_author_id"
+  add_index "actions", ["catcher_id"], :name => "index_actions_on_author_id"
   add_index "actions", ["user_id"], :name => "index_actions_on_user_id"
 
   create_table "active_admin_comments", :force => true do |t|
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20121018192541) do
     t.datetime "updated_at",           :null => false
     t.integer  "source_id"
     t.boolean  "scraper"
+    t.boolean  "copy_scraper"
   end
 
   add_index "feeds", ["next_crawl_at"], :name => "index_feeds_on_next_crawl_at"

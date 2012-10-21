@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
   has_many :subscriptions, :dependent => :destroy
+  has_many :starred_subscriptions, 
+          :class_name => "Subscription", 
+          :source => :subscription,  :conditions => ['subscriptions.starred =?', true]
   has_many :authors, through: :subscriptions 
   has_many :articles, through: :authors
   has_many :actions
