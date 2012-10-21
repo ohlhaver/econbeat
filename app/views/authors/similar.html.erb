@@ -44,7 +44,7 @@
          <ol class="profile_microposts">
             <% @recommended.each do |r| %>
             <li>
-          <%= link_to raw('<i class="icon-user"></i> ') + r[0].name, r[0], title: r[0].name, "data-content" => "#{popover_link (r[0])}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %> (<%= (r[1]/Float(@size)*100).to_i.to_s + "%" %>)</li>
+          <span class = "user"><%= link_to raw('<i class="icon-user"></i> ') + r[0].name, r[0], title: r[0].name, "data-content" => "#{popover_link (r[0])}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %> (<%= (r[1]/Float(@size)*100).to_i.to_s + "%" %>)</span></li>
           <%end%>
 
       

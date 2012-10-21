@@ -4,7 +4,7 @@
 
          <div class="span6"><h3> <%= @author.name %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
 <%= render 'subscribe_form' %>
-</div></h3><div class ="hidden-phone"><span class="timestamp"><%= link_to link_to raw('<i class="icon-list-alt"></i> ') + "wikipedia", "http://en.wikipedia.org/wiki/" + @author.name %>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send to friend'), "sendMessage(); return false;" %></span></div></div>
+</div></h3><div class ="hidden-phone"><span class="timestamp"><%= link_to_function raw('<i class="icon-envelope"></i>'+ ' recommend'), "sendMessage(); return false;" %>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to link_to raw('<i class="icon-list-alt"></i> ') + "wikipedia", "http://en.wikipedia.org/wiki/" + @author.name %></span></div></div>
          <script>
 
 
@@ -38,7 +38,9 @@
   <div class="span6">
     <br>
        <% if @actions.any? %>
-       
+       <br>
+      <span class = "user">Latest posts by <%= link_to (@author.name).html_safe , @author , title: @author.name, "data-content" => "#{popover_link (@author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %></span>
+       <br>
      
 
       
