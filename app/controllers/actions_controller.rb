@@ -2,7 +2,7 @@ class ActionsController < ApplicationController
 	before_filter :authorize, only: [:add_comment, :show]
 	before_filter :correct_user,   only: [:destroy]
 	def index
-	  @authors = Author.search params[:q], :match_mode => :any
+	  @authors = Author.search params[:q],:with => {:hidden => false}, :match_mode => :any
 	  #@articles = Article.search params[:q], :match_mode => :any, :order => :created_at,
 	  #:sort_mode => :desc
 	  	  @actions = Action.search params[:q], :with => {:action_type => [7,1]}, :match_mode => :any, :order => :created_at,
