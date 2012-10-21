@@ -15,7 +15,7 @@ class Action < ActiveRecord::Base
   define_index do
     indexes article.title, :as => :title
     indexes post.headline, :as => :headline
-    indexes author.name, :as => :author
+    indexes catcher.author.name, :as => :author
     indexes action_type, :as => :type
     has created_at, action_type
   end
