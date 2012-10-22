@@ -104,9 +104,6 @@
       
         Subscribers of <%= @author.name %> also subscribe to
 
-        
-
-
          <ol class="profile_microposts">
             <% @recommended.each do |r| %>
           <%=    render r[0] %>
@@ -114,7 +111,7 @@
           </ol>
           <br>
           <span class="timestamp">
-          <%= link_to raw('<i class="icon-plus"></i> ') + "more similar authors..", :action => "similar", :id => params[:id] %>
+          <%= link_to raw('<i class="icon-plus"></i> ') + "more similar authors..", :controller => "authors", :action => "similar", :id => @article.catcher.author.id %>
         </span>
           
 
