@@ -29,7 +29,7 @@
       <% flash.each do |key, value| %>
             <div class="alert alert-<%= key %>"><b><%= value %></b></div>
       <% end %>
-      <%= render 'shared/post_form' if current_user %>
+      <!--%= render 'shared/post_form' if current_user %-->
 
       <%= yield %>
     

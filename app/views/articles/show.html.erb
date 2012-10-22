@@ -8,7 +8,7 @@
 <% end %>
 
 <div class="row">
-  <div class = "span8">
+  <div class = "span6">
     <br>
     <ol class="microposts">
       
@@ -85,6 +85,44 @@
 
         <%end%>
   </div>
+      <div class="span2">
+
+        <% if @subscribed_friends && @subscribed_friends.any? %>
+        <span class = "user">
+        Friends subscribed to <%= link_to (@article.catcher.author.name).html_safe , @article.catcher.author , title: @article.catcher.author.name, "data-content" => "#{popover_link (@article.catcher.author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %>  </span>
+
+      
+         <ol class="profile_microposts">
+          <%= render @subscribed_friends %>
+          </ol>
+          <br>
+      
+<%end%>
+
+<% if @recommended.any? %>
+<br>
+      
+        Subscribers of <%= @author.name %> also subscribe to
+
+        
+
+
+         <ol class="profile_microposts">
+            <% @recommended.each do |r| %>
+          <%=    render r[0] %>
+          <%end%>
+          </ol>
+          <br>
+          <span class="timestamp">
+          <%= link_to raw('<i class="icon-plus"></i> ') + "more similar authors..", :action => "similar", :id => params[:id] %>
+        </span>
+          
+
+<%end%>
+
+
+
+</div>
   <br>
 </div>
 

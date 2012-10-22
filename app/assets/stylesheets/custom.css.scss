@@ -30,6 +30,7 @@ html {
 
 
 body {
+  font-family: "freight-sans-pro", Helvetica, Arial, sans-serif;
   
 }
 
@@ -566,12 +567,11 @@ aside {
   border: 1px solid $grayLighter;
  
   margin-top: 0px;
-  display: inline-block;
+  
   
   padding: 6px 8px 0px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  width: 94%;
 
 }
 #starred_authors {
@@ -579,20 +579,20 @@ aside {
   border: 1px solid $grayLighter;
  
   margin-top: 0px;
-  display: inline-block;
+
   
   padding: 6px 8px 0px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  width: 85%;
+ 
 
 }
 
 #subscribed_authors {
   margin-top: 20px;
-  display: inline-block;
+
   padding: 6px 8px 5px;
-  width: 85%;
+
 
 }
 
@@ -607,12 +607,14 @@ aside {
 /* stagely */
 
 body {
+    font-family: "freight-sans-pro", Helvetica, Arial, sans-serif;
     background-color: #FFFFFF;
     color: #333333;
     line-height: 1.38;
     margin: 0;
 
     a {
+    font-family: "freight-sans-pro", Helvetica, Arial, sans-serif;
     color: #3B5998;
     text-decoration: none;
     font-weight: bold;
