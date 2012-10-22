@@ -419,6 +419,23 @@ textarea, .uneditable-input {
 
 }
 
+.article_timestamp {
+  line-height: 28px;
+  color: $grayLight;
+      a {
+    color: #6D84B4;
+    text-decoration: none;
+    font-weight: normal;
+    }
+    a:hover {
+    color: #6D84B4;
+    font-weight: normal;
+    text-decoration: underline;
+    
+    }
+
+}
+
 .new_articles {
   font-size: 12px;
   color: $grayLight;
