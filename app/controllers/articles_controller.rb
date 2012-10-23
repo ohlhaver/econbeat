@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
 	    #end
 	    #current_user.facebook.put_connections("me", "og.likes", object: post_url(@post))
 	    
-	    #current_user.delay.fblike(article_url(@article), @article)
+	    current_user.delay.fblike(article_url(@article), @article)
 	    
 	    #LikeMailer.delay.like_it(@post, current_user)
 	    #current_user.facebook.put_like(@post.fbaction_id)
