@@ -1,3 +1,22 @@
+<% content_for :head do %>
+  <%= tag :meta, property: "fb:app_id", content: ENV['FACEBOOK_APP_ID'] %>
+  <%= tag :meta, property: "og:site_name", content: "Jurnalo" %>
+
+  <% if Rails.env.development? %> 
+  <%= tag :meta, property: "og:type", content: "jurnalo_local:author" %>
+     
+    <%else%>
+     <%= tag :meta, property: "og:type", content: "jurnalo:author" %>
+    <%end%>
+  
+  <%= tag :meta, property: "og:title", content: @author.name %>
+  <%= tag :meta, property: "og:url", content: author_url(@author) %>
+   <%= tag :meta, property: "og:image", content: request.protocol + request.host + image_path("256n.png") %>
+
+  
+<% end %>
+
+
      <div class ="user_show">
 
   <div class="row">

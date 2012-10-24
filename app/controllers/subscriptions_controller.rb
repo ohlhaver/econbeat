@@ -13,6 +13,7 @@ class SubscriptionsController < ApplicationController
   def destroy
     @author = Subscription.find(params[:id]).author
     current_user.unsubscribe!(@author)
+    current_user.delay.fb_unsubscribe(author_url(@author))
     respond_to do |format|
       format.html { redirect_to :back, :only_path => true }
       format.js
@@ -22,12 +23,14 @@ class SubscriptionsController < ApplicationController
   def subscribe
     author = Author.find(params[:id])
     current_user.subscribe!(author)
+    current_user.delay.fb_subscribe(author_url(author))
     redirect_to :back
   end
 
   def unsubscribe
     author = Author.find(params[:id])
     current_user.unsubscribe!(author)
+    current_user.delay.fb_unsubscribe(author_url(author))
     redirect_to :back
   end
 
@@ -38,6 +41,7 @@ class SubscriptionsController < ApplicationController
     #@subscription.position = 1
     @subscription.save
     current_user.star_author_action(@subscription)
+    current_user.delay.fbstar_author(author_url(@subscription.author_id))
     
     #current_user.delay.fbstar(post_url(@post))
     redirect_to :back, :notice => "Author has been starred."
@@ -47,6 +51,7 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.find(params[:id])
     @subscription.starred=nil
     @subscription.save
+    current_user.delay.fbunstar_author(author_url(@subscription.author_id))
     #current_user.delay.fbunstar(post_url(@post))
     redirect_to :back
   end

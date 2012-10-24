@@ -129,7 +129,42 @@ class User < ActiveRecord::Base
       end
   end
 
-  
+  def fb_subscribe(author_url)
+    if Rails.env.development?  
+      self.facebook.put_connections("me", "jurnalo_local:subscribe_to", author: author_url)
+    else
+      self.facebook.put_connections("me", "jurnalo:subscribe_to", author: author_url)
+    end
+
+  end
+
+  def fb_unsubscribe(author_url)
+    if Rails.env.development?  
+     a=self.facebook.get_connections("me","jurnalo_local:subscribe_to")
+    else
+      a=self.facebook.get_connections("me","jurnalo:subscribe_to")
+    end
+    s=a.select {|f| f["data"]["author"]["url"] == author_url}
+    self.facebook.delete_object(s.first["id"])
+  end
+
+  def fbstar_author(author_url)
+    if Rails.env.development?  
+      self.facebook.put_connections("me", "jurnalo_local:star", author: author_url)
+    else
+      self.facebook.put_connections("me", "jurnalo:star", author: author_url)
+    end
+  end
+
+  def fbunstar_author(author_url)
+    if Rails.env.development?  
+     a=self.facebook.get_connections("me","jurnalo_local:star")
+    else
+      a=self.facebook.get_connections("me","jurnalo:star")
+    end
+    s=a.select {|f| f["data"]["author"]["url"] == author_url}
+    self.facebook.delete_object(s.first["id"])
+  end
 
   def fbstar(post_url)
     if Rails.env.development?  
@@ -138,6 +173,17 @@ class User < ActiveRecord::Base
       self.facebook.put_connections("me", "jurnalo:star", article: post_url)
     end
   end
+
+  def fbunstar(post_url)
+    if Rails.env.development?  
+     a=self.facebook.get_connections("me","jurnalo_local:star")
+    else
+      a=self.facebook.get_connections("me","jurnalo:star")
+    end
+    s=a.select {|f| f["data"]["article"]["url"] == post_url}
+    self.facebook.delete_object(s.first["id"])
+  end
+
 
   def fblike(post_url, post)
           a=self.facebook.get_connections("me","og.likes")
@@ -150,7 +196,7 @@ class User < ActiveRecord::Base
           post.save
   end
 
-    def fb_article_like(article_url, article)
+  def fb_article_like(article_url, article)
           a=self.facebook.get_connections("me","og.likes")
           s=a.select {|f| f["data"]["object"]["url"] == article_url}
           unless s.empty?
@@ -161,15 +207,8 @@ class User < ActiveRecord::Base
           #post.save
   end
 
-  def fbunstar(post_url)
-    if Rails.env.development?  
-     a=self.facebook.get_connections("me","jurnalo_local:star")
-    else
-      a=self.facebook.get_connections("me","jurnalo:star")
-    end
-    s=a.select {|f| f["data"]["article"]["url"] == post_url}
-    self.facebook.delete_object(s.first["id"])
-  end
+
+
 
   def fbpost(post_url, post)
     if Rails.env.development? 
