@@ -133,7 +133,7 @@ class User < ActiveRecord::Base
     if Rails.env.development?  
       self.facebook.put_connections("me", "jurnalo_local:subscribe_to", author: author_url)
     else
-      self.facebook.put_connections("me", "jurnalo:subscribe_to", author: author_url)
+      self.facebook.put_connections("me", "jurnalo:subscribe", author: author_url)
     end
 
   end
@@ -142,7 +142,7 @@ class User < ActiveRecord::Base
     if Rails.env.development?  
      a=self.facebook.get_connections("me","jurnalo_local:subscribe_to")
     else
-      a=self.facebook.get_connections("me","jurnalo:subscribe_to")
+      a=self.facebook.get_connections("me","jurnalo:subscribe")
     end
     s=a.select {|f| f["data"]["author"]["url"] == author_url}
     self.facebook.delete_object(s.first["id"])
