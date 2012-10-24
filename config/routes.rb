@@ -48,7 +48,7 @@ end
 
 resources :subscriptions do
     member do
-      get :star, :unstar
+      get :star, :unstar, :subscribe, :unsubscribe
       post :subscribe, :unsubscribe
     end
 end

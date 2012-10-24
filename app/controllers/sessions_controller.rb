@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 	    session[:user_id] = user.id
 	    user.delay.sync_fb
 	    #user.load_friends_posts
-	    redirect_back_or root_url
+	    redirect_to root_url
   	end
 
   	def destroy
