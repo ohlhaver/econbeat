@@ -2,6 +2,13 @@ class ActionsController < ApplicationController
 	before_filter :authorize, only: [:add_comment, :show]
 	before_filter :correct_user,   only: [:destroy]
 	def index
+		if current_user && current_user.subscriptions.empty?
+        	flash[:notice] = "Subscribe to any author below by selecting its name and then clicking 'subscribe'." 
+    	
+     #   elsif @utopics.empty?
+     #   flash[:notice] = "Click 'select topic!' underneath any headline to categorize a post."
+     #   end
+      end
 	  @authors = Author.search params[:q],:with => {:hidden => false}, :match_mode => :any
 	  #@articles = Article.search params[:q], :match_mode => :any, :order => :created_at,
 	  #:sort_mode => :desc

@@ -12,14 +12,27 @@ class StaticPagesController < ApplicationController
       #end
 
       # @actions = (@unique_user_actions + current_user.author_action_feed - @starred_actions).sort_by{|e| -e[:id]}
-      @starred_actions = Kaminari.paginate_array(@starred_actions).page(params[:page]).per(50)
+   
       @actions =  (current_user.author_action_feed - @starred_actions).sort_by{|e| -e[:id]}
-      @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
+     
 
       @user_actions=current_user.user_action_feed
-      @user_actions = Kaminari.paginate_array(@user_actions).page(params[:page]).per(50)
+      
 
 
+      if @starred_actions.empty? && @actions.empty? &&  @user_actions.where(:hidden => nil).empty?
+        flash[:notice] = "Find authors to subscribe to by using the search box above." 
+      elsif @starred_actions.empty? && @actions.empty?
+        flash[:notice] = "Follow any author by selecting its name and then clicking 'subscribe'." 
+       elsif current_user.starred_subscriptions.empty?
+        flash[:notice] = "Star your favorite authors by clicking the star buttons next to the articles." 
+     #   elsif @utopics.empty?
+     #   flash[:notice] = "Click 'select topic!' underneath any headline to categorize a post."
+     #   end
+      end
+         @starred_actions = Kaminari.paginate_array(@starred_actions).page(params[:page]).per(50)
+ @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
+@user_actions = Kaminari.paginate_array(@user_actions).page(params[:page]).per(50)
 
     end
  
