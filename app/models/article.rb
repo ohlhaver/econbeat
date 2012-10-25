@@ -1,5 +1,6 @@
 class Article < ActiveRecord::Base
   # attr_accessible :title, :body
+  belongs_to :feed
   belongs_to :catcher
   default_scope order: 'articles.created_at DESC'
   after_create :publish_action

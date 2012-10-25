@@ -88,7 +88,7 @@
 		
 				<span class="content">
 		 			
-						<%= link_to action.article.title, action.article.url %>
+						<%= link_to action.article.title, action.article.url, title: action.article.feed.source.name, rel: 'tooltip', "data-placement"=>"top" %>
 						<span class = "user">
 							<% if action.subject_type == 1 && action.article.catcher %> by <%= link_to action.article.catcher.author.name, action.article.catcher.author, title: action.article.catcher.author.name, "data-content" => "#{popover_link (action.article.catcher.author)}",  rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %><%end%><br>
 						</span>
