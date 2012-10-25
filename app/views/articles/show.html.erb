@@ -4,6 +4,7 @@
   <%= tag :meta, property: "og:type", content: "article" %>
   <%= tag :meta, property: "og:title", content: @article.title %>
   <%= tag :meta, property: "og:url", content: article_url(@article) %>
+  <%= tag :meta, property: "og:image", content: request.protocol + request.host + image_path("newspaper_article.jpeg") %>
   
 <% end %>
 
