@@ -1,8 +1,8 @@
  <% if @authors && @authors.any? %>
 Authors:<br><br>
 
-<% @authors.each do |a| %>
-<%= link_to a.name, a, title: a.name, "data-content" => "#{popover_link (a)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %>, 
+
+<%= link_to @authors.first.name, @authors.first, title: @authors.first.name, "data-content" => "#{popover_link (@authors.first)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %><% @authors.drop(1).each do |a| %>, <%= link_to a.name, a, title: a.name, "data-content" => "#{popover_link (a)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %>
 <% end%>
 
 
