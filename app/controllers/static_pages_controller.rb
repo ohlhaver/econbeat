@@ -21,11 +21,11 @@ class StaticPagesController < ApplicationController
 
 
       if @starred_actions.empty? && @actions.empty? &&  @user_actions.where(:hidden => nil).empty?
-        flash[:notice] = "Find authors to subscribe to by using the search box above." 
+        flash.now[:notice] = "Find authors by using the search box above." 
       elsif @starred_actions.empty? && @actions.empty?
-        flash[:notice] = "Follow any author by selecting its name and then clicking 'subscribe'." 
+        flash.now[:notice] = "Follow any author by selecting its name and then clicking 'subscribe'." unless flash[:notice]
        elsif current_user.starred_subscriptions.empty?
-        flash[:notice] = "Star your favorite authors by clicking the star buttons next to the articles." 
+        flash.now[:notice] = "Star your favorite authors by clicking the star buttons next to the headlines." unless flash[:notice]
      #   elsif @utopics.empty?
      #   flash[:notice] = "Click 'select topic!' underneath any headline to categorize a post."
      #   end
