@@ -21,7 +21,8 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
       
-    <%= render 'layouts/header' if current_user || params[:action] == "contact" || params[:action] == "privacy" || params[:action] == "show"%>
+    <%= render 'layouts/header' if current_user || params[:action] == "contact" || params[:action] == "privacy" || params[:action] == "show" || params[:action] == "similar" || params[:controller] == "actions"%>
+
     <div class="container">
     <div class="span8 offset2">
         

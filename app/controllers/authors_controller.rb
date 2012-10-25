@@ -26,10 +26,10 @@ class AuthorsController < ApplicationController
 	def similar
 		@author = Author.find(params[:id])
 		
-
-		@friends = current_user.followed_users
-
-		@subscribed_friends = @friends.find_all{|i| i.subscribed?(@author)}
+		if current_user
+			@friends = current_user.followed_users
+			@subscribed_friends = @friends.find_all{|i| i.subscribed?(@author)}
+		end
 		
 		@all_authors =[]
 		@size = @author.users.size

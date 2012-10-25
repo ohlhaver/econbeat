@@ -20,7 +20,7 @@
            </script>
 
 <div class ="span2">
-<% if current_user.subscribed?(@author)  %> 
+<% if current_user && current_user.subscribed?(@author)  %> 
   <% if current_user.subscribed?(@author).starred == true%>
        
           <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/unstar", :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
@@ -55,7 +55,7 @@
 
 <%end%>
 
-<% if @subscribed_friends.any? %>
+<% if @subscribed_friends && @subscribed_friends.any? %>
 <div class="span2">
        
         Subscribed friends 

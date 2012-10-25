@@ -28,6 +28,23 @@
 			</span>
 			
 	<% elsif action.subject_type == 2 %>
+		<%  if params[:controller] == "static_pages" %>
+			 <div id ="star"> <div class="hidden-phone">
+    
+        <% if current_user.subscriptions.find_by_author_id(action.catcher.author.id).starred == true && action.object_type == 2%>
+       
+          <%= link_to raw('<i class="icon-star"></i>'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(action.catcher.author.id).id}/unstar", :class => "btn btn-small", title: 'unstar this author', rel: 'tooltip', "data-placement"=>"bottom" %>
+        <%else%>
+
+          <%= link_to raw('<i class="icon-star-empty"></i>'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(action.catcher.author.id).id}/star", :class => "btn btn-small", title: 'star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
+          
+        <%end%>
+      
+    </div>
+
+		</div>
+		<%end%>
+
 		<div id ="item_text">
 			<%  if params[:controller] != "authors" && params[:controller] != "articles" %> 
 			<span class = "user">
@@ -107,7 +124,7 @@
 					<br>
 					<span class="new_articles"> 
 					<% @size = action.catcher.author.actions.where("actions.created_at >= :time", {:time => 1.day.ago}).size %>
-					<%= link_to raw('<i class="icon-list"></i> ') + @size.to_s + " new today", action.catcher.author,title: 'all articles by ' + action.catcher.author.name, rel: 'tooltip', "data-placement"=>"bottom"  if @size >= 2  %>
+					<%= link_to raw('<i class="icon-arrow-right"></i> ') + @size.to_s + " posts today", action.catcher.author,title: 'all articles by ' + action.catcher.author.name, rel: 'tooltip', "data-placement"=>"bottom"  if @size >= 2  %>
 					</span>
 				<%end%>
 	<% elsif action.object_type == 3 or action.object_type == 4 %>

@@ -1,23 +1,49 @@
-<% if @starred_actions.any? %>
-<div id = "favorite_posts">
-        
-   Starred
-  <ol class="microposts">
-<%= render @starred_actions %>
-</ol>
+<div class = "row">
+<div class = "span5">
+	<% if @starred_actions.any? %>
+	<div id = "favorite_posts">
+	        
+	   Starred
+	  <ol class="microposts">
+	<%= render @starred_actions %>
+	</ol>
+	</div>
+	<%end%>
+	<% if @actions.any? %>
+	<div id = "latest_posts">
+	  <ol class="microposts">
+	<%= render @actions %>
+	</ol>
+	</div>
+
+
+
+
+	  <br>
+	  <%= paginate @actions %>
+	  
+	<% end %>
 </div>
-<%end%>
+
 <% if @actions.any? %>
-<div id = "latest_posts">
-  <ol class="microposts">
-<%= render @actions %>
-</ol>
+<div class = "span3">
+<%else%>
+<div class = "span5">
+<%end%>
+		<% if @user_actions.any? %>
+	
+	<div id = "latest_posts">
+	  <ol class="microposts">
+	<%= render @user_actions %>
+	</ol>
+	</div>
+
+
+
+
+	  
+	<% end %>
+
+
 </div>
-
-
-
-
-  <br>
-  <%= paginate @actions %>
-  
-<% end %>
+</div>
