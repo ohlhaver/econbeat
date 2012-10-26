@@ -1,0 +1,30 @@
+Dear <%= @user.name %>,
+<br><br>
+
+<% if @actions.size == 1 %>
+	<%= @actions.size.to_s + " of your followed authors has published articles in the last 24 hours:" %>
+<%else%>
+	<%= @actions.size.to_s + " of your followed authors have published articles in the last 24 hours:" %>
+<%end%>
+
+
+
+<% @actions.each do |action| %>
+<br><br><br>
+<b><%= link_to action.catcher.author.name, author_url(action.catcher.author) %>:</b>
+<br>
+<%= link_to action.article.title, article_url(action.article) %>
+
+
+<% @size = action.catcher.author.actions.where("actions.created_at >= :time", {:time => 1.day.ago}).size %>
+<% if @size >= 2 %>
+<br>
+					<b><%= link_to @size.to_s + " more posts by " + action.catcher.author.name, author_url(action.catcher.author) %></b>
+					<%end%>
+<%end%>
+<br><br><br><br>
+To stop receiving these emails simply unfollow the respective authors above:<br>
+Click the author's name and then click the 'unfollow' button on the author's profile page on Jurnalo.
+<br><br><br><br>
+Best regards,<br><br>
+Jurnalo

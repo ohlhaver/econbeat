@@ -17,4 +17,12 @@ class UserMailer < ActionMailer::Base
     mail :to => 'ohlhaver@gmail.com', :subject => "FEEDBACK"
 
   end
+
+  def daily_mail(user, actions)
+    @user = user
+    @subject = "Daily Digest"
+    @actions = actions
+    mail :to => user.email, :subject => @subject 
+
+  end
 end
