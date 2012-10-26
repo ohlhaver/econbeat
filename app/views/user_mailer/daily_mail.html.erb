@@ -13,7 +13,7 @@ Dear <%= @user.name %>,
 <br><br><br>
 <b><%= link_to action.catcher.author.name, author_url(action.catcher.author) %>:</b>
 <br>
-<%= link_to action.article.title, article_url(action.article) %>
+<%= link_to action.article.title, action.article.url %>
 
 
 <% @size = action.catcher.author.actions.where("actions.created_at >= :time", {:time => 1.day.ago}).size %>
@@ -23,8 +23,10 @@ Dear <%= @user.name %>,
 					<%end%>
 <%end%>
 <br><br><br><br>
-To stop receiving these emails simply unfollow the respective authors above:<br>
-Click the author's name and then click the 'unfollow' button on the author's profile page on Jurnalo.
-<br><br><br><br>
+<b><%= link_to "Click here for an up-to-date overview.", root_url %></b>
+<br><br><br>
+To stop receiving these emails simply unfollow the respective authors:<br>
+Click the author's name above and then click the 'unfollow' button on the author's profile page on Jurnalo.
+<br><br><br>
 Best regards,<br><br>
-Jurnalo
+<%= link_to "Jurnalo", root_url %>
