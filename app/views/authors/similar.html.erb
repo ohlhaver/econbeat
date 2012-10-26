@@ -12,12 +12,8 @@
           <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/star", :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
           
         <%end%>
-      <%end%></div>
-</div></h3></div>
-
-     
-<div class ="span2">
-  <div class ="hidden-phone"><span class="timestamp"><%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send'), "sendMessage(); return false;" %>&nbsp;&nbsp;<%= link_to link_to raw('<i class="icon-list-alt"></i> ') + "wikipedia", "http://en.wikipedia.org/wiki/" + @author.name %></span></div>
+      <%end%></div></h3>
+      <div class ="hidden-phone"><span class="timestamp"><%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send'), "sendMessage(); return false;" %>&nbsp;&nbsp;<%= link_to link_to raw('<i class="icon-list-alt"></i> ') + "wikipedia", "http://en.wikipedia.org/wiki/" + @author.name %></span></div>
          <script>
 
 
@@ -31,6 +27,11 @@
                     description: 'Subscribe to this author via Jurnalo.'
                     })}
            </script>
+</div></div>
+
+     
+<div class ="span2">
+  
 
     
       </div>
