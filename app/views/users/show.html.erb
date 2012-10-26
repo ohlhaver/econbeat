@@ -5,38 +5,39 @@
     
     
       <div class="span3">
+        <div class ="upper_section">
         
-
-            <h4>
-              
+        <h4>      
          <%= image_tag @user.picture, :width => "50" %>&nbsp; <%= @user.name %>
        </h4>
-         
-
-
-         
+        
+        </div> 
       </div>
       <div class="span5">
+        <div class ="upper_section">
         <div id = "follow_button">
 
                 <%= render 'follow_form' unless @friendship == false %>            
  
        </div>
+
         <%= render 'shared/stats' %>  
+      </div>
       </div>
 
        
        <% if @actions.any? %>
        <br><br> <br><br>
        <div class="span8">
+        <div class ="upper_section">
 
          <ol class="profile_microposts">
           <%= render @actions %>
           </ol>
           <br>
           <%= paginate @actions %>
-
-    </div>
+        </div>
+        </div>
         <%end%>
         
            

@@ -21,9 +21,22 @@
 
   <div class="row">
 
-         <div class="span6"><h3> <%= @author.name %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
-<%= render 'subscribe_form' %>
-</div></h3><div class ="hidden-phone"><span class="timestamp"><%= link_to_function raw('<i class="icon-envelope"></i>'+ ' recommend'), "sendMessage(); return false;" %>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to link_to raw('<i class="icon-list-alt"></i> ') + "wikipedia", "http://en.wikipedia.org/wiki/" + @author.name %></span></div></div>
+         <div class="span6"><div class ="upper_section"><h3><%= @author.name %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
+<%= render 'subscribe_form' %></div>&nbsp;&nbsp;&nbsp;<div id = "follow_button"> <% if current_user && current_user.subscribed?(@author)  %> 
+  <% if current_user.subscribed?(@author).starred == true%>
+       
+          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/unstar", :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
+        <%else%>
+
+          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/star", :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
+          
+        <%end%>
+      <%end%></div>
+</div></h3></div>
+
+     
+<div class ="span2">
+  <div class ="hidden-phone"><span class="timestamp"><%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send'), "sendMessage(); return false;" %>&nbsp;&nbsp;<%= link_to link_to raw('<i class="icon-list-alt"></i> ') + "wikipedia", "http://en.wikipedia.org/wiki/" + @author.name %></span></div>
          <script>
 
 
@@ -38,28 +51,19 @@
                     })}
            </script>
 
-     
-<div class ="span2">
-  
-<% if current_user && current_user.subscribed?(@author)  %> 
-  <% if current_user.subscribed?(@author).starred == true%>
-       
-          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/unstar", :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
-        <%else%>
-
-          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/star", :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
-          
-        <%end%>
-      <%end%>
     
       </div>
 
   <div class="span6">
+    <div class ="upper_section">
     <br>
        <% if @actions.any? %>
        <br>
+       <div class ="upper_section">
       <span class = "user">Latest posts by <%= link_to (@author.name).html_safe , @author , title: @author.name, "data-content" => "#{popover_link (@author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %></span>
+    </div>
        <br>
+
      
 
       
@@ -68,8 +72,10 @@
           </ol>
           <br>
           <%= paginate @actions %>
-  </div>
+  
         <%end%>
+        </div>
+        </div>
 
          <div class="span2">
 

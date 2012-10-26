@@ -1,3 +1,4 @@
+<div class ="upper_section">
 	<% if @action.subject_type == 1 %>
 		<div id ="user_image">
 			<%= link_to (image_tag @action.user.picture, :width => "25"), @action.user  %> 
@@ -133,5 +134,6 @@ redirect_uri=#{request.url}" %> ·
                   <%end%>
           <%end%>
         <%end%>
+</div>
 
 

@@ -4,15 +4,17 @@
     
     
       <div class="span3">
+        <div class ="upper_section">
 
             <h4>
          <%= link_to (image_tag @user.picture, :width => "50"), @user %>&nbsp; <%= link_to @user.name, @user %> </h4>
          
 
 
-         
+         </div>
       </div>
       <div class="span5">
+        <div class ="upper_section">
         <div id = "follow_button">
                 <%if current_user.following?(@user) && @utopic %>
                   <%= render @utopic  unless @friendship == false%>
@@ -22,24 +24,28 @@
        </div>
         <%= render 'shared/stats' %>  
       </div>
+      </div>
 
 
 
   
   <div class="span8">
+    <div class ="upper_section">
           
-          <br><br><h4><%= @title %> </h4><br><br>
+          <br><br><h4><%= @title %> </h4>
  
 
 
       
       <% if @users %>
         <ul class="users">
+          <br><br>
           <%= render @users %>
         </ul>
         <%= paginate @users %>
       <% end %>
       <% if @starred_authors && @starred_authors.any? %>
+      <br><br>
        <div id = "starred_authors">
         <ol class="profile_microposts">
           Starred
@@ -57,6 +63,7 @@
       <% end %>
 
     </div>
+  </div>
   
    
 
