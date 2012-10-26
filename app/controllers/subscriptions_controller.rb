@@ -15,7 +15,7 @@ class SubscriptionsController < ApplicationController
     current_user.unsubscribe!(@author)
     current_user.delay.fb_unsubscribe(author_url(@author))
     respond_to do |format|
-      format.html { redirect_to :back, :only_path => true, :notice => "You have unsubscribed from #{@author.name}." }
+      format.html { redirect_to :back, :only_path => true, :notice => "You have unfollowed #{@author.name}." }
       format.js
     end
   end
@@ -24,7 +24,7 @@ class SubscriptionsController < ApplicationController
     author = Author.find(params[:id])
     current_user.subscribe!(author)
     current_user.delay.fb_subscribe(author_url(author))
-    redirect_to :back, :notice => "You have subscribed to #{author.name}."
+    redirect_to :back, :notice => "You are now following #{author.name}."
   end
 
   def unsubscribe
@@ -41,7 +41,7 @@ class SubscriptionsController < ApplicationController
     #@subscription.position = 1
     @subscription.save
     current_user.star_author_action(@subscription)
-    current_user.delay.fbstar_author(author_url(@subscription.author_id))
+    #current_user.delay.fbstar_author(author_url(@subscription.author_id))
     
     #current_user.delay.fbstar(post_url(@post))
     redirect_to :back, :notice => "You have starred #{@subscription.author.name}."
@@ -51,7 +51,7 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.find(params[:id])
     @subscription.starred=nil
     @subscription.save
-    current_user.delay.fbunstar_author(author_url(@subscription.author_id))
+    #current_user.delay.fbunstar_author(author_url(@subscription.author_id))
     #current_user.delay.fbunstar(post_url(@post))
     redirect_to :back, :notice => "You have unstarred #{@subscription.author.name}."
   end

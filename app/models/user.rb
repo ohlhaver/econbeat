@@ -131,28 +131,28 @@ class User < ActiveRecord::Base
 
   def fb_subscribe(author_url)
     if Rails.env.development?  
-      self.facebook.put_connections("me", "jurnalo_local:subscribe_to", author: author_url)
+      self.facebook.put_connections("me", "og:follows", profile: author_url)
     else
-      self.facebook.put_connections("me", "jurnalo:subscribe", author: author_url)
+      self.facebook.put_connections("me", "og:follows", profile: author_url)
     end
 
   end
 
   def fb_unsubscribe(author_url)
     if Rails.env.development?  
-     a=self.facebook.get_connections("me","jurnalo_local:subscribe_to")
+     a=self.facebook.get_connections("me","og:follows")
     else
-      a=self.facebook.get_connections("me","jurnalo:subscribe")
+      a=self.facebook.get_connections("me","og:follows")
     end
-    s=a.select {|f| f["data"]["author"]["url"] == author_url}
+    s=a.select {|f| f["data"]["profile"]["url"] == author_url}
     self.facebook.delete_object(s.first["id"])
   end
 
   def fbstar_author(author_url)
     if Rails.env.development?  
-      self.facebook.put_connections("me", "jurnalo_local:star", author: author_url)
+      self.facebook.put_connections("me", "jurnalo_local:star", profile: author_url)
     else
-      self.facebook.put_connections("me", "jurnalo:star", author: author_url)
+      self.facebook.put_connections("me", "jurnalo:star", profile: author_url)
     end
   end
 

@@ -36,7 +36,7 @@
 <% if @recommended %>
        <div class="span6">
         <br><br>
-        <b>Subscribers of <%= @author.name %> also subscribe to </b>
+        <b>Followers of <%= @author.name %> also follow </b>
         <br><br>
         
 
@@ -58,7 +58,7 @@
 <% if @subscribed_friends && @subscribed_friends.any? %>
 <div class="span2">
        
-        Subscribed friends 
+        Friends following <%= @author.name %>
 
       
          <ol class="profile_microposts">

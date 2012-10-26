@@ -2,12 +2,12 @@
 <% if params[:controller] == "authors" or params[:controller] == "articles" %>
 
 
-		<%= button_to "subscribe", {:controller => "subscriptions", :action => "subscribe", :id => @author.id}, {:class => "btn btn-small btn-primary" } %>
+		<%= button_to "follow", {:controller => "subscriptions", :action => "subscribe", :id => @author.id}, {:class => "btn btn-small btn-primary" } %>
 
 
 	<%else%>
 
-			<%= button_to "subscribe", {:controller => "subscriptions", :action => "subscribe", :id => @author.id}, {:class => "btn btn-small btn-primary" } %>
+			<%= button_to "follow", {:controller => "subscriptions", :action => "subscribe", :id => @author.id}, {:class => "btn btn-small btn-primary" } %>
 		<%= link_to "view articles", @author %>
 
 	<%end %>

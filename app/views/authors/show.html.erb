@@ -3,10 +3,10 @@
   <%= tag :meta, property: "og:site_name", content: "Jurnalo" %>
 
   <% if Rails.env.development? %> 
-  <%= tag :meta, property: "og:type", content: "jurnalo_local:author" %>
+  <%= tag :meta, property: "og:type", content: "profile" %>
      
     <%else%>
-     <%= tag :meta, property: "og:type", content: "jurnalo:author" %>
+     <%= tag :meta, property: "og:type", content: "profile" %>
     <%end%>
   
   <%= tag :meta, property: "og:title", content: @author.name %>
@@ -75,7 +75,7 @@
 
         <% if @subscribed_friends && @subscribed_friends.any? %>
        
-        Subscribed friends 
+        Friends following <%= @author.name %>
 
       
          <ol class="profile_microposts">
@@ -87,7 +87,7 @@
 
 <% if @recommended.any? %>
       
-        Subscribers of <%= @author.name %> also subscribe to
+        Followers of <%= @author.name %> also follow
 
         
 
