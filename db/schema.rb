@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121021142528) do
+ActiveRecord::Schema.define(:version => 20121027142329) do
 
   create_table "actions", :force => true do |t|
     t.integer  "subject_type"
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20121021142528) do
     t.integer  "source_id"
     t.boolean  "scraper"
     t.boolean  "copy_scraper"
+    t.boolean  "paused"
   end
 
   add_index "feeds", ["next_crawl_at"], :name => "index_feeds_on_next_crawl_at"
@@ -176,6 +177,12 @@ ActiveRecord::Schema.define(:version => 20121021142528) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "article_id"
+  end
+
+  create_table "lists", :force => true do |t|
+    t.text     "top_authors"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "posts", :force => true do |t|
