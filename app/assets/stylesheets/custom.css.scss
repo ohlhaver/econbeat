@@ -102,9 +102,19 @@ p {
 .navbar .nav li {
   margin-top: 8px;
       a {
-    color: #3B5998;
+    color: #333;
     text-decoration: none;
     font-weight: bold;
+
+      @media (max-width: 480px) { 
+        font-size: 13px;
+        
+ 
+}
+@media (min-width: 481px) { 
+
+}
+    
     }
     a:hover {
     color: #3B5998;
