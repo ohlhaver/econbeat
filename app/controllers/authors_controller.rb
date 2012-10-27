@@ -46,11 +46,13 @@ class AuthorsController < ApplicationController
 		@author_hash = @author_hash.sort_by {|author, count| -count}
 		@ranked_authors = @author_hash.to_a
 		@recommended = @ranked_authors.first(50)
-	end
+	
 
 	unless current_user
 
         	flash.now[:notice] = "Start following all your favorite authors. <a href=\"/auth/facebook\">Join now!</a>" 
+    end
+
     end
 
 end
