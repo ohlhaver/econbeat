@@ -74,7 +74,7 @@
     </ol>
     <br>
     <div class ="upper_section">
-      <div class="fb-comments" data-href="<%= request.url%>" data-num-posts="2"></div>
+      <div class="fb-comments" data-href="<%= article_url(@article)%>" data-num-posts="2"></div>
       <% if @actions.any? %>
       <br><br>
         <span class = "user">More posts by <%= link_to (@article.catcher.author.name).html_safe , @article.catcher.author , title: @article.catcher.author.name, "data-content" => "#{popover_link (@article.catcher.author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %></span>
