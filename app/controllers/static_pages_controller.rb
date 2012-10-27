@@ -23,7 +23,7 @@ class StaticPagesController < ApplicationController
       if @starred_actions.empty? && @actions.empty? &&  @user_actions.where(:hidden => nil).empty?
         flash.now[:notice] = "Find authors to follow by using the search box above." 
       elsif @starred_actions.empty? && @actions.empty?
-        flash.now[:notice] = "Follow any of your friends' authors below by selecting the author's name and then clicking 'follow'." unless flash[:notice]
+        flash.now[:notice] = "Follow any of the authors below by selecting the author's name and then clicking 'follow'." unless flash[:notice]
        elsif current_user.starred_subscriptions.empty?
         flash.now[:notice] = "Star your favorite authors by clicking the star buttons next to the headlines." unless flash[:notice]
      #   elsif @utopics.empty?
@@ -31,12 +31,16 @@ class StaticPagesController < ApplicationController
      #   end
       end
          @starred_actions = Kaminari.paginate_array(@starred_actions).page(params[:page]).per(50)
- @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
-@user_actions = Kaminari.paginate_array(@user_actions).page(params[:page]).per(50)
+          @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
+          @user_actions = Kaminari.paginate_array(@user_actions).page(params[:page]).per(50)
+
+          @recommended = current_user.recommended
+          @popular = current_user.popular if @recommended.empty?
 
     end
  
   end
+
 
   def fb_new
     redirect_to root_url

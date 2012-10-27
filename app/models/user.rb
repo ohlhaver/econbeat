@@ -347,6 +347,30 @@ class User < ActiveRecord::Base
     a.comment_on_action(comment)
   end
 
+  def recommended
+
+      @friends = self.followed_users
+
+      @all_authors =[]
+
+      @friends.each do |u|
+        @all_authors += u.authors
+      end
+
+    @all_authors -= self.authors if self.authors 
+    @ranked_authors = @all_authors.sort! { |a,b| b.users.count <=> a.users.count }.first(25)
+
+  end
+
+  def popular
+
+
+    @all_authors = Author.all
+    @all_authors -= self.authors if self.authors 
+    @ranked_authors = @all_authors.sort! { |a,b| b.users.count <=> a.users.count }.first(25)
+
+  end
+
 
 
   private

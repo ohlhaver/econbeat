@@ -17,13 +17,30 @@
 	</div>
 	  
 	<% end %>
+
+	<% if @recommended.any? %>
+
+	<div id = "latest_posts">
+		Authors most followed by your friends:<br><br>
+	  <ol class="microposts">
+	<%= render @recommended %>
+	</ol>
+	</div>
+	  
+	<% else %>
+
+		<div id = "latest_posts">
+		Authors most followed by other users:<br><br>
+	  <ol class="microposts">
+	<%= render @popular %>
+	</ol>
+	</div>
+	<%end%>
 </div>
 
-<% if @actions.any? || @starred_actions.any?  %>
+
 <div class = "span3">
-<%else%>
-<div class = "span5">
-<%end%>
+
 		<% if @user_actions.any? %>
 	<div id = "latest_posts">
 		<div class ="visible-phone"><br>Friends' actions<br></div>

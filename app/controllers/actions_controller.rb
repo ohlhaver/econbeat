@@ -15,6 +15,11 @@ class ActionsController < ApplicationController
 	  	  @actions = Action.search params[:q], :with => {:action_type => [7,1]}, :match_mode => :any, :order => :created_at,
 	  :sort_mode => :desc
 	  @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
+
+	  unless current_user
+
+        	flash.now[:notice] = "Start following all your favorite authors. <a href=\"/auth/facebook\">Join now!</a>" 
+    	end
 	end
 
 	def destroy
