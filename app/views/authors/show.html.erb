@@ -1,15 +1,9 @@
 <% content_for :head do %>
   <%= tag :meta, property: "fb:app_id", content: ENV['FACEBOOK_APP_ID'] %>
   <%= tag :meta, property: "og:site_name", content: "Jurnalo" %>
-
-  <% if Rails.env.development? %> 
   <%= tag :meta, property: "og:type", content: "profile" %>
-     
-    <%else%>
-     <%= tag :meta, property: "og:type", content: "profile" %>
-    <%end%>
-  
   <%= tag :meta, property: "og:title", content: @author.name %>
+  <%= tag :meta, property: "og:description", content: "Follow " + @author.name + " now and always get all of " + @author.name + "'s articles posted anywhere on the web!" %>
   <%= tag :meta, property: "og:url", content: author_url(@author) %>
    <%= tag :meta, property: "og:image", content: request.protocol + request.host + image_path("256n.png") %>
 
