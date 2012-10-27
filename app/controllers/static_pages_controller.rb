@@ -34,8 +34,8 @@ class StaticPagesController < ApplicationController
           @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
           @user_actions = Kaminari.paginate_array(@user_actions).page(params[:page]).per(50)
 
-          @recommended = current_user.recommended
-          @popular = current_user.popular if @recommended.empty?
+         # @recommended = current_user.recommended
+         # @popular = current_user.popular if @recommended.empty?
 
     end
  

@@ -18,7 +18,7 @@
 	  
 	<% end %>
 
-	<% if @recommended.any? %>
+	<% if @recommended && @recommended.any? %>
 
 	<div id = "latest_posts">
 		Authors most followed by your friends:<br><br>
@@ -28,13 +28,14 @@
 	</div>
 	  
 	<% else %>
-
+		<% if @popular && @popular.any? %>
 		<div id = "latest_posts">
 		Authors most followed by other users:<br><br>
 	  <ol class="microposts">
 	<%= render @popular %>
 	</ol>
 	</div>
+	<%end%>
 	<%end%>
 </div>
 
