@@ -10,7 +10,7 @@
   <%= tag :meta, property: "og:image", content: request.protocol + request.host + image_path("newspaper_article.jpeg") %>
   
 <% end %>
-
+<% content_for :title, @article.title + " - " %>
 <div class="row">
   <div class = "span6">
     <br>
