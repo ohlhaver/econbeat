@@ -358,17 +358,20 @@ class User < ActiveRecord::Base
       end
 
     @all_authors -= self.authors if self.authors 
-    @ranked_authors = @all_authors.sort! { |a,b| b.users.count <=> a.users.count }.first(25)
+    @friends_authors = @all_authors.sort! { |a,b| b.users.count <=> a.users.count }.first(25)
 
-  end
+    if @friends_authors.empty?
 
-  def popular
+      list_of_ids = List.last.top_authors.split(",").first(25)
 
+      @authors = []
+      list_of_ids.each do |i|
+        @authors += Array.wrap(Author.find(i))
+      end
+      @authors -= self.authors if self.authors 
+    end
 
-    @all_authors = Author.all
-    @all_authors -= self.authors if self.authors 
-    @ranked_authors = @all_authors.sort! { |a,b| b.users.count <=> a.users.count }.first(25)
-
+    return @friends_authors, @authors
   end
 
 
