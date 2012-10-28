@@ -13,10 +13,10 @@ class StaticPagesController < ApplicationController
 
       # @actions = (@unique_user_actions + current_user.author_action_feed - @starred_actions).sort_by{|e| -e[:id]}
    
-      @actions =  (current_user.author_action_feed - @starred_actions).sort_by{|e| -e[:id]}
+      @actions =  (current_user.user_action_feed + current_user.author_action_feed - @starred_actions).sort_by{|e| -e[:id]}
      
 
-      @user_actions=current_user.user_action_feed
+      #@user_actions=current_user.user_action_feed
       
 
 
@@ -30,7 +30,7 @@ class StaticPagesController < ApplicationController
       end
          @starred_actions = Kaminari.paginate_array(@starred_actions).page(params[:page]).per(50)
           @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
-          @user_actions = Kaminari.paginate_array(@user_actions).page(params[:page]).per(50)
+        #  @user_actions = Kaminari.paginate_array(@user_actions).page(params[:page]).per(50)
 
           @recommended, @popular = current_user.recommended
           
