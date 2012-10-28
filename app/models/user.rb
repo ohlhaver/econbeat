@@ -138,6 +138,14 @@ class User < ActiveRecord::Base
 
   end
 
+  def fb_subscribe_raw(author, author_url)
+    self.facebook.put_wall_post("follows " + author.name + " via Jurnalo", :link => author_url)
+  end
+
+  def fb_star_raw(author, author_url)
+    self.facebook.put_wall_post("starred " + author.name + " on Jurnalo", :link => author_url)
+  end
+
   def fb_unsubscribe(author_url)
     if Rails.env.development?  
      a=self.facebook.get_connections("me","og:follows")
