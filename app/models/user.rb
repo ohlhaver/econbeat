@@ -356,6 +356,7 @@ class User < ActiveRecord::Base
       @friends.each do |u|
         @all_authors += u.authors
       end
+      @all_authors = @all_authors.uniq
 
     @all_authors -= self.authors if self.authors 
     @friends_authors = @all_authors.sort! { |a,b| b.users.count <=> a.users.count }.first(25)
