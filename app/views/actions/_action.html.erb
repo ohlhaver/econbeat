@@ -134,6 +134,13 @@
 				 <% if current_user == action.user %> 
 				  			&nbsp;<%= link_to "x", action, method: :delete,
 				                                     data: { confirm: "You sure?" } %> <%end%> </span>
+				    <% if params[:controller] == "static_pages"%>
+				                                     					<br>
+						<span class="new_articles"> 
+						<% @size = (action.user.actions.where("actions.created_at >= :time", {:time => 1.day.ago})).where(:hidden => nil).size %>
+						<%= link_to raw('<i class="icon-arrow-right"></i> ') + @size.to_s + " actions today", action.user,title: 'all actions by ' + action.user.name, rel: 'tooltip', "data-placement"=>"bottom"  if @size >= 2  %>
+						</span>
+					<%end%>
 	<%end%>
 		</div>
 

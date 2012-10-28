@@ -130,6 +130,17 @@ class Action < ActiveRecord::Base
             user_id: user.id)
   end
 
+  def self.latest_from_users_followed_by(user)
+    actions = []   
+    users = user.followed_users 
+    users.each do |u|
+      actions += Array.wrap(u.actions.first)
+    end
+    actions += Array.wrap(user.actions.first)
+
+  end  
+
+
   def self.latest_from_authors_followed_by(user)
     
 

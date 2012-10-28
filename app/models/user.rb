@@ -253,7 +253,7 @@ class User < ActiveRecord::Base
   end
 
   def user_action_feed
-       a = Action.from_users_followed_by(self)
+       a = Action.latest_from_users_followed_by(self)
     return a
 
   end
