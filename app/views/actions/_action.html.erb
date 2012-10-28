@@ -124,7 +124,7 @@
 					<br>
 					<span class="new_articles"> 
 					<% @size = action.catcher.author.actions.where("actions.created_at >= :time", {:time => 1.day.ago}).size %>
-					<%= link_to raw('<i class="icon-arrow-right"></i> ') + @size.to_s + " posts today", action.catcher.author,title: 'all articles by ' + action.catcher.author.name, rel: 'tooltip', "data-placement"=>"bottom"  if @size >= 2  %>
+					<%= link_to raw('<i class="icon-arrow-right"></i> ') + @size.to_s + " posts today", action.catcher.author, title: @size.to_s + " new posts" , "data-content" => "#{today (action.catcher.author)}", rel: 'popover', "trigger"=>"click", "data-placement"=>"bottom"  if @size >= 2  %>
 					</span>
 				<%end%>
 	<% elsif action.object_type == 3 or action.object_type == 4 %>

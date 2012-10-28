@@ -733,8 +733,25 @@ body {
 
    
 }
+}
 
-
+.todays_actions {
+  font-size: 12px;
+    line-height: 28px;
+  color: $grayLight;
+      a {
+        font-size: 14px;
+    color: #3B5998;
+    text-decoration: none;
+    font-weight: bold;
+    }
+    a:hover {
+      font-size: 14px;
+    color: #3B5998;
+    font-weight: normal;
+    text-decoration: underline;
+    
+    }
 }
 
 
