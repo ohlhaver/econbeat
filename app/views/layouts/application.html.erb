@@ -20,7 +20,7 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
       
-    <%= render 'layouts/header' if current_user || params[:action] == "contact" || params[:action] == "privacy" || params[:action] == "show" || params[:action] == "similar" || params[:controller] == "actions"%>
+    <%= render 'layouts/header' unless current_user==nil && params[:action] == "home" %>
 
     <div class="container">
     <div class="span8 offset2">
@@ -70,7 +70,7 @@
     <% end %>
                   
                
-      (c) Jurnalo · <%= link_to "Jurnalo's Top 250", authors_path %> · <%= link_to "Privacy", privacy_path %>  </footer>
+      (c) Jurnalo · <%= link_to "Privacy", privacy_path %> · <%= link_to "Jurnalo's Top 250", authors_path %>  </footer>
   
   </body>
 </html>
