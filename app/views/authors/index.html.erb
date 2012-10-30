@@ -3,7 +3,8 @@
 <h3>Jurnalo's Top 250 Most Followed Authors</h3><br><br>
 
 <% @authors.each do |a| %>
-	<%= link_to Author.find(a).name, author_path(a) %>,
+	<% a=Author.find(a) %>
+	<%= link_to a.name, author_path(a) %>,
 	<%end%>
 
 </div>
