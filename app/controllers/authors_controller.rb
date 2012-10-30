@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-	#before_filter :authorize, only: [:show]
+	before_filter :authorize, only: [:like]
 	def show
 		@author = Author.find(params[:id])
 		@actions = @author.actions
