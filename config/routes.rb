@@ -55,7 +55,7 @@ end
 
 resources :authors do
     member do
-      get :similar
+      get :similar, :like
     end
 end
 

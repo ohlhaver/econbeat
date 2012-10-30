@@ -66,4 +66,27 @@ class AuthorsController < ApplicationController
 
     end
 
+    def like
+	    
+	    @author = Author.find(params[:id])
+	
+
+	    #a=current_user.facebook.get_connections("me","og.likes")
+	    #s=a.select {|f| f["data"]["object"]["url"] == post_url(@post)}
+	    #unless s.empty?
+	    #  current_user.facebook.delete_object(s.first["id"])
+	    #end
+	    #current_user.facebook.put_connections("me", "og.likes", object: post_url(@post))
+	    
+	    current_user.delay.fb_author_like(author_url(@author), @author)
+	    
+	    #LikeMailer.delay.like_it(@post, current_user)
+	    #current_user.facebook.put_like(@post.fbaction_id)
+	    redirect_to :back, :notice => "Author has been liked."
+	    #redirect_back_or root_url#, :notice => "Article has been liked."
+	end
+
+
+
+
 end

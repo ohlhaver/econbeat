@@ -16,7 +16,7 @@
 
   <div class="row">
 
-         <div class="span6"><div class ="upper_section"><h3><%= @author.name %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
+         <div class="span8"><div class ="upper_section"><h3><%= @author.name %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
 <%= render 'subscribe_form' %></div>&nbsp;&nbsp;&nbsp;<div id = "follow_button"> <% if current_user && current_user.subscribed?(@author)  %> 
   <% if current_user.subscribed?(@author).starred == true%>
        
@@ -27,7 +27,8 @@
           
         <%end%>
       <%end%></div></h3>
-      <div class ="hidden-phone"><span class="timestamp"><%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send'), "sendMessage(); return false;" %>&nbsp;&nbsp;<%= link_to link_to raw('<i class="icon-list-alt"></i> ') + "wikipedia", "http://en.wikipedia.org/wiki/" + @author.name %></span></div>
+      <span class="timestamp"><%= link_to raw('<i class="icon-thumbs-up"></i>'+ ' like'), :controller => "authors", :action => "like", :id => @author.id %>&nbsp;&nbsp;
+      <%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send'), "sendMessage(); return false;" %>&nbsp;&nbsp;<%= link_to link_to raw('<i class="icon-list-alt"></i> ') + "wikipedia", "http://en.wikipedia.org/wiki/" + @author.name %></span>
          <script>
 
 
@@ -47,12 +48,6 @@
 
 </div>
 
-     
-<div class ="span2">
-  <div class="fb-like" data-send="false" data-width="50" data-show-faces="false" data-font="arial" data-layout="button_count" data-href="<%= request.url%>"></div>
-  
-    
-      </div>
 
   <div class="span6">
     <div class ="upper_section">
