@@ -346,6 +346,11 @@ class User < ActiveRecord::Base
       a.like_article(like)
   end
 
+    def like_author_action(author)
+     a=Action.new 
+      a.like_author(author, self)
+  end
+
   def subscribe_action(subscription)
      a=Action.new 
       a.subscribe_author(subscription)

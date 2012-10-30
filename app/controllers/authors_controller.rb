@@ -77,7 +77,7 @@ class AuthorsController < ApplicationController
 	    #  current_user.facebook.delete_object(s.first["id"])
 	    #end
 	    #current_user.facebook.put_connections("me", "og.likes", object: post_url(@post))
-	    
+	    current_user.like_author_action(@author)
 	    current_user.delay.fb_author_like(author_url(@author), @author)
 	    
 	    #LikeMailer.delay.like_it(@post, current_user)

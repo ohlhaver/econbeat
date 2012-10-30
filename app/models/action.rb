@@ -50,6 +50,16 @@ class Action < ActiveRecord::Base
   	self.save
   end
 
+  def like_author(author, user)
+    self.subject_type=1
+    self.user_id=user.id
+    self.action_type=2
+    self.object_type=3
+    self.author_obj_id=author.id
+
+    self.save
+  end
+
   def subscribe_author(subscription)
   	self.subject_type=1
   	self.user_id=subscription.user_id
@@ -134,9 +144,9 @@ class Action < ActiveRecord::Base
     actions = []   
     users = user.followed_users 
     users.each do |u|
-      actions += Array.wrap(u.actions.first)
+      actions += Array.wrap(u.actions.where(:hidden=>nil).first)
     end
-    actions += Array.wrap(user.actions.first)
+    actions += Array.wrap(user.actions.where(:hidden=>nil).first)
 
   end  
 
