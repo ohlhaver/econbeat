@@ -30,7 +30,7 @@ match 'auth/:provider/callback', to: 'sessions#create'
 match 'auth/failure', to: redirect('/')
 match 'signout', to: 'sessions#destroy', as: 'signout'
 
-
+get "/sitemap.:format", to: "authors#sitemap", as: "sitemap"
 
 resources :users do
     member do

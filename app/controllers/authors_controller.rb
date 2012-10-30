@@ -33,6 +33,12 @@ class AuthorsController < ApplicationController
 
 	end
 
+	def sitemap
+		@authors = List.last.top_authors.split(",")
+
+	end
+
+
 	def similar
 		@author = Author.find(params[:id])
 		
