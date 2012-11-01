@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
   def home
     if current_user
       #@starred_actions = current_user.starred_author_action_feed.where("created_at >= :time", {:time => 1.day.ago}).sort_by{|e| -e[:id]}
-      @starred_actions = current_user.starred_author_action_feed.find_all{|i| i.created_at >= 1.day.ago}.sort_by{|e| -e[:id]}
+      @starred_actions = current_user.starred_author_action_feed.find_all{|i| i.created_at >= 12.hours.ago}.sort_by{|e| -e[:id]}
       #@user_actions = current_user.user_action_feed
       #@unique_user_actions =[]
       #@unique_user_actions += Array.wrap(@user_actions.first)
