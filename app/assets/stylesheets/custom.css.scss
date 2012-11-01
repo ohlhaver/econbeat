@@ -513,7 +513,7 @@ aside {
 
 #item_text {
   @media (max-width: 480px) { 
-  margin-left: 5px;
+  margin-left: 0px;
   display: inline-block;
   width: 99%;
   margin-bottom: 0px;
@@ -595,7 +595,16 @@ aside {
 
 #favorite_posts {
 
-  border: 1px solid $grayLighter;
+
+
+
+        @media (max-width: 480px) { 
+
+ 
+}
+@media (min-width: 481px) { 
+
+    border: 1px solid $grayLighter;
  
   margin-top: 0px;
   
@@ -608,8 +617,16 @@ aside {
 -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 
 box-shadow: 0 0px 0px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+         
 
 }
+
+
+
+}
+
+
+
 #starred_authors {
 
   border: 1px solid $grayLighter;
@@ -633,8 +650,17 @@ box-shadow: 0 0px 0px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
 #latest_posts {
+
+        @media (max-width: 480px) { 
+
  
-  padding: 6px 8px 5px;
+}
+@media (min-width: 481px) { 
+         padding: 6px 8px 5px;
+
+}
+ 
+  
 
 
 }
