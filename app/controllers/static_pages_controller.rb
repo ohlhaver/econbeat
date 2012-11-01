@@ -12,16 +12,16 @@ class StaticPagesController < ApplicationController
       #end
 
       # @actions = (@unique_user_actions + current_user.author_action_feed - @starred_actions).sort_by{|e| -e[:id]}
-   
-      @actions =  (current_user.user_action_feed + current_user.author_action_feed - @starred_actions).sort_by{|e| -e[:id]}
+      @author_actions = current_user.author_action_feed
+      @actions =  (current_user.user_action_feed + @author_actions - @starred_actions).sort_by{|e| -e[:id]}
      
 
       #@user_actions=current_user.user_action_feed
       
 
 
-      if @starred_actions.empty? && @actions.empty?
-        flash.now[:notice] = "Follow any of the authors below or find authors by using the search box above." unless flash[:notice]
+      if @author_actions.empty?
+        flash.now[:notice] = "Click on any of the authors below to follow them or find authors by using the search box above." unless flash[:notice]
        elsif current_user.starred_subscriptions.empty?
         flash.now[:notice] = "Star your favorite authors by clicking the star buttons next to the headlines." unless flash[:notice]
      #   elsif @utopics.empty?
