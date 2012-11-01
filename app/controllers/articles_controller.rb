@@ -50,7 +50,7 @@ class ArticlesController < ApplicationController
 		@recommended = @ranked_authors.first(3)
 
 		unless current_user
-        	flash.now[:notice] = "Start following all your favorite authors. <a href=\"/auth/facebook\">Join now!</a>" 
+        	flash.now[:notice] = "Start following all your favorite authors.<br> <a href=\"/auth/facebook\">Login now via Facebook! (It's free.)</a>" 
     	end
 
 	end	
