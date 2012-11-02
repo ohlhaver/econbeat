@@ -25,7 +25,7 @@
               
             </ul>
             <div class="hidden-phone">
-             <ul class="nav pull-right" >
+             <ul class="nav pull-left" >
 
 
             <% if current_user %>
@@ -56,7 +56,9 @@
                             
             <li><%= link_to raw('<i class="icon-home"></i> ')+ "Home", root_path %></li>
             <li><%= link_to (image_tag current_user.picture, :width => "13", :style => "padding-bottom: 5px;") + " " + current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
-            <li> <%= link_to_function raw('<i class="icon-gift"></i> ')+"invite", "sendRequestViaMultiFriendSelector(); return false;" %> </li>
+          </ul>
+            <ul class="nav pull-right" >
+            <li><div class="fb-like" data-href="https://www.facebook.com/jurnalo" data-send="false" data-layout="button_count" data-show-faces="true" data-font="arial"></div></li>
     
 
 
