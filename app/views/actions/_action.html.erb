@@ -88,6 +88,7 @@
 		
 				<span class="content">
 						<%= link_to action.article.title, action.article.url %>
+						<% if action.article.summary %><br><span class="teaser"><%= truncate(action.article.summary, :length => 100, :omission =>"...", :separator => ' ')%></span><%end%>
 						<br><span class="timestamp"><%= action.article.feed.source.name %></span>
 						<span class = "user">
 							<% if action.subject_type == 1 && action.article.catcher %> by <%= link_to action.article.catcher.author.name, action.article.catcher.author, title: action.article.catcher.author.name, "data-content" => "#{popover_link (action.article.catcher.author)}",  rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %><%end%><br>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027142329) do
+ActiveRecord::Schema.define(:version => 20121102092646) do
 
   create_table "actions", :force => true do |t|
     t.integer  "subject_type"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20121027142329) do
     t.datetime "updated_at", :null => false
     t.integer  "catcher_id"
     t.integer  "source_id"
+    t.string   "summary"
   end
 
   add_index "articles", ["title", "catcher_id"], :name => "index_articles_on_title_and_catcher_id", :unique => true
