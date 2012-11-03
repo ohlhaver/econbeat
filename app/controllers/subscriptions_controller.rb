@@ -25,8 +25,8 @@ class SubscriptionsController < ApplicationController
     current_user.subscribe!(author)
     #current_user.facebook.put_wall_post("started following " + author.name + " via Jurnalo", :link => author_url(author))
     
-    current_user.delay.fb_subscribe_raw(author, author_url(author))
-    #current_user.delay.fb_subscribe(author_url(author))
+    #current_user.delay.fb_subscribe_raw(author, author_url(author))
+    current_user.delay.fb_subscribe(author_url(author))
     redirect_to :back, :notice => "You are now following #{author.name}."
   end
 
@@ -44,9 +44,10 @@ class SubscriptionsController < ApplicationController
     #@subscription.position = 1
     @subscription.save
     current_user.star_author_action(@subscription)
-    #current_user.delay.fbstar_author(author_url(@subscription.author_id))
+    
     @author = Author.find(@subscription.author_id)
     current_user.delay.fb_star_raw(@author, author_url(@author))
+    #current_user.delay.fbstar_author(author_url(@author))
     
     #current_user.delay.fbstar(post_url(@post))
     redirect_to :back, :notice => "You have starred #{@subscription.author.name}."
