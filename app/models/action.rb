@@ -150,6 +150,17 @@ class Action < ActiveRecord::Base
 
   end  
 
+  def self.latest_from_other_users_followed_by(user)
+    actions = []   
+    users = user.followed_users 
+    users.each do |u|
+      actions += Array.wrap(u.actions.where(:hidden=>nil).first)
+    end
+    return actions
+  end  
+
+
+
 
   def self.latest_from_authors_followed_by(user)
     

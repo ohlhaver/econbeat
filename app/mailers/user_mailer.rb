@@ -18,11 +18,12 @@ class UserMailer < ActionMailer::Base
 
   end
 
-  def daily_mail(user, actions)
+  def daily_mail(user, actions, user_actions)
     @from         = "\"Jurnalo\" <jurnalo.service@gmail.com>"
     @user = user
     @subject = "Daily Digest"
     @actions = actions
+    @user_actions = user_actions
     mail :to => user.email, :subject => @subject 
 
   end

@@ -277,6 +277,13 @@ class User < ActiveRecord::Base
 
   end
 
+
+  def friends_action_feed
+       a = Action.latest_from_other_users_followed_by(self)
+    return a
+
+  end
+
    def author_action_feed
        a = Action.latest_from_authors_followed_by(self)
     return a

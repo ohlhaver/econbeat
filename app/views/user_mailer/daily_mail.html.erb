@@ -22,11 +22,59 @@ Dear <%= @user.name %>,
 					<b><%= link_to @size.to_s + " more posts by " + action.catcher.author.name, author_url(action.catcher.author) %></b>
 					<%end%>
 <%end%>
+
+<% if @user_actions && @user_actions.any?  %>
+	<br><br><br>
+	<% if @user_actions.size == 1 %>
+		<%= @user_actions.size.to_s + " of your friends has been active on Jurnalo in the last 24 hours:" %>
+	<%else%>
+		<%= @user_actions.size.to_s + " of your friends have been active on Jurnalo in the last 24 hours:" %>
+	<%end%>
+
+	<% @user_actions.each do |action| %>
+		<br><br><br>
+		<b><%= link_to action.user.name, user_url(action.user) %> </b>
+		<% if action.action_type == 1%>
+		 posted <br>
+			<%= link_to action.post.headline, action.post.url %>
+
+
+		<% elsif action.action_type == 2%>
+		liked <% if action.object_type ==1 %>
+				<br><%= link_to action.post.headline, action.post.url %>
+			<% elsif action.object_type ==2 %>
+				<br><%= link_to action.article.title, action.article.url %> <br>
+				by <%= link_to action.article.catcher.author.name, author_url(action.article.catcher.author) %>
+			<% elsif action.object_type ==3 %>
+			<%= link_to Author.find(action.author_obj_id).name, author_url(Author.find(action.author_obj_id)) %>
+			<%end%>
+		<% elsif action.action_type == 3%>
+		followed <%= link_to Author.find(action.author_obj_id).name, author_url(Author.find(action.author_obj_id)) %>
+		<% elsif action.action_type == 4%>
+		starred <%= link_to Author.find(action.author_obj_id).name, author_url(Author.find(action.author_obj_id)) %>
+		<% elsif action.action_type == 5%>
+		commented on <%= link_to action.article.title, action.article.url %> <br>
+				by <%= link_to action.article.catcher.author.name, author_url(action.article.catcher.author) %>
+		<% elsif action.action_type == 6%>
+		joined Jurnalo!
+		<%end%>
+		<% @size = action.user.actions.where("actions.created_at >= :time", {:time => 1.day.ago}).size %>
+		<% if @size >= 2 %>
+		<br><br>
+							<b><%= link_to @size.to_s + " more actions by " + action.user.name, user_url(action.user) %>
+							</b>
+		<%end%>
+	<%end%>
+
+<%end%>
+
+
+
 <br><br><br><br>
-<b><%= link_to "Click here for an up-to-date overview.", root_url %></b>
+<b><%= link_to "Click here for an overview of all your latest articles.", root_url %></b>
 <br><br><br>
-To stop receiving these emails simply unfollow the respective authors:<br>
-Click the author's name above and then click the 'unfollow' button on the author's profile page on Jurnalo.
+To stop receiving these emails simply unfollow the respective authors or users:<br>
+Click the author's or user's name above and then click the 'unfollow' button on the author's or user's profile page on Jurnalo.
 <br><br><br>
 Best regards,<br><br>
 <%= link_to "Jurnalo", root_url %>
