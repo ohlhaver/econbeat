@@ -1,26 +1,27 @@
 Dear <%= @user.name %>,
 <br><br>
-
-<% if @actions.size == 1 %>
-	<%= @actions.size.to_s + " of your followed authors has published articles in the last 24 hours:" %>
-<%else%>
-	<%= @actions.size.to_s + " of your followed authors have published articles in the last 24 hours:" %>
-<%end%>
-
-
-
-<% @actions.each do |action| %>
-<br><br><br>
-<b><%= link_to action.catcher.author.name, author_url(action.catcher.author) %>:</b>
-<br>
-<%= link_to action.article.title, action.article.url %>
+<% if @actions && @actions.any?  %>
+	<% if @actions.size == 1 %>
+		<%= @actions.size.to_s + " of your followed authors has published articles in the last 24 hours:" %>
+	<%else%>
+		<%= @actions.size.to_s + " of your followed authors have published articles in the last 24 hours:" %>
+	<%end%>
 
 
-<% @size = action.catcher.author.actions.where("actions.created_at >= :time", {:time => 1.day.ago}).size %>
-<% if @size >= 2 %>
-<br>
-					<b><%= link_to @size.to_s + " more posts by " + action.catcher.author.name, author_url(action.catcher.author) %></b>
-					<%end%>
+
+	<% @actions.each do |action| %>
+	<br><br><br>
+	<b><%= link_to action.catcher.author.name, author_url(action.catcher.author) %>:</b>
+	<br>
+	<%= link_to action.article.title, action.article.url %>
+
+
+	<% @size = action.catcher.author.actions.where("actions.created_at >= :time", {:time => 1.day.ago}).size %>
+	<% if @size >= 2 %>
+	<br>
+						<b><%= link_to @size.to_s + " more posts by " + action.catcher.author.name, author_url(action.catcher.author) %></b>
+						<%end%>
+	<%end%>
 <%end%>
 
 <% if @user_actions && @user_actions.any?  %>
@@ -71,7 +72,7 @@ Dear <%= @user.name %>,
 
 
 <br><br><br><br>
-<b><%= link_to "Click here for an overview of all your latest articles.", root_url %></b>
+<b><%= link_to "Click here for an overview of all your latest articles and actions.", root_url %></b>
 <br><br><br>
 To stop receiving these emails simply unfollow the respective authors or users:<br>
 Click the author's or user's name above and then click the 'unfollow' button on the author's or user's profile page on Jurnalo.
