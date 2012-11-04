@@ -38,7 +38,7 @@
 
 
 <% if @recommended %>
-       <div class="span6">
+       <div class="span5">
         <div class ="upper_section">
         <br><br>
         <b>Followers of <%= @author.name %> also follow </b>
@@ -63,7 +63,7 @@
 <%end%>
 
 <% if @subscribed_friends && @subscribed_friends.any? %>
-<div class="span2">
+<div class="span3">
        
         Friends following <%= Author.find(params[:id]).name %>
 

@@ -1,5 +1,9 @@
 <li><span class = "user">
 <%= link_to raw('<i class="icon-user"></i> ') + author.name, author_path(author), title: author.name, "data-content" => "#{popover_link (author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %></span>
+<% if params[:controller] == "static_pages"%>
+&nbsp;&nbsp;&nbsp;<div id = "follow_button">
+<%= render 'authors/subscribe_form' %></div>&nbsp;&nbsp;&nbsp;<div id = "follow_button"> 
+<%end%>
 <% if @user == current_user %>  
 <% if current_user %>
 <% if current_user.subscriptions.find_by_author_id(author.id).starred == false %>  <span class="handle"> <%end%>
