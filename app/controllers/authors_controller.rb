@@ -29,7 +29,7 @@ class AuthorsController < ApplicationController
 	end
 
 	def index
-		@authors = List.last.top_authors.first(250).split(",")
+		@authors = List.last.top_authors.split(",").first(250)
 
 	end
 
