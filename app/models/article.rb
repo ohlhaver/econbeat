@@ -7,7 +7,7 @@ class Article < ActiveRecord::Base
   has_many :likes
 
   def to_param
-  "#{id}-#{title.downcase.gsub(/[^a-zA-Z0-9]+/, '-').gsub(/-{2,}/, '-').gsub(/^-|-$/, '')}"
+  "#{id}-#{title.downcase.gsub(/[^a-zA-Z0-9]+/, '-').gsub(/-{2,}/, '-').gsub(/^-|-$/, '')}" if title
   end
 
 
