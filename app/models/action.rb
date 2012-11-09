@@ -167,7 +167,7 @@ class Action < ActiveRecord::Base
 
     actions = []                    
     user.authors.each do |a|
-      actions += Array.wrap(a.actions.first)
+      actions += Array.wrap(a.actions.first) if a.actions.first && a.actions.first.created_at >= 2.days.ago
     end
 
     return actions
