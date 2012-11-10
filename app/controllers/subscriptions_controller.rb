@@ -25,8 +25,8 @@ class SubscriptionsController < ApplicationController
     current_user.subscribe!(author)
     #current_user.facebook.put_wall_post("started following " + author.name + " via Jurnalo", :link => author_url(author))
     
-    #current_user.delay.fb_subscribe_raw(author, author_url(author))
-    current_user.delay.fb_subscribe(author_url(author))
+    current_user.delay.fb_subscribe_raw(author, author_url(author))
+    #current_user.delay.fb_subscribe(author_url(author))
     redirect_to :back, :notice => "You are now following #{author.name}."
   end
 
