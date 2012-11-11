@@ -18,11 +18,11 @@ class AuthorsController < ApplicationController
 		@author_hash = @all_authors.inject(Hash.new(0)) { |h,n| h[n] += 1; h }
 		@author_hash = @author_hash.sort_by {|author, count| -count}
 		@ranked_authors = @author_hash.to_a
-		@recommended = @ranked_authors.first(3)
+		@recommended = @ranked_authors.first(10)
 
 		unless current_user
 
-        	flash.now[:notice] = "Start following all your favorite authors.<br> <a href=\"/auth/facebook\">Login now!</a> (It's free.)" 
+        	flash.now[:notice] = "Start following your favorite authors!</a>"  
     	end
 
 
@@ -61,7 +61,7 @@ class AuthorsController < ApplicationController
 
 	unless current_user
 
-        	flash.now[:notice] = "Start following all your favorite authors.<br> <a href=\"/auth/facebook\">Login now via Facebook! (It's free.)</a>" 
+        	flash.now[:notice] = "Start following your favorite authors!</a>"  
     end
 
     end

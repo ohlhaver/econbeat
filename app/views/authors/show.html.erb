@@ -3,7 +3,7 @@
   <%= tag :meta, property: "og:site_name", content: "Jurnalo" %>
   <%= tag :meta, property: "og:type", content: "profile" %>
   <%= tag :meta, property: "og:title", content: @author.name %>
-  <%= tag :meta, property: "og:description", content: "Click here to follow all of your favorite columnists, bloggers and journalists!" %>
+  <%= tag :meta, property: "og:description", content: "Read all of " + @author.name + "'s articles and discover related commentators like " + @recommended[0][0].name + ", " + @recommended[1][0].name + " and " +  @recommended[2][0].name + "."  %>
   <%= tag :meta, property: "og:url", content: author_url(@author) %>
    <%= tag :meta, property: "og:image", content: request.protocol + request.host + image_path("256n.png") %>
 
