@@ -112,8 +112,7 @@
           <%else%>
             <%= link_to "comment", action %> · 
             <%end%> 
-						  <%else%>
-						 	 <%= link_to "comment", action.article %> · 
+						  
 						<% end %>
 			   			<%= time_ago_in_words(action.created_at) %> ago 
 			   			<% if current_user == action.user %> 
