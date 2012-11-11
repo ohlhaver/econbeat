@@ -10,23 +10,13 @@
         <nav>
 
           <ul class="nav nav-pills pull-left">
-        <li>
-          <div class="header_search_box">
-              <%= form_tag actions_path, :method => 'get' do %>
-            
-              <%= text_field_tag :q, nil, :placeholder => 'Search authors ...'%>
-              
-          
-          <% end %>
-          </div>
-        </li>
+        
 
 
               
             </ul>
             <div class="hidden-phone">
              <ul class="nav pull-left" >
-
 
             <% if current_user %>
            
@@ -35,42 +25,38 @@
    
     
 
-    <script>
-      FB.init({
-        appId  : ENV['FACEBOOK_APP_ID'],
-        frictionlessRequests: true
-      });
-
-      function sendRequestViaMultiFriendSelector() {
-        FB.ui({method: 'apprequests',
-          message: 'invites you to Jurnalo',
-    new_style_message: true
-        }, requestCallback);
-      }
-      
-      function requestCallback(response) {
-        // Handle callback here
-      }
-    </script>
    
                             
             <li><%= link_to raw('<i class="icon-home"></i> ')+ "Home", root_path %></li>
             <li><%= link_to (image_tag current_user.picture, :width => "13", :style => "padding-bottom: 5px;") + " " + current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
+            <%end%>
           </ul>
-            <ul class="nav pull-right" >
+           </div>
+                   <div class="hidden-phone">
+          <ul class="nav pull-right" >
+
             <li><div class="fb-like" data-href="https://www.facebook.com/jurnalo" data-send="false" data-layout="button_count" data-show-faces="true" data-font="arial"></div></li>
+          </ul>
+          </div>
+            <ul class="nav pull-right" >
+              <li>          
+          <div class="header_search_box">
+              <%= form_tag actions_path, :method => 'get' do %>
+            
+              <%= text_field_tag :q, nil, :placeholder => 'Find authors ...'%>
+              
+          
+          <% end %>
+          </div>
+        </li>
+        </ul>
+
     
 
 
-               
-
-              <%else%>
-              <li><%= link_to "Login now!", "/auth/facebook", id: "sign_in" %></li>
-            <% end %>
-
              
-          </ul>
-        </div>
+          
+       
         </nav>
       </div>
     </div>

@@ -21,7 +21,7 @@ class StaticPagesController < ApplicationController
 
 
       if @author_actions.empty?
-        flash.now[:notice] = "Get started by following any of the authors listed below!" unless flash[:notice]
+        flash.now[:notice] = "Follow your favorite authors!" unless flash[:notice]
        elsif current_user.starred_subscriptions.empty?
         flash.now[:notice] = "Star your favorite authors by clicking the star buttons on the right." unless flash[:notice]
      #   elsif @utopics.empty?

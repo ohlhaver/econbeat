@@ -20,10 +20,7 @@ class AuthorsController < ApplicationController
 		@ranked_authors = @author_hash.to_a
 		@recommended = @ranked_authors.first(10)
 
-		unless current_user
-
-        	flash.now[:notice] = "Start following your favorite authors!</a>"  
-    	end
+		flash.now[:notice] = "Follow your favorite authors!" unless current_user
 
 
 	end

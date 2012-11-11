@@ -566,6 +566,24 @@ aside {
 
 }
 
+#author_text {
+  @media (max-width: 480px) { 
+  margin-left: 0px;
+  display: inline-block;
+  width: 80%;
+  margin-bottom: 0px;
+}
+@media (min-width: 481px) { 
+  margin-left: 5px;
+  display: inline-block;
+  width: 60%;
+  margin-bottom: 0px;
+}
+
+}
+
+
+
 #comment_text {
   margin-left: 5px;
   display: inline-block;
@@ -838,6 +856,7 @@ margin-bottom: 20px
 
 .fb-like {
   margin-top: 9px;
+  padding-left: 15px;
 }
 
 
