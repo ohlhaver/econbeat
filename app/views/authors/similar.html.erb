@@ -2,7 +2,8 @@
 
   <div class="row">
 
-        <div class="span6"><div class ="upper_section"><h3><%= link_to @author.name, @author %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
+        <div class="span6"><div class ="upper_section"><h3><%= link_to (image_tag @author.img_url, :height=> "50"),@author if @author.img_url %>
+          <%= link_to @author.name, @author %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
 <%= render 'subscribe_form' %></div>&nbsp;&nbsp;&nbsp;<div id = "follow_button"> <% if current_user && current_user.subscribed?(@author)  %> 
   <% if current_user.subscribed?(@author).starred == true%>
        

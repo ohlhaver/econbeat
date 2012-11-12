@@ -1,5 +1,16 @@
-<li><span class = "user"><div id = "author_text">
-<%= link_to raw('<i class="icon-user"></i> ') + author.name, author_path(author), title: author.name, "data-content" => "#{popover_link (author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %></span></div>
+<li>
+
+	<span class = "user">
+			
+		<div id = "author_text">
+			<% if author.img_url %>
+		<div id ="author_image">
+			<%= link_to (image_tag author.img_url, :width=> "25"), author  %>
+		</div>  
+		<%= link_to author.name, author_path(author), title: author.name, "data-content" => "#{popover_link (author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %>
+		<%else%>
+		
+<%= link_to raw('<i class="icon-user"></i> ') + author.name, author_path(author), title: author.name, "data-content" => "#{popover_link (author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %><%end%></span></div>
 <% unless current_user && current_user.subscribed?(author) %>
 <div id = "follow_button">
 <%= render 'authors/subscribe_form' %></div><%end%>&nbsp;&nbsp;&nbsp;<div id = "follow_button"> 

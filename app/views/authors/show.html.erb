@@ -8,8 +8,11 @@
    <%= tag :meta, property: "og:description", content: "Read all of " + @author.name + "'s articles."  %>
   <%end%> 
   <%= tag :meta, property: "og:url", content: author_url(@author) %>
-   <%= tag :meta, property: "og:image", content: request.protocol + request.host + image_path("256n.png") %>
-
+  <% if @author.img_url %>
+    <%= tag :meta, property: "og:image", content: @author.img_url %>
+   <%else%>
+    <%= tag :meta, property: "og:image", content: request.protocol + request.host + image_path("256n.png") %>
+   <%end%>
   
 <% end %>
 <% content_for :title, @author.name + " - " %>
@@ -19,7 +22,9 @@
 
   <div class="row">
 
-         <div class="span5"><div class ="upper_section"><h3><%= @author.name %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
+         <div class="span5"><div class ="upper_section"><h3>
+      <%= link_to (image_tag @author.img_url, :height=> "50"), "http://en.wikipedia.org/wiki/" + @author.name if @author.img_url %>
+    <%= @author.name %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
 <%= render 'subscribe_form' %></div>&nbsp;&nbsp;&nbsp;<div id = "follow_button"> <% if current_user && current_user.subscribed?(@author)  %> 
   <% if current_user.subscribed?(@author).starred == true%>
        

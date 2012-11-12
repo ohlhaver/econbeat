@@ -45,11 +45,22 @@
 		</div>
 		<%end%>
 
-		<div id ="item_text">
-			<%  if params[:controller] != "authors" && params[:controller] != "articles" %> 
+		
+			<%  if params[:controller] != "authors" && params[:controller] != "articles" %>
+
+			<% if action.catcher.author.img_url %>
+		<div id ="user_image">
+			<%= link_to (image_tag action.catcher.author.img_url, :width => "25"), action.catcher.author  %> 
+		</div>  
+		<%end%>
+				<div id ="user_item_text">
+			
 			<span class = "user">
 				<%= link_to action.catcher.author.name, action.catcher.author, title: action.catcher.author.name, "data-content" => "#{popover_link (action.catcher.author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"%>
 			</span> 
+			<%else%>
+			<div id ="item_text">
+
 			<%end%>
 
 	<%end%>
