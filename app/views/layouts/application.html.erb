@@ -3,7 +3,7 @@
   <head>
     <title><%=h yield(:title) %><% unless params[:action] == "home"%>  Jurnalo <%end%></title>
     <meta name="description" content="Journalo - Follow your favorite columnists, bloggers and journalists!" />
-    <meta name="keywords" content="Journalo, Jurnalo, columnists, bloggers, journalists, authors" />
+    <meta name="keywords" content="Journalo, Jurnalo, Jounalo, columnists, bloggers, journalists, authors" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
@@ -86,7 +86,7 @@
     <% end %>
                   
                
-      (c) Jurnalo · <%= link_to "Privacy", privacy_path %> · <%= link_to "Jurnalo's Top 250", authors_path %>  </footer>
+      (c) Jurnalo ( aka <i>Journalo</i> or <i>Jounalo</i> ) · <%= link_to "Privacy", privacy_path %> · <%= link_to "Jurnalo's Top 250", authors_path %>  </footer>
   
   </body>
 </html>
