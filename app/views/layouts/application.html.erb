@@ -35,7 +35,7 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
       
-    <%= render 'layouts/header' unless current_user==nil && params[:action] == "home" %>
+    <%= render 'layouts/header' %>
 
     <div class="container">
     <div class="span8 offset2">

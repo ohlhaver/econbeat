@@ -186,6 +186,30 @@ class Action < ActiveRecord::Base
 
   end
 
+  def self.latest_from_top_authors
+    
+
+
+    actions = []  
+    authors = []
+    @authors = List.last.top_authors.split(",").first(100)                  
+    @authors.each do |a|
+      author = Author.find(a)
+      actions += Array.wrap(author.actions.first) if author.actions.first && author.actions.first.created_at >= 1.days.ago
+      authors += Array.wrap(Author.find(a))
+    end
+    actions = actions.first(25)
+    authors = authors.first(25)
+
+
+
+
+    return actions, authors
+
+  end
+
+
+
   def hide
     self.hidden=true
     self.save

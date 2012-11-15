@@ -28,7 +28,7 @@
 			</span>
 			
 	<% elsif action.subject_type == 2 %>
-		<%  if params[:controller] == "static_pages" %>
+		<%  if current_user && params[:controller] == "static_pages" %>
 			 <div id ="star"> <div class="hidden-phone">
     
         <% if current_user.subscriptions.find_by_author_id(action.catcher.author.id).starred == true && action.object_type == 2%>

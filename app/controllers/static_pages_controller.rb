@@ -21,7 +21,7 @@ class StaticPagesController < ApplicationController
 
 
       if @author_actions.empty?
-        flash.now[:notice] = "Follow your favorite authors!" unless flash[:notice]
+        flash.now[:notice] = "Get a daily email with your favorite authors!" unless flash[:notice]
        elsif current_user.starred_subscriptions.empty?
         flash.now[:notice] = "Star your favorite authors by clicking the star buttons on the right." unless flash[:notice]
      #   elsif @utopics.empty?
@@ -35,7 +35,14 @@ class StaticPagesController < ApplicationController
           @recommended, @popular = current_user.recommended
           
 
+    else
+
+      @actions, @popular = Action.latest_from_top_authors
+      @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
+      flash.now[:notice] = "Get a daily email with your favorite authors!" unless flash[:notice]
+      
     end
+
  
   end
 

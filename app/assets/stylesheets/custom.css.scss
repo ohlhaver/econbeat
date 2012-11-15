@@ -44,7 +44,7 @@ textarea {
 }
 
 .center {
-  text-align: center;
+  text-align: left;
   h1 {
     margin-bottom: 10px;
   }
@@ -157,6 +157,11 @@ p {
 .header_search_box {
   margin-top: 6px;
   width: 110px;
+}
+
+.header_button {
+  margin-top: 9px;
+
 }
 
 /* footer */
@@ -845,8 +850,13 @@ margin-bottom: 20px
 }
 
 .center {
-  margin-top: 60px;
+  margin-top: 0px;
+
 }
+
+  .hero-unit {
+    padding: 20px;
+  }
 
 #faqs .handle {
   font-size: 12px;

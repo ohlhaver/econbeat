@@ -9,19 +9,7 @@
 
 <% else %>
 
-  <div class="center hero-unit">
-    <div class ="hidden-phone"><h1>Jurnalo</h1></div>
-    <div class ="visible-phone"><h2>Jurnalo</h2></div>
-
-
-     <h2>
-      Follow your favorite columnists, bloggers and journalists!
-    </h2>
-
-    <%= link_to "Login via Facebook!", "/auth/facebook", id: "sign_in", 
-                                class: "btn btn-large btn-primary" %>
-
-  </div>
+  <%= render 'shared/home_feed' %>
 
 <% end %> 
 

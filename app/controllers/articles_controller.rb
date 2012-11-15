@@ -50,7 +50,7 @@ class ArticlesController < ApplicationController
 		@recommended = @ranked_authors.first(3)
 
 		unless current_user
-        	flash.now[:notice] = "Follow your favorite authors!</a>" 
+        	flash.now[:notice] = "Get a daily email with your favorite authors!</a>" 
     	end
 
 	end	
