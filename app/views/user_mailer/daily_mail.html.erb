@@ -12,15 +12,14 @@ Dear <%= @user.name %>,
 	<% @actions.each do |action| %>
 	<br><br><br>
 	<b><%= link_to action.catcher.author.name, author_url(action.catcher.author) %>:</b>
-	<br>
-	<%= link_to action.article.title, action.article.url %>
+	
 
 
-	<% @size = action.catcher.author.actions.where("actions.created_at >= :time", {:time => 1.day.ago}).size %>
-	<% if @size >= 2 %>
+	<% @author_actions = action.catcher.author.actions.where("actions.created_at >= :time", {:time => 1.day.ago})%>
+	<% @author_actions.each do |a| %>
 	<br>
-						<b><%= link_to @size.to_s + " more posts by " + action.catcher.author.name, author_url(action.catcher.author) %></b>
-						<%end%>
+	<%= link_to a.article.title, a.article.url %>
+	<%end%>
 	<%end%>
 <%end%>
 
