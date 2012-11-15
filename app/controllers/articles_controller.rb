@@ -49,9 +49,6 @@ class ArticlesController < ApplicationController
 		@ranked_authors = @author_hash.to_a
 		@recommended = @ranked_authors.first(3)
 
-		unless current_user
-        	flash.now[:notice] = "Get all your favorite authors' articles in a daily email!</a>" 
-    	end
 
 	end	
 

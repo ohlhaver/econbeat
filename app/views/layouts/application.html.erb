@@ -44,6 +44,18 @@
       <% flash.each do |key, value| %>
             <div class="alert alert-<%= key %>"><b><%= raw value %></b></div>
       <% end %>
+      <% unless current_user %>
+            <div class="center hero-unit">
+
+       <h2>
+        Get a daily email with all new articles by your favorite authors!
+      </h2>
+
+      <%= link_to "Login via Facebook!", "/auth/facebook", id: "sign_in", 
+                                  class: "btn btn-large btn-primary" %>
+
+    </div>
+    <%end%>
       <!--%= render 'shared/post_form' if current_user %-->
       <%= yield %>
     
