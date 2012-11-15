@@ -20,7 +20,7 @@ class AuthorsController < ApplicationController
 		@ranked_authors = @author_hash.to_a
 		@recommended = @ranked_authors.first(25)
 
-		flash.now[:notice] = "Get a daily email with your favorite authors!" unless current_user
+		flash.now[:notice] = "Get all your favorite authors' articles in a daily email!" unless current_user
 
 
 	end
@@ -58,7 +58,7 @@ class AuthorsController < ApplicationController
 
 	unless current_user
 
-        	flash.now[:notice] = "Get a daily email with your favorite authors!</a>"  
+        	flash.now[:notice] = "Get all your favorite authors' articles in a daily email!</a>"  
     end
 
     end

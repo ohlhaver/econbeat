@@ -29,11 +29,7 @@
                             
             <li><%= link_to raw('<i class="icon-home"></i> ')+ "Home", root_path %></li>
             <li><%= link_to (image_tag current_user.picture, :width => "13", :style => "padding-bottom: 5px;") + " " + current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
-            <%else%>
-            <div class = "header_button">
-             <%= link_to "Login via Facebook!", "/auth/facebook", id: "sign_in", 
-                                class: "btn btn-large btn-primary" %>
-                              </div>
+
             <%end%>
           </ul>
            </div>
