@@ -198,8 +198,8 @@ class Action < ActiveRecord::Base
       actions += Array.wrap(author.actions.first) if author.actions.first && author.actions.first.created_at >= 1.days.ago
       authors += Array.wrap(Author.find(a))
     end
-    actions = actions.first(25)
-    authors = authors.first(25)
+    actions = actions.first(50)
+    authors = authors.first(50)
 
 
 
