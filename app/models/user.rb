@@ -139,7 +139,7 @@ class User < ActiveRecord::Base
   end
 
   def fb_subscribe_raw(author, author_url)
-    self.facebook.put_wall_post("follows " + author.name + " on Jurnalo", :link => author_url)
+    self.facebook.put_wall_post("follows all articles by " + author.name + " using Jurnalo", :link => author_url)
   end
 
   def fb_star_raw(author, author_url)
