@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <title><%=h yield(:title) %><% unless params[:action] == "home"%>  Jurnalo <%end%></title>
-    <meta name="description" content="Journalo - Follow your favorite columnists, bloggers and journalists!" />
-    <meta name="keywords" content="Journalo, Jurnalo, Jounalo, columnists, bloggers, journalists, authors" />
+    <meta name="description" content="Journalo - Follow authors you like and get all their articles wherever they are published!" />
+    <meta name="keywords" content="Journalo, Jurnalo, Jounalo, Junalo, columnists, bloggers, journalists, authors" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
@@ -48,7 +48,7 @@
             <div class="center hero-unit">
 
        <h2>
-        Get a daily email with all articles by your favorite authors!
+        Follow authors you like and get all their articles wherever they are published!
       </h2>
 
       <%= link_to "Login via Facebook!", "/auth/facebook", id: "sign_in", 

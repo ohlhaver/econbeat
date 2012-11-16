@@ -4,7 +4,7 @@
   <%= tag :meta, property: "og:type", content: "profile" %>
   <%= tag :meta, property: "og:title", content: @author.name %>
   <% if @recommended.size > 2 &&  %>
-  <%= tag :meta, property: "og:description", content: "Get all of " + @author.name + "'s articles published anywhere in a daily email and discover related authors like " + @recommended[0][0].name + ", " + @recommended[1][0].name + " and " +  @recommended[2][0].name + "."  %> <% else %>
+  <%= tag :meta, property: "og:description", content: "Get all articles by " + @author.name + " wherever they are published or follow related authors like " + @recommended[0][0].name + ", " + @recommended[1][0].name + " and " +  @recommended[2][0].name + "."  %> <% else %>
    <%= tag :meta, property: "og:description", content: "Read all of " + @author.name + "'s articles."  %>
   <%end%> 
   <%= tag :meta, property: "og:url", content: author_url(@author) %>
