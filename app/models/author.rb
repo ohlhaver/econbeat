@@ -1,5 +1,5 @@
 class Author < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :name, :economist, :hidden, :img_url
   has_many :catchers
   has_many :articles, through: :catchers
   has_many :subscriptions
