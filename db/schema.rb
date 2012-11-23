@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121102092646) do
+ActiveRecord::Schema.define(:version => 20121119172833) do
 
   create_table "actions", :force => true do |t|
     t.integer  "subject_type"
@@ -85,6 +85,8 @@ ActiveRecord::Schema.define(:version => 20121102092646) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.boolean  "hidden"
+    t.string   "img_url"
+    t.boolean  "economist"
   end
 
   add_index "authors", ["name"], :name => "index_authors_on_name", :unique => true

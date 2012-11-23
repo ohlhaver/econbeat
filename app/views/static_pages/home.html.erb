@@ -1,5 +1,5 @@
 
-<% content_for :title, "Jurnalo - Follow your favorite authors!" %>
+<% content_for :title, "Jurnalo - Discover and follow your favorite economists!" %>
 <% if current_user %>
       
       <%= render 'shared/feed' %>
@@ -9,9 +9,19 @@
 
 <% else %>
 
+<div class="center hero-unit">
+    <div class ="hidden-phone"><h1>Jurnalo</h1></div>
+    <div class ="visible-phone"><h2>Jurnalo</h2></div>
 
 
-  <%= render 'shared/home_feed' %>
+     <h2>
+      Discover and follow your favorite economists!
+    </h2>
+
+    <%= link_to "Login via Facebook!", "/auth/facebook", id: "sign_in", 
+                                class: "btn btn-large btn-primary" %>
+
+  </div>
 
 <% end %> 
 
