@@ -385,7 +385,7 @@ class User < ActiveRecord::Base
       @all_authors =[]
 
       @friends.each do |u|
-        @all_authors += u.authors
+        @all_authors += u.authors.where(:economist => true)
       end
       @all_authors = @all_authors.uniq
 
