@@ -29,7 +29,12 @@
                             
             <li><%= link_to raw('<i class="icon-home"></i> ')+ "Home", root_path %></li>
             <% if current_user %>
-            <li><%= link_to (image_tag current_user.picture, :width => "13", :style => "padding-bottom: 5px;") + " " + current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
+              <% if current_user.picture %>
+                <li><%= link_to (image_tag current_user.picture, :width => "13", :style => "padding-bottom: 5px;") + " " + current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
+                <%else%>
+                 <li><%= link_to current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
+
+                <%end%>
 
             <%end%>
           </ul>

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :password, :name, :password_confirmation, :invitation_token
-  #has_secure_password
+  has_secure_password
   has_many :posts, :dependent => :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -26,18 +26,18 @@ class User < ActiveRecord::Base
   after_create :join_action
   
 
-  #validates :name, presence: true, length: { maximum: 50 },
-  #                  uniqueness: { case_sensitive: false }
-  #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  #validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
-  #                  uniqueness: { case_sensitive: false }
-  #validates :password, length: { minimum: 6 }
-  #validates :password_confirmation, presence: true
+  validates :name, presence: true, length: { maximum: 50 }
+  #                   uniqueness: { case_sensitive: false }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
+  validates :password, length: { minimum: 4 }
+  validates :password_confirmation, presence: true
 
   #validates_presence_of :invitation_id, :message => 'is required'
   #validates_uniqueness_of :invitation_id
 
-  #before_save { |user| user.email = email.downcase }
+  before_save { |user| user.email = email.downcase }
   #before_save { |user| user.name = name.downcase }
 
 
@@ -55,6 +55,9 @@ class User < ActiveRecord::Base
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.picture = user.facebook.get_picture("me")
+      user.password_digest = "1234"
+      user.password = "1234"
+      user.password_confirmation = "1234"
       user.save!
     end
   end
@@ -423,12 +426,14 @@ class User < ActiveRecord::Base
     end
 
     def follow_fb_friends_action
-      @friends = self.facebook.get_connections("me", "friends")
-      @friends.each do |friend|
-        jurnalo_user = User.find_by_uid(friend["id"])
-        if jurnalo_user
-          self.follow!(jurnalo_user)
-          follow_back(jurnalo_user)
+      if self.oauth_token
+        @friends = self.facebook.get_connections("me", "friends") 
+        @friends.each do |friend|
+          jurnalo_user = User.find_by_uid(friend["id"])
+          if jurnalo_user
+            self.follow!(jurnalo_user)
+            follow_back(jurnalo_user)
+          end
         end
       end
     end

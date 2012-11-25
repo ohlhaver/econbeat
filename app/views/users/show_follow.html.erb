@@ -6,8 +6,8 @@
       <div class="span3">
         <div class ="upper_section">
 
-            <h4>
-         <%= link_to (image_tag @user.picture, :width => "50"), @user %>&nbsp; <%= link_to @user.name, @user %> </h4>
+            <h4><% if @user.picture  %>  
+         <%= link_to (image_tag @user.picture, :width => "50"), @user %>&nbsp; <%end%> <%= link_to @user.name, @user %> </h4>
          
 
 

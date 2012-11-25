@@ -1,5 +1,14 @@
 <% @user ||= current_user %>
 <div class="stats">
+<% if @user == current_user %>
+   <a href="<%= edit_user_path(current_user) %>">
+    <strong id="authors" class="stat">
+     
+    </strong>
+    <br> settings
+  </a>
+<%end%>
+
   <a href="<%= authors_user_path(@user) %>">
     <strong id="authors" class="stat">
       <%= @user.authors.count %>

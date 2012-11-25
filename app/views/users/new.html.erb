@@ -1,28 +1,32 @@
+<div class="row">
+  <div class="span8">
+    
 <h1>Sign Up</h1>
 
-<div class="row">
+
 
 
 <%= form_for @user do |f| %>
   <%= f.hidden_field :invitation_token %>
    <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
-  </div>
+  </div><br>
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email %>
     <%= f.text_field :email %>
-  </div>
+  </div><br>
   <div class="field">
-    <%= f.label :password %><br />
+    <%= f.label :password %>
     <%= f.password_field :password %>
-  </div>
+  </div><br>
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
-  </div>
+  </div><br>
   <div class="actions"><%= f.submit "Sign Up", class: "btn btn-large btn-primary" %></div>
 <% end %>
 
+</div>
 </div>

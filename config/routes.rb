@@ -26,7 +26,7 @@ get 'edit', to: 'users#edit', as: 'edit'
 match '/signup(/:invitation_token)' => 'users#new', as: 'signup'
 #match '/signup' => 'users#new', as: 'signup'
 
-match 'auth/:provider/callback', to: 'sessions#create'
+match 'auth/:provider/callback', to: 'sessions#fb_create'
 match 'auth/failure', to: redirect('/')
 match 'signout', to: 'sessions#destroy', as: 'signout'
 

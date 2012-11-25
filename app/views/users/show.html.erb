@@ -7,8 +7,9 @@
       <div class="span3">
         <div class ="upper_section">
         
-        <h4>      
-         <%= image_tag @user.picture, :width => "50" %>&nbsp; <%= @user.name %>
+        <h4>  
+        <% if @user.picture  %>  
+         <%= image_tag @user.picture, :width => "50"  %>&nbsp; <%end%> <%= @user.name %>
        </h4>
         
         </div> 

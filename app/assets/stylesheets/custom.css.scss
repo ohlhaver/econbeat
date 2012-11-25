@@ -351,6 +351,9 @@ textarea, .uneditable-input {
   @extend .error;
  }
 
+.field {
+  width: 98%
+}
  /* users index */
 
 .users {
