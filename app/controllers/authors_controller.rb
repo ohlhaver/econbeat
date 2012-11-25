@@ -12,7 +12,7 @@ class AuthorsController < ApplicationController
 		@all_authors =[]
 		@size = @author.users.size
 		@author.users.each do |u|
-			@all_authors += (u.authors.where(:economist => true) - Array.wrap(@author))
+			@all_authors += (u.authors - Array.wrap(@author))
 		end
 
 		@author_hash = @all_authors.inject(Hash.new(0)) { |h,n| h[n] += 1; h }
