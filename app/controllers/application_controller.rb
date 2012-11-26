@@ -1,18 +1,21 @@
 class ApplicationController < ActionController::Base
-  before_filter :detect_facebook_post!
+  
   protect_from_forgery
 
   
 
 private
 
+	def detect_facebook_post!
+	    if request.host == "apps.facebook.com"
+	      redirect_to "/auth/facebook" 
+	    end
+	    flash.now[:notice] = request.host
 
-  def detect_facebook_post!
-    if request.env['facebook.params']
-      redirect_to "/auth/facebook" 
-    end
-    true
-  end
+	    true
+
+	end
+
 
 	def current_user
 	  @current_user ||= User.find(session[:user_id]) if session[:user_id]
