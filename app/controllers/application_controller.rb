@@ -1,20 +1,10 @@
 class ApplicationController < ActionController::Base
-  
   protect_from_forgery
-
   
 
 private
 
-	def detect_facebook_post!
-	    if request.host == "apps.facebook.com"
-	      redirect_to "/auth/facebook" 
-	    end
-	    flash.now[:notice] = request.host
 
-	    true
-
-	end
 
 
 	def current_user
