@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  before_filter :authorize, only: [:fb_new, :add_message, :home]
+  before_filter :authorize, only: [:fb_new, :add_message]
   def home
     if current_user
       #@starred_actions = current_user.starred_author_action_feed.where("created_at >= :time", {:time => 1.day.ago}).sort_by{|e| -e[:id]}
