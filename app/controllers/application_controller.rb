@@ -1,11 +1,17 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :detect_facebook_post!
   
 
 private
 
 
-
+  def detect_facebook_post!
+    if request.env['facebook.params']
+      redirect_to "/auth/facebook" 
+    end
+    true
+  end
 
 	def current_user
 	  @current_user ||= User.find(session[:user_id]) if session[:user_id]
