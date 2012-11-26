@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
   before_filter :detect_facebook_post!
+  protect_from_forgery
+
   
 
 private
