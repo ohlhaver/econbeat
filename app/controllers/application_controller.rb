@@ -17,6 +17,12 @@ private
 	#  @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
 	#end
 	#helper_method :current_user
+	def check_for_canvas
+		if params[:r] == "facebook"
+			redirect_to "/auth/facebook"
+		end
+
+	end
 
 	def authorize
 		if current_user.nil?	
