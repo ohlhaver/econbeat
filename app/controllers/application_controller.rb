@@ -19,7 +19,7 @@ private
 	#helper_method :current_user
 	def check_for_canvas
 		if params[:r] == "facebook"
-			redirect_to "/auth/facebook"
+			authorize
 		end
 
 	end
