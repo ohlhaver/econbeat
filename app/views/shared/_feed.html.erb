@@ -1,62 +1,32 @@
 <div class = "row">
 
-<% if @author_actions.count < 5 %>
-<div class = "span4">
-	<%else%>
+
 
 <div class = "span8">
-	<%end%>
-	<% if @starred_actions.any? %>
+
+	<% if @starred_section_actions.any? %>
 	<div id = "favorite_posts">
 	        
 	   Starred
 	  <ol class="microposts">
-	<%= render @starred_actions %>
+	<%= render @starred_section_actions %>
 	</ol>
 	</div>
 	<br>
 	<%end%>
-	<% if @actions.any? %>
+	<% if @popular_actions.any? %>
 	<div id = "latest_posts">
-		Your newsfeed
+		Popular economists
 	  <ol class="microposts">
-	<%= render @actions %>
+	<%= render @popular_actions %>
 	</ol>
 	</div>
 	 <br> 
 	<% end %>
 	<br>
-	  <%= paginate @actions %>
+	  <%= paginate @popular_actions %>
 
 </div>
 
-<% if @author_actions.count < 5 %>
-<div class = "span4">
-	<%else%>
 
-<div class = "span8">
-
-	<%end%>
-
-	<% if @recommended && @recommended.any? %>
-
-	<div id = "latest_posts">
-		Other columnists most followed by your friends<br><br>
-	  <ol class="microposts">
-	<%= render @recommended %>
-	</ol>
-	</div>
-	  
-	<% else %>
-		<% if @popular && @popular.any? %>
-		<div id = "latest_posts">
-		columnists most followed by other users<br><br>
-	  <ol class="microposts">
-	<%= render @popular %>
-	</ol>
-	</div>
-	<%end%>
-	<%end%>
-
-	</div>
 </div>

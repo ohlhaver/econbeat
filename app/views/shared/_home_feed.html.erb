@@ -1,11 +1,11 @@
 <div class = "row">
 
 
-<div class = "span5">
+<div class = "span8">
 
 	<% if @actions.any? %>
 	<div id = "latest_posts">
-		Today's recommended articles
+		Latest
 	  <ol class="microposts">
 	<%= render @actions %>
 	</ol>
@@ -18,20 +18,4 @@
 </div>
 
 
-<div class = "span3">
-
-
-
-
-		<% if @popular && @popular.any? %>
-		<div id = "latest_posts">
-		Most followed authors<br><br>
-	  <ol class="microposts">
-	<%= render @popular %>
-	</ol>
-	</div>
-	<%end%>
-
-
-	</div>
 </div>

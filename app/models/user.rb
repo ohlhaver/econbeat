@@ -146,7 +146,7 @@ class User < ActiveRecord::Base
   end
 
   def fb_star_raw(author, author_url)
-    self.facebook.put_wall_post("starred " + author.name + " on Jurnalo", :link => author_url)
+    self.facebook.put_wall_post("starred the economist " + author.name + " on EconBeat.com", :link => author_url)
   end
 
   def fb_unsubscribe(author_url)
@@ -331,14 +331,19 @@ class User < ActiveRecord::Base
   end
 
   def subscribe!(author)
-    subscription = subscriptions.create!(author_id: author.id)
-    subscribe_action(subscription) if subscription.save
+    if subscribed?(author)
+      subscription = subscriptions.find_by_author_id(author.id)
+    else
+      subscription = subscriptions.create!(author_id: author.id)
+    end
+    #subscribe_action(subscription) if subscription.save
+    return subscription
   end
 
   def unsubscribe!(author)
     subscriptions.find_by_author_id(author.id).destroy
-    a=Action.find_by_user_id_and_author_obj_id(self, author.id)
-    a.hide
+    #a=Action.find_by_user_id_and_author_obj_id(self, author.id)
+    #a.hide
   end
 
   def post_action(post)
@@ -388,7 +393,7 @@ class User < ActiveRecord::Base
       @all_authors =[]
 
       @friends.each do |u|
-        @all_authors += u.authors
+        @all_authors += u.authors.where(:economist => true)
       end
       @all_authors = @all_authors.uniq
 

@@ -21,7 +21,7 @@ config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {
   address: "smtp.gmail.com",
   port: 587,
-  domain: "@jurnalo.com",
+  domain: "@econbeat.com",
   authentication: "plain",
   enable_starttls_auto: true,
   user_name: "jurnalo.service@gmail.com",
@@ -50,8 +50,8 @@ config.action_mailer.smtp_settings = {
 
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
 
-  ENV['FACEBOOK_APP_ID'] = '266726516779542'
-  ENV['FACEBOOK_SECRET'] = '8400807f19e2ca49f4dea8f47751c3d2'
+  ENV['FACEBOOK_APP_ID'] = '470168233034222'
+  ENV['FACEBOOK_SECRET'] = 'd459c8b9544e27be1cb926798995f815'
 
 
 

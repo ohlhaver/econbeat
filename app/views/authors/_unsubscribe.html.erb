@@ -1,25 +1,14 @@
-<% if params[:controller] == "authors" or params[:controller] == "articles"%>
 
-<%= form_for(current_user.subscriptions.find_by_author_id(@author),
-             html: { method: :delete },
-             remote: true) do |f| %>
-  <%= f.submit "unfollow", class: "btn btn-small" %>
-<% end %>
-
-<%else%>
-<%= form_for(current_user.subscriptions.find_by_author_id(@author),
-             html: { method: :delete }) do |f| %>
-  <%= f.submit "unfollow", class: "btn btn-small" %>
-<% end %>
- <% if current_user.subscriptions.find_by_author_id(@author.id).starred == true%>
        
-          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/unstar", :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
+         <% if current_user && current_user.subscribed?(@author) && current_user.subscribed?(@author).starred == true%>
+       
+          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), {:controller => "subscriptions", :action => "unsubscribe", :id => @author.id}, :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
         <%else%>
 
-          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/star", :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
+          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), {:controller => "subscriptions", :action => "subscribe", :id => @author.id}, :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
           
-        <%end%>
+       
+      <%end%>
         <br><br>
       <%= link_to "view articles", @author %>
 
-<%end%>

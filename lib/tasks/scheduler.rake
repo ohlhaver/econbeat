@@ -15,7 +15,7 @@ end
 task :top_authors => :environment do
   puts "start generating..."
   	array=[]
-    all_authors = Author.all
+    all_authors = Author.where(:economist => true)
     ranked_authors = all_authors.sort! { |a,b| b.users.count <=> a.users.count }.first(2500)
     ranked_authors.each do |a|
     	array += Array.wrap(a.id)

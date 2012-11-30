@@ -89,6 +89,16 @@ p {
   background-repeat: no-repeat;
   filter: none;
 
+  #logo {
+
+  
+    color: $black;
+    }
+     #logo:hover {
+      color: $black;
+    
+  }
+
 
 }
 
@@ -143,9 +153,8 @@ p {
   margin-right: 10px;
   font-size: 1.7em;
   color: white;
-  text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 11px;
+  margin-top: 12px;
   font-weight: bold;
   line-height: 1;
   &:hover {
@@ -156,11 +165,12 @@ p {
 
 .header_search_box {
   margin-top: 6px;
+  margin-left: 20px;
   width: 110px;
 }
 
 .header_button {
-  margin-top: 9px;
+  margin-top: 14px;
 
 }
 

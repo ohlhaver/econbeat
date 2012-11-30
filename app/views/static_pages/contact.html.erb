@@ -10,11 +10,11 @@
 
 
   	<h3>
-Contact Jurnalo</h3>
+Contact EconBeat</h3>
 <br><br>
 <%= form_tag(:controller => "static_pages", :action => 'add_message', :id => 1) do %>
                         <div id ="comment_image"> <%= link_to (image_tag current_user.picture, :width => "26"), current_user  %></div>
-                        <div id ="comment_field"><%= text_field_tag :message, nil, :placeholder => 'Write a message to Jurnalo...'%> </div>
+                        <div id ="comment_field"><%= text_field_tag :message, nil, :placeholder => 'Write a message to EconBeat...'%> </div>
                         <div class="actions"><%= submit_tag "Send", class: "btn btn-primary" %></div>
                   <% end %>
             

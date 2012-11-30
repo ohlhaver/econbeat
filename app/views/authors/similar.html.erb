@@ -4,16 +4,15 @@
 
         <div class="span6"><div class ="upper_section"><h3><%= link_to (image_tag @author.img_url, :height=> "50"),@author if @author.img_url %>
           <%= link_to @author.name, @author %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
-<%= render 'subscribe_form' %></div>&nbsp;&nbsp;&nbsp;<div id = "follow_button"> <% if current_user && current_user.subscribed?(@author)  %> 
-  <% if current_user.subscribed?(@author).starred == true%>
+
+  <% if current_user && current_user.subscribed?(@author) && current_user.subscribed?(@author).starred == true%>
        
-          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/unstar", :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
+          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), {:controller => "subscriptions", :action => "unsubscribe", :id => @author.id}, :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
         <%else%>
 
-          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/star", :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
-          
-        <%end%>
-      <%end%></div></h3>
+          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), {:controller => "subscriptions", :action => "subscribe", :id => @author.id}, :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
+
+      <%end%></div></h3><br>
       <div class ="hidden-phone"><span class="timestamp"><%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send'), "sendMessage(); return false;" %>&nbsp;&nbsp;<%= link_to link_to raw('<i class="icon-list-alt"></i> ') + "wikipedia", "http://en.wikipedia.org/wiki/" + @author.name %></span></div>
          <script>
 
@@ -42,7 +41,7 @@
        <div class="span5">
         <div class ="upper_section">
         <br><br>
-        <b>Followers of <%= @author.name %> also follow </b>
+        <b>Users who starred <%= @author.name %> also starred </b>
         <br><br>
 
         
@@ -50,8 +49,9 @@
 
          <ol class="profile_microposts">
             <% @recommended.each do |r| %>
+            <% author = Author.find(r[0]) %>
             <li>
-          <span class = "user"><%= link_to raw('<i class="icon-user"></i> ') + r[0].name, r[0], title: r[0].name, "data-content" => "#{popover_link (r[0])}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right" %> (<%= (r[1]/Float(@size)*100).to_i.to_s + "%" %>)</span></li>
+         <%= render author %></li>
           <%end%>
 
       
@@ -66,7 +66,7 @@
 <% if @subscribed_friends && @subscribed_friends.any? %>
 <div class="span3">
        
-        Friends following <%= Author.find(params[:id]).name %>
+        Friends who starred <%= Author.find(params[:id]).name %>
 
       
          <ol class="profile_microposts">

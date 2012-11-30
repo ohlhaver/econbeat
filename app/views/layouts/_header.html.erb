@@ -4,65 +4,37 @@
   <div class="navbar navbar-static-top">
     <div class="navbar-inner">
       <div class="container">
-        <div class ="jlogo">
-        <%= link_to image_tag( 'logo.gif'), root_path, id: "logo", title: 'home', rel: 'tooltip', "data-placement"=>"bottom" %>
-        </div>
+        
+        <h3><%= link_to "EconBeat", root_path, id: "logo", title: 'home', rel: 'tooltip', "data-placement"=>"bottom" %></h3> 
+        
         <nav>
 
-          <ul class="nav nav-pills pull-left">
-        
+          
+            <ul class="nav pull-right" >      
+                          <% if current_user %>
 
-
+                  <li>
+                    <%= link_to current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %>
+                  </li>
+                
+              <%end%>         
               
-            </ul>
-            <div class="hidden-phone">
-             <ul class="nav pull-left" >
-
-            
            
-
-             
-   
-    
-
-   
-                            
-            <li><%= link_to raw('<i class="icon-home"></i> ')+ "Home", root_path %></li>
-            <% if current_user %>
-              <% if current_user.picture %>
-                <li><%= link_to (image_tag current_user.picture, :width => "13", :style => "padding-bottom: 5px;") + " " + current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
-                <%else%>
-                 <li><%= link_to current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %></li>
-
-                <%end%>
-
-            <%end%>
-          </ul>
-           </div>
-                   <div class="hidden-phone">
-          <ul class="nav pull-right" >
-
-            <li><div class="fb-like" data-href="https://www.facebook.com/jurnalo" data-send="false" data-layout="button_count" data-show-faces="true" data-font="arial"></div></li>
-          </ul>
-          </div>
-            <ul class="nav pull-right" >
-              <li>          
-          <div class="header_search_box">
-              <%= form_tag actions_path, :method => 'get' do %>
-            
-              <%= text_field_tag :q, nil, :placeholder => 'Find authors ...'%>
-              
+            </ul>
           
-          <% end %>
-          </div>
-        </li>
-        </ul>
+          <div class="hidden-phone">
+            <ul class="nav pull-left" >
 
-    
+                <li>          
+                  <div class="header_search_box">
+                    <%= form_tag actions_path, :method => 'get' do %>
+                      <%= text_field_tag :q, nil, :placeholder => 'Search ...'%>
+                    <% end %>
+                  </div>
+                </li>
 
-
-             
-          
+            </ul> 
+          </div>  
        
         </nav>
       </div>

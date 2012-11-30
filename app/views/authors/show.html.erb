@@ -1,6 +1,6 @@
 <% content_for :head do %>
   <%= tag :meta, property: "fb:app_id", content: ENV['FACEBOOK_APP_ID'] %>
-  <%= tag :meta, property: "og:site_name", content: "Jurnalo" %>
+  <%= tag :meta, property: "og:site_name", content: "EconBeat" %>
   <%= tag :meta, property: "og:type", content: "profile" %>
   <%= tag :meta, property: "og:title", content: @author.name %>
   <% if @recommended.size > 2 &&  %>
@@ -25,16 +25,16 @@
          <div class="span5"><div class ="upper_section"><h3>
       <%= link_to (image_tag @author.img_url, :height=> "50"), "http://en.wikipedia.org/wiki/" + @author.name if @author.img_url %>
     <%= @author.name %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
-<%= render 'subscribe_form' %></div>&nbsp;&nbsp;&nbsp;<div id = "follow_button"> <% if current_user && current_user.subscribed?(@author)  %> 
-  <% if current_user.subscribed?(@author).starred == true%>
+
+  <% if current_user && current_user.subscribed?(@author) && current_user.subscribed?(@author).starred == true%>
        
-          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/unstar", :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
+          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), {:controller => "subscriptions", :action => "unsubscribe", :id => @author.id}, :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
         <%else%>
 
-          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(@author.id).id}/star", :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
+          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), {:controller => "subscriptions", :action => "subscribe", :id => @author.id}, :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
           
-        <%end%>
-      <%end%></div></h3>
+       
+      <%end%></div></h3><br>
       <span class="timestamp"><%= link_to raw('<i class="icon-thumbs-up"></i>'+ ' like'), :controller => "authors", :action => "like", :id => @author.id %>&nbsp;&nbsp;
       <%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send'), "sendMessage(); return false;" %>&nbsp;&nbsp;<%= link_to link_to raw('<i class="icon-list-alt"></i> ') + "wikipedia", "http://en.wikipedia.org/wiki/" + @author.name %></span>
          <script>
@@ -75,7 +75,7 @@
 
         <% if @subscribed_friends && @subscribed_friends.any? %>
        
-        Friends following <%= @author.name %>
+        Friends who starred <%= @author.name %>
 
       
          <ol class="profile_microposts">
@@ -87,7 +87,7 @@
 
 <% if @recommended.any? %>
       
-        <%= @author.name %>'s followers also follow<br><br>
+        Users who starred <%= @author.name %> also starred<br><br>
 
         
 
@@ -99,7 +99,7 @@
           </ol>
           <br>
           <span class="timestamp">
-          <%= link_to raw('<i class="icon-plus"></i> ') + "more authors", :action => "similar", :id => params[:id] %>
+          <%= link_to raw('<i class="icon-plus"></i> ') + "more economists", :action => "similar", :id => params[:id] %>
         </span>
           
 

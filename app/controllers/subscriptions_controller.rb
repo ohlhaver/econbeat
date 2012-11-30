@@ -11,23 +11,29 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    @author = Subscription.find(params[:id]).author
+    
+    subscription = Subscription.find(params[:id])
+    @author = subscription.author
     current_user.unsubscribe!(@author)
-    current_user.delay.fb_unsubscribe(author_url(@author))
-    respond_to do |format|
-      format.html { redirect_to :back, :only_path => true, :notice => "You have unfollowed #{@author.name}." }
-      format.js
-    end
+    #current_user.delay.fb_unsubscribe(author_url(@author))
+    #respond_to do |format|
+    #  format.html { redirect_to :back, :only_path => true, :notice => "You have unfollowed #{@author.name}." }
+    #  format.js
+    #end
+    unstar(subscription)
+    redirect_to :back
+
   end
 
   def subscribe
     author = Author.find(params[:id])
-    current_user.subscribe!(author)
+    subscription = current_user.subscribe!(author)
     #current_user.facebook.put_wall_post("started following " + author.name + " via Jurnalo", :link => author_url(author))
     
     #current_user.delay.fb_subscribe_raw(author, author_url(author))
-    current_user.delay.fb_subscribe(author_url(author))
-    redirect_to :back, :notice => "You are now following #{author.name}."
+    #current_user.delay.fb_subscribe(author_url(author))
+    #redirect_to :back, :notice => "You are now following #{author.name}."
+    star(subscription)
   end
 
   def unsubscribe
@@ -37,9 +43,9 @@ class SubscriptionsController < ApplicationController
     redirect_to :back
   end
 
-  def star
+  def star(subscription)
     
-    @subscription = Subscription.find(params[:id])
+    @subscription = subscription
     @subscription.starred=true
     #@subscription.position = 1
     @subscription.save
@@ -53,8 +59,8 @@ class SubscriptionsController < ApplicationController
     redirect_to :back, :notice => "You have starred #{@subscription.author.name}."
   end
 
-  def unstar
-    @subscription = Subscription.find(params[:id])
+  def unstar(subscription)
+    @subscription = subscription
     @subscription.starred=nil
     @subscription.save
     #current_user.delay.fbunstar_author(author_url(@subscription.author_id))

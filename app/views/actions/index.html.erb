@@ -1,7 +1,7 @@
 <% content_for :title, params[:q] + " - " %>
 <div class = "upper_section">
 <% if @authors && @authors.any? %>
-Authors:<br><br>
+Economists:<br><br>
 
 
 <%=link_to @authors.first.name, @authors.first, title: @authors.first.name, "data-content" => "#{popover_link (@authors.first)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"  %><% @authors.drop(1).each do |a| %>, <%= link_to a.name, a, title: a.name, "data-content" => "#{popover_link (a)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"%><% end%>

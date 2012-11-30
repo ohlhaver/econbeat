@@ -28,17 +28,19 @@
 			</span>
 			
 	<% elsif action.subject_type == 2 %>
-		<%  if current_user && params[:controller] == "static_pages" %>
+		<%  if params[:controller] == "static_pages" || params[:controller] == "actions" %>
 			 <div id ="star"> <div class="hidden-phone">
-    
-        <% if current_user.subscriptions.find_by_author_id(action.catcher.author.id).starred == true && action.object_type == 2%>
+
+
+		<% if current_user && current_user.subscribed?(action.catcher.author) && current_user.subscribed?(action.catcher.author).starred == true%>
        
-          <%= link_to raw('<i class="icon-star"></i>'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(action.catcher.author.id).id}/unstar", :class => "btn btn-small", title: 'unstar this author', rel: 'tooltip', "data-placement"=>"bottom" %>
+          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), {:controller => "subscriptions", :action => "unsubscribe", :id => action.catcher.author.id}, :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
         <%else%>
 
-          <%= link_to raw('<i class="icon-star-empty"></i>'), "/subscriptions/#{current_user.subscriptions.find_by_author_id(action.catcher.author.id).id}/star", :class => "btn btn-small", title: 'star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
+          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), {:controller => "subscriptions", :action => "subscribe", :id => action.catcher.author.id}, :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
           
-        <%end%>
+       
+      <%end%>	 	
       
     </div>
 
@@ -56,7 +58,7 @@
 				<div id ="user_item_text">
 			
 			<span class = "user">
-				<%= link_to action.catcher.author.name, action.catcher.author, title: action.catcher.author.name, "data-content" => "#{popover_link (action.catcher.author)}", rel: 'popover', "trigger"=>"hover", "data-placement"=>"right"%>
+				<%= link_to action.catcher.author.name, action.catcher.author,title: 'all articles by ' + action.catcher.author.name, rel: 'tooltip', "data-placement"=>"right"%>
 			</span> 
 			<%else%>
 			<div id ="item_text">
