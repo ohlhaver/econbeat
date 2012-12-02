@@ -43,7 +43,7 @@ class StaticPagesController < ApplicationController
           
 
     else
-      flash.now[:notice] = "Star your favorite economists to always see their posts on top!" unless flash[:notice]
+      #flash.now[:notice] = "Star your favorite economists to always see their posts on top!" unless flash[:notice]
       @actions, @popular = Action.latest_from_top_authors
       @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
       

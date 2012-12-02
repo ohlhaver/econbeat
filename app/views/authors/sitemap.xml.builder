@@ -2,7 +2,7 @@
 xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
 
   xml.url do
-    xml.loc "https://www.jurnalo.com"
+    xml.loc "https://www.EconBloggers.com"
     xml.priority 1.0
   end
 

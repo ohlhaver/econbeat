@@ -15,7 +15,7 @@ class PostMailer < ActionMailer::Base
     #receipients = alerted_users.map{|u| u[:email]}
     receipients = alerted_users.collect(&:email).join(",") 
 
-    mail :to => "followers@jurnalo.com", :bcc => receipients, :subject =>  @subject 
+    mail :to => "followers@EconBloggers.com", :bcc => receipients, :subject =>  @subject 
   end
 
 
@@ -40,6 +40,6 @@ class PostMailer < ActionMailer::Base
     end
     @post = post
     @text = text
-    mail :to => "discussion@jurnalo.com", :bcc => receipients, :subject =>  @subject  
+    mail :to => "discussion@EconBloggers.com", :bcc => receipients, :subject =>  @subject  
   end
 end

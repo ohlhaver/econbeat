@@ -26,9 +26,9 @@ Dear <%= @user.name %>,
 <% if @user_actions && @user_actions.any?  %>
 	<br><br><br>
 	<% if @user_actions.size == 1 %>
-		<%= @user_actions.size.to_s + " of your friends has been active on Jurnalo in the last 24 hours:" %>
+		<%= @user_actions.size.to_s + " of your friends has been active on EconBloggers in the last 24 hours:" %>
 	<%else%>
-		<%= @user_actions.size.to_s + " of your friends have been active on Jurnalo in the last 24 hours:" %>
+		<%= @user_actions.size.to_s + " of your friends have been active on EconBloggers in the last 24 hours:" %>
 	<%end%>
 
 	<% @user_actions.each do |action| %>
@@ -56,7 +56,7 @@ Dear <%= @user.name %>,
 		commented on <%= link_to action.article.title, action.article.url %> <br>
 				by <%= link_to action.article.catcher.author.name, author_url(action.article.catcher.author) %>
 		<% elsif action.action_type == 6%>
-		joined Jurnalo!
+		joined EconBloggers!
 		<%end%>
 		<% @size = action.user.actions.where("actions.created_at >= :time", {:time => 1.day.ago}).size %>
 		<% if @size >= 2 %>
@@ -74,7 +74,7 @@ Dear <%= @user.name %>,
 <b><%= link_to "Click here for an overview of all your latest articles and actions.", root_url %></b>
 <br><br><br>
 To stop receiving these emails simply unfollow the respective authors or users:<br>
-Click the author's or user's name above and then click the 'unfollow' button on the author's or user's profile page on Jurnalo.
+Click the author's or user's name above and then click the 'unfollow' button on the author's or user's profile page on EconBloggers.
 <br><br><br>
 Best regards,<br><br>
-<%= link_to "Jurnalo", root_url %>
+<%= link_to "EconBloggers", root_url %>

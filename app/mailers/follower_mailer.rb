@@ -9,6 +9,6 @@ class FollowerMailer < ActionMailer::Base
   def follower(relationship)
     @follower = relationship.follower
     @followed = relationship.followed
-    mail :to => @followed.email, :subject => "New follower"
+    mail :to => @followed.email, :subject => "New follower on EconBloggers"
   end
 end

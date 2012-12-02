@@ -23,8 +23,8 @@
                 FB.ui({
                     method: 'send',
                     name: '<%= @author.name%>' ,
-                    link: '<%= "www.jurnalo.com" + author_path(@author)%>',
-                    description: 'Subscribe to this author via Jurnalo.'
+                    link: '<%= "www.EconBloggers.com" + author_path(@author)%>',
+                    description: 'Subscribe to this author via EconBloggers.'
                     })}
            </script>
 </div></div>
@@ -50,8 +50,8 @@
          <ol class="profile_microposts">
             <% @recommended.each do |r| %>
             <% author = Author.find(r[0]) %>
-            <li>
-         <%= render author %></li>
+            
+         <%= render author %>
           <%end%>
 
       

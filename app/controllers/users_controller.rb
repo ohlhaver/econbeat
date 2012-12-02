@@ -101,7 +101,7 @@ end
   end
 
   def authors
-    @title = "Economists"
+    @title = "Econ Bloggers"
     @user = User.find(params[:id])
     @friendship = check_friendship(@user)
     @starred_authors = @user.subscriptions.where(:starred =>true).map(&:author)

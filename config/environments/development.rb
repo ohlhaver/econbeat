@@ -1,4 +1,4 @@
-Jurnalo::Application.configure do
+EconBloggers::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -24,7 +24,7 @@ config.action_mailer.smtp_settings = {
   domain: "@EconBloggers.com",
   authentication: "plain",
   enable_starttls_auto: true,
-  user_name: "jurnalo.service@gmail.com",
+  user_name: "econbloggers.service@gmail.com",
   password: "rockybeach"
 }
 

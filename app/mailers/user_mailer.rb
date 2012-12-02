@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "Jurnalo"
+  default from: "EconBloggers"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -19,7 +19,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def daily_mail(user, actions, user_actions)
-    @from         = "\"Jurnalo\" <jurnalo.service@gmail.com>"
+    @from         = "\"EconBloggers\" <econbloggers.service@gmail.com>"
     @user = user
     @subject = "Daily Digest"
     @actions = actions

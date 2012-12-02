@@ -1,6 +1,6 @@
 <% content_for :head do %>
   <%= tag :meta, property: "fb:app_id", content: ENV['FACEBOOK_APP_ID'] %>
-  <%= tag :meta, property: "og:site_name", content: "Jurnalo" %>
+  <%= tag :meta, property: "og:site_name", content: "EconBloggers" %>
   <%= tag :meta, property: "og:type", content: "article" %>
   <%= tag :meta, property: "og:title", content: @post.headline %>
   <%= tag :meta, property: "og:section", content: @post.topic.name if @post.topic %>

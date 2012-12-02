@@ -15,7 +15,7 @@
 			<%= "starred" if @action.action_type == 4 %>
 			<%= "commented on" if @action.action_type == 5 %>
 			<% if @action.action_type == 6 %>
-			<%= "joined Jurnalo" %> <br><span class="timestamp">  <%= time_ago_in_words(@action.created_at) %> ago
+			<%= "joined EconBloggers" %> <br><span class="timestamp">  <%= time_ago_in_words(@action.created_at) %> ago
 			<% if current_user == @action.user %> 
 				  			&nbsp;<%= link_to "x", @action, method: :delete,
 				                                     data: { confirm: "You sure?" } %> <%end%> </span>

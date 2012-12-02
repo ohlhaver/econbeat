@@ -258,9 +258,9 @@ end
     def find_fbaction_id(post)
       if Rails.env.development?  
         user = post.user
-     a=user.facebook.get_connections("me","jurnalo_local:share")
+     a=user.facebook.get_connections("me","EconBloggers_local:share")
     else
-      a=user.facebook.get_connections("me","jurnalo:share")
+      a=user.facebook.get_connections("me","EconBloggers:share")
     end
     s=a.select {|f| f["data"]["article"]["url"] == post_url(post)}
     return s.first["id"] if s != []

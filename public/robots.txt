@@ -5,5 +5,5 @@
 # Disallow: /articles
 # Disallow: /actions
 # Disallow: /users
-Sitemap: https://www.jurnalo.com/sitemap.xml
+Sitemap: https://www.EconBloggers.com/sitemap.xml
 

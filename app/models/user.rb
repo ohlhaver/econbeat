@@ -142,7 +142,7 @@ class User < ActiveRecord::Base
   end
 
   def fb_subscribe_raw(author, author_url)
-    self.facebook.put_wall_post("gets all articles by " + author.name + " using Jurnalo", :link => author_url)
+    self.facebook.put_wall_post("gets all articles by " + author.name + " using EconBloggers", :link => author_url)
   end
 
   def fb_star_raw(author, author_url)
@@ -161,17 +161,17 @@ class User < ActiveRecord::Base
 
   def fbstar_author(author_url)
     if Rails.env.development?  
-      self.facebook.put_connections("me", "jurnalo_local:star", profile: author_url)
+      self.facebook.put_connections("me", "EconBloggers_local:star", profile: author_url)
     else
-      self.facebook.put_connections("me", "jurnalo:star", profile: author_url)
+      self.facebook.put_connections("me", "EconBloggers:star", profile: author_url)
     end
   end
 
   def fbunstar_author(author_url)
     if Rails.env.development?  
-     a=self.facebook.get_connections("me","jurnalo_local:star")
+     a=self.facebook.get_connections("me","EconBloggers_local:star")
     else
-      a=self.facebook.get_connections("me","jurnalo:star")
+      a=self.facebook.get_connections("me","EconBloggers:star")
     end
     s=a.select {|f| f["data"]["author"]["url"] == author_url}
     self.facebook.delete_object(s.first["id"])
@@ -179,17 +179,17 @@ class User < ActiveRecord::Base
 
   def fbstar(post_url)
     if Rails.env.development?  
-      self.facebook.put_connections("me", "jurnalo_local:star", article: post_url)
+      self.facebook.put_connections("me", "EconBloggers_local:star", article: post_url)
     else
-      self.facebook.put_connections("me", "jurnalo:star", article: post_url)
+      self.facebook.put_connections("me", "EconBloggers:star", article: post_url)
     end
   end
 
   def fbunstar(post_url)
     if Rails.env.development?  
-     a=self.facebook.get_connections("me","jurnalo_local:star")
+     a=self.facebook.get_connections("me","EconBloggers_local:star")
     else
-      a=self.facebook.get_connections("me","jurnalo:star")
+      a=self.facebook.get_connections("me","EconBloggers:star")
     end
     s=a.select {|f| f["data"]["article"]["url"] == post_url}
     self.facebook.delete_object(s.first["id"])
@@ -234,9 +234,9 @@ class User < ActiveRecord::Base
 
   def fbpost(post_url, post)
     if Rails.env.development? 
-      p=self.facebook.put_connections("me", "jurnalo_local:share", article: post_url)
+      p=self.facebook.put_connections("me", "EconBloggers_local:share", article: post_url)
     else
-      p=self.facebook.put_connections("me", "jurnalo:share", article: post_url)
+      p=self.facebook.put_connections("me", "EconBloggers:share", article: post_url)
     end
     post.fbaction_id = p["id"]
     post.save
