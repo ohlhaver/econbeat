@@ -18,6 +18,7 @@ Jurnalo::Application.routes.draw do
 
 get 'contact', to: 'static_pages#contact', as: 'contact'
 get 'privacy', to: 'static_pages#privacy', as: 'privacy'
+get 'about', to: 'static_pages#about', as: 'about'
 #get '/signup', to: 'users#new', as: 'signup'
 get 'login', to: 'sessions#new', as: 'login'
 get 'logout', to: 'sessions#destroy', as: 'logout'

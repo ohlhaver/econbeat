@@ -1,6 +1,8 @@
 <% content_for :title, "Most Followed columnists - " %>
 <div class ="upper_section">
-<h3>EconBeat's Most Frequently Starred Economists</h3><br><br>
+<h3>Top Econ Bloggers</h3><br>
+<h4>Econ Bloggers that are most starred by our users:</h4>
+<br>
 <ol class="profile_microposts">
 <% @authors.each do |a| %>
 	<% a=Author.find(a) %>

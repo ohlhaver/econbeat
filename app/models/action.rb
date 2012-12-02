@@ -192,7 +192,7 @@ class Action < ActiveRecord::Base
 
     actions = []  
     authors = []
-    @authors = List.last.top_authors.split(",").first(100)                  
+    @authors = Econlist.last.top_authors.split(",").first(100)                  
     @authors.each do |a|
       author = Author.find(a)
       actions += Array.wrap(author.actions.first) if author.actions.first && author.actions.first.created_at >= 1.days.ago

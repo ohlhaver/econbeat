@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title><%=h yield(:title) %><% unless params[:action] == "home"%>  Jurnalo <%end%></title>
-    <meta name="description" content="EconBeat - Follow the world's best economists!" />
+    <meta name="description" content="EconBloggers - Follow the world's best economists!" />
     <meta name="keywords" content="economics, econ, economists, econ bloggers" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -35,7 +35,7 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
       
-    <%= render 'layouts/header' unless current_user==nil && params[:action] == "home"%>
+    <%= render 'layouts/header'%>
 
     <div class="container">
     <div class="span8 offset2">
@@ -73,7 +73,7 @@
 
       function sendRequestViaMultiFriendSelector() {
         FB.ui({method: 'apprequests',
-          message: 'invites you to EconBeat',
+          message: 'invites you to EconBloggers',
     new_style_message: true
         }, requestCallback);
       }
@@ -87,7 +87,7 @@
     <% end %>
                   
                
-      (c) EconBeat · <%= link_to "Privacy", privacy_path %> · <%= link_to "Economists", authors_path %>  </footer>
+      (c) EconBloggers ·  <%= link_to "About", about_path %> · <%= link_to "Privacy", privacy_path %> · <%= link_to "Top Econ Bloggers", authors_path %>  </footer>
   
   </body>
 </html>

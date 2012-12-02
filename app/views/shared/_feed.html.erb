@@ -7,7 +7,7 @@
 	<% if @starred_section_actions.any? %>
 	<div id = "favorite_posts">
 	        
-	   Starred
+	   Your Newsfeed
 	  <ol class="microposts">
 	<%= render @starred_section_actions %>
 	</ol>
@@ -16,7 +16,7 @@
 	<%end%>
 	<% if @popular_actions.any? %>
 	<div id = "latest_posts">
-		Popular economists
+		Latest By Other Top Econ Bloggers
 	  <ol class="microposts">
 	<%= render @popular_actions %>
 	</ol>

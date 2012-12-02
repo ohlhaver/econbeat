@@ -22,7 +22,7 @@ task :top_authors => :environment do
     end
 
 	ranked_authors_string= array.join(",")
-    list=List.new
+    list=Econlist.new
     list.top_authors=ranked_authors_string
     list.save
 

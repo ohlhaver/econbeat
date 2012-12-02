@@ -65,14 +65,14 @@ Jurnalo::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :host => "www.econbeat.com" }
+  config.action_mailer.default_url_options = { :host => "www.EconBloggers.com" }
 
   # Change mail delvery to either :smtp, :sendmail, :file, :test
 config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {
   address: "smtp.gmail.com",
   port: 587,
-  domain: "@econbeat.com",
+  domain: "@EconBloggers.com",
   authentication: "plain",
   enable_starttls_auto: true,
   user_name: "jurnalo.service@gmail.com",
@@ -84,7 +84,7 @@ ENV['FACEBOOK_SECRET'] = '20b520f9b5e2f05bc50dd94242cf0731'
 
 config.middleware.use ExceptionNotifier,
   :email_prefix => "[Exception] ",
-  :sender_address => %{"Exception Notifier" <noreply@econbeat.com>},
+  :sender_address => %{"Exception Notifier" <noreply@EconBloggers.com>},
   :exception_recipients => %w{ohlhaver@gmail.com}
 
 end

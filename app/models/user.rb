@@ -146,7 +146,7 @@ class User < ActiveRecord::Base
   end
 
   def fb_star_raw(author, author_url)
-    self.facebook.put_wall_post("starred the economist " + author.name + " on EconBeat.com", :link => author_url)
+    self.facebook.put_wall_post("starred " + author.name + " on EconBloggers.com", :link => author_url)
   end
 
   def fb_unsubscribe(author_url)

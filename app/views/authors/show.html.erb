@@ -1,6 +1,6 @@
 <% content_for :head do %>
   <%= tag :meta, property: "fb:app_id", content: ENV['FACEBOOK_APP_ID'] %>
-  <%= tag :meta, property: "og:site_name", content: "EconBeat" %>
+  <%= tag :meta, property: "og:site_name", content: "EconBloggers" %>
   <%= tag :meta, property: "og:type", content: "profile" %>
   <%= tag :meta, property: "og:title", content: @author.name %>
   <% if @recommended.size > 2 &&  %>
@@ -99,7 +99,7 @@
           </ol>
           <br>
           <span class="timestamp">
-          <%= link_to raw('<i class="icon-plus"></i> ') + "more economists", :action => "similar", :id => params[:id] %>
+          <%= link_to raw('<i class="icon-plus"></i> ') + "more econ bloggers", :action => "similar", :id => params[:id] %>
         </span>
           
 

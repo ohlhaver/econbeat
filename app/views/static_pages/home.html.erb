@@ -9,23 +9,7 @@
 
 <% else %>
 
-<div class="center hero-unit">
-    <div class ="hidden-phone"><h1>EconBeat</h1></div>
-    <div class ="visible-phone"><h2>EconBeat</h2></div>
-
-
-     <h2>
-      Discover and follow your favorite economists!
-    </h2>
-    <%= link_to "Signup", signup_path, id: "sign_in", 
-                                class: "btn btn-large btn-info" %>
-
-<%= link_to "Login", login_path, id: "sign_in", 
-                                class: "btn btn-large btn-info" %>
-    <%= link_to "Login via Facebook!", "/auth/facebook", id: "sign_in", 
-                                class: "btn btn-large btn-primary" %>
-
-  </div>
+  <%= render 'shared/home_feed' %>
 
 <% end %> 
 

@@ -13,7 +13,7 @@ class StaticPagesController < ApplicationController
       #end
 
       # @actions = (@unique_user_actions + current_user.author_action_feed - @starred_actions).sort_by{|e| -e[:id]}
-      @starred_section_actions = (@starred_actions + current_user.user_action_feed).sort_by{|e| -e[:id]}
+      @starred_section_actions = (@starred_actions + current_user.friends_action_feed).find_all{|i| i.created_at >= 24.hours.ago}.sort_by{|e| -e[:id]}
       @author_actions = current_user.author_action_feed
       @actions =  (current_user.user_action_feed + @author_actions - @starred_actions).sort_by{|e| -e[:id]}
      

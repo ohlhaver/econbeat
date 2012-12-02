@@ -5,7 +5,7 @@
     <div class="navbar-inner">
       <div class="container">
         
-        <h3><%= link_to "EconBeat", root_path, id: "logo", title: 'home', rel: 'tooltip', "data-placement"=>"bottom" %></h3> 
+       <%= link_to "EconBloggers", root_path, id: "logo", title: 'home', rel: 'tooltip', "data-placement"=>"bottom" %>
         
         <nav>
 
@@ -16,6 +16,11 @@
                   <li>
                     <%= link_to current_user.name, current_user, title: 'my profile', rel: 'tooltip', "data-placement"=>"bottom" %>
                   </li>
+                  <%else%>
+                  <div class = "header_button">
+                  <%= link_to "Login via Facebook!", "/auth/facebook", id: "sign_in", 
+                                class: "btn btn-medium btn-primary" %>
+                  </div>
                 
               <%end%>         
               
@@ -23,7 +28,7 @@
             </ul>
           
           <div class="hidden-phone">
-            <ul class="nav pull-left" >
+            <ul class="nav pull-right" >
 
                 <li>          
                   <div class="header_search_box">

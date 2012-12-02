@@ -26,12 +26,12 @@ class AuthorsController < ApplicationController
 	end
 
 	def index
-		@authors = List.last.top_authors.split(",").first(250)
+		@authors = Econlist.last.top_authors.split(",").first(250)
 
 	end
 
 	def sitemap
-		@authors = List.last.top_authors.split(",")
+		@authors = Econlist.last.top_authors.split(",")
 
 	end
 
