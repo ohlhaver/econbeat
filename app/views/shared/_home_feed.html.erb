@@ -5,7 +5,7 @@
 
 	<% if @actions.any? %>
 	<div id = "latest_posts">
-		<b>Latest By Top Econ Bloggers</b>
+		<b>Latest By <%= link_to "Top Econ Bloggers", authors_path %></b>
 	  <ol class="microposts">
 	<%= render @actions %>
 	</ol>
