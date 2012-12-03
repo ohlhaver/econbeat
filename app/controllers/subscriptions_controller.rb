@@ -52,7 +52,7 @@ class SubscriptionsController < ApplicationController
     current_user.star_author_action(@subscription)
     
     @author = Author.find(@subscription.author_id)
-    current_user.delay.fb_star_raw(@author, author_url(@author))
+    current_user.delay.fb_star_eb(@author, author_url(@author))
     #current_user.delay.fbstar_author(author_url(@author))
     
     #current_user.delay.fbstar(post_url(@post))
