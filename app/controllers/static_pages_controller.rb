@@ -52,6 +52,8 @@ class StaticPagesController < ApplicationController
  
   end
 
+  def register
+  end
 
   def fb_new
     redirect_to root_url

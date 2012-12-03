@@ -16,6 +16,8 @@ Jurnalo::Application.routes.draw do
 
   get "static_pages/fb_new"
 
+  get "static_pages/register"
+
 get 'contact', to: 'static_pages#contact', as: 'contact'
 get 'privacy', to: 'static_pages#privacy', as: 'privacy'
 get 'about', to: 'static_pages#about', as: 'about'
@@ -23,6 +25,7 @@ get 'about', to: 'static_pages#about', as: 'about'
 get 'login', to: 'sessions#new', as: 'login'
 get 'logout', to: 'sessions#destroy', as: 'logout'
 get 'edit', to: 'users#edit', as: 'edit'
+get 'register', to: 'static_pages#register', as: 'register'
 
 match '/signup(/:invitation_token)' => 'users#new', as: 'signup'
 #match '/signup' => 'users#new', as: 'signup'
