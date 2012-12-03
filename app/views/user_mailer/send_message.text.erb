@@ -2,9 +2,12 @@ Feedback message:
 
 <%= @message %>
 
+<% if @user %>
 from:
 
 <%= @user.name %>
 <%= @user.email %>
 Id:
 <%= @user.id %>
+
+<%end%>

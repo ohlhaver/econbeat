@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  before_filter :authorize, only: [:fb_new, :add_message]
+  before_filter :authorize, only: [:fb_new]
   before_filter :check_for_canvas, only: [:home]
   def home
     if current_user
