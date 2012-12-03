@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-EconBloggers::Application.load_tasks
+Jurnalo::Application.load_tasks
