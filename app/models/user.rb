@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   after_create :join_action
   
 
-  validates :name, presence: true, length: { maximum: 50 }
+  validates :name, presence: true
   #                   uniqueness: { case_sensitive: false }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
@@ -58,6 +58,7 @@ class User < ActiveRecord::Base
       user.password_digest = "1234"
       user.password = "1234"
       user.password_confirmation = "1234"
+      user.eb = true
       user.save!
     end
   end
