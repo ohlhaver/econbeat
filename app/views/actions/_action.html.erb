@@ -32,12 +32,12 @@
 			 <div id ="star"> <div class="hidden-phone">
 
 
-		<% if current_user && current_user.subscribed?(action.catcher.author) && current_user.subscribed?(action.catcher.author).starred == true%>
+		<% if current_user && current_user.subscribed?(action.catcher.author)%>
        
-          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), {:controller => "subscriptions", :action => "unsubscribe", :id => action.catcher.author.id}, :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
+          <%= button_to "unfollow",{:controller => "subscriptions", :action => "unsubscribe", :id => action.catcher.author.id}, :class => "btn btn-small", title: 'unfollow this author', rel: 'tooltip', "data-placement"=>"bottom" %>
         <%else%>
 
-          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), {:controller => "subscriptions", :action => "subscribe", :id => action.catcher.author.id}, :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
+          <%= button_to "follow", {:controller => "subscriptions", :action => "subscribe", :id => action.catcher.author.id}, :class => "btn btn-small btn-primary", title: 'follow this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
           
        
       <%end%>	 	

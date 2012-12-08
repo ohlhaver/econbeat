@@ -2,15 +2,15 @@
 
   <div class="row">
 
-        <div class="span6"><div class ="upper_section"><h3><%= link_to (image_tag @author.img_url, :height=> "50"),@author if @author.img_url %>
+        <div class="span5"><div class ="upper_section"><h3><%= link_to (image_tag @author.img_url, :height=> "50"),@author if @author.img_url %>
           <%= link_to @author.name, @author %>&nbsp;&nbsp;&nbsp;<div id = "follow_button">
 
-  <% if current_user && current_user.subscribed?(@author) && current_user.subscribed?(@author).starred == true%>
+  <% if current_user && current_user.subscribed?(@author)%>
        
-          <%= link_to raw('<i class="icon-star"></i>'+ ' unstar'), {:controller => "subscriptions", :action => "unsubscribe", :id => @author.id}, :class => "btn btn-small", title: 'click to unstar', rel: 'tooltip', "data-placement"=>"bottom" %>
+          <%= button_to "unfollow",{:controller => "subscriptions", :action => "unsubscribe", :id => @author.id}, :class => "btn btn-small", title: 'unfollow this author', rel: 'tooltip', "data-placement"=>"bottom" %>
         <%else%>
 
-          <%= link_to raw('<i class="icon-star-empty"></i>'+ ' star'), {:controller => "subscriptions", :action => "subscribe", :id => @author.id}, :class => "btn btn-small", title: 'click to star this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
+          <%= button_to "follow", {:controller => "subscriptions", :action => "subscribe", :id => @author.id}, :class => "btn btn-small btn-primary", title: 'follow this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
 
       <%end%></div></h3><br>
       <div class ="hidden-phone"><span class="timestamp"><%= link_to_function raw('<i class="icon-envelope"></i>'+ ' send'), "sendMessage(); return false;" %>&nbsp;&nbsp;<%= link_to link_to raw('<i class="icon-list-alt"></i> ') + "wikipedia", "http://en.wikipedia.org/wiki/" + @author.name %></span></div>
@@ -27,21 +27,16 @@
                     description: 'Subscribe to this author via EconBloggers.'
                     })}
            </script>
-</div></div>
+</div>
 
      
-<div class ="span2">
-  
-
-    
-      </div>
 
 
 <% if @recommended %>
-       <div class="span5">
+       
         <div class ="upper_section">
         <br><br>
-        <b>Users who starred <%= @author.name %> also starred </b>
+        <b><%= @author.name %>'s followers also follow </b>
         <br><br>
 
         
@@ -66,7 +61,7 @@
 <% if @subscribed_friends && @subscribed_friends.any? %>
 <div class="span3">
        
-        Friends who starred <%= Author.find(params[:id]).name %>
+        Friends following <%= Author.find(params[:id]).name %>
 
       
          <ol class="profile_microposts">

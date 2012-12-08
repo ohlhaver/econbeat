@@ -25,7 +25,7 @@ class StaticPagesController < ApplicationController
       #@user_actions=current_user.user_action_feed
       
       if @starred_actions.empty?
-        flash.now[:notice] = "Star your favorite economists to always see their posts on top!" unless flash[:notice]
+        flash.now[:notice] = "Follow your favorite econ bloggers to always see their posts on top!" unless flash[:notice]
        #elsif current_user.starred_subscriptions.empty?
        # flash.now[:notice] = "Star your favorite columnists by clicking the star buttons on the right." unless flash[:notice]
      #   elsif @utopics.empty?
