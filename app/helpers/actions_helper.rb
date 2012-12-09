@@ -13,6 +13,16 @@ def today author
 	
 end
 
+def follow author
+	"Follow " + author.name 	 
+	
+end
+
+def unfollow author
+	"Unfollow " + author.name 	 
+	
+end
+
 def sender action
 	return action.article.title.to_s	
 

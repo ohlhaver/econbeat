@@ -34,10 +34,10 @@
 
 		<% if current_user && current_user.subscribed?(action.catcher.author)%>
        
-          <%= button_to "unfollow",{:controller => "subscriptions", :action => "unsubscribe", :id => action.catcher.author.id}, :class => "btn btn-small", title: 'unfollow this author', rel: 'tooltip', "data-placement"=>"bottom" %>
+          <%= button_to "unfollow",{:controller => "subscriptions", :action => "unsubscribe", :id => action.catcher.author.id}, :class => "btn btn-small", title: "#{unfollow (action.catcher.author)}", rel: 'tooltip', "data-placement"=>"bottom" %>
         <%else%>
 
-          <%= button_to "follow", {:controller => "subscriptions", :action => "subscribe", :id => action.catcher.author.id}, :class => "btn btn-small btn-primary", title: 'follow this author', rel: 'tooltip', "data-placement"=>"bottom"  %>
+          <%= button_to "follow", {:controller => "subscriptions", :action => "subscribe", :id => action.catcher.author.id}, :class => "btn btn-small btn-primary", title: "#{follow (action.catcher.author)}", rel: 'tooltip', "data-placement"=>"bottom"  %>
           
        
       <%end%>	 	

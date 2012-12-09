@@ -4,7 +4,7 @@ class StaticPagesController < ApplicationController
   def home
     if current_user
       #@starred_actions = current_user.starred_author_action_feed.where("created_at >= :time", {:time => 1.day.ago}).sort_by{|e| -e[:id]}
-      @starred_actions = current_user.starred_author_action_feed.find_all{|i| i.created_at >= 24.hours.ago}.sort_by{|e| -e[:id]}
+      #@starred_actions = current_user.starred_author_action_feed.find_all{|i| i.created_at >= 24.hours.ago}.sort_by{|e| -e[:id]}
       #@user_actions = current_user.user_action_feed
       #@unique_user_actions =[]
       #@unique_user_actions += Array.wrap(@user_actions.first)
@@ -13,18 +13,18 @@ class StaticPagesController < ApplicationController
       #end
 
       # @actions = (@unique_user_actions + current_user.author_action_feed - @starred_actions).sort_by{|e| -e[:id]}
-      @starred_section_actions = (@starred_actions + current_user.friends_action_feed).find_all{|i| i.created_at >= 24.hours.ago}.sort_by{|e| -e[:id]}
-      @author_actions = current_user.author_action_feed
-      @actions =  (current_user.user_action_feed + @author_actions - @starred_actions).sort_by{|e| -e[:id]}
+      #@starred_section_actions = (@starred_actions + current_user.friends_action_feed).find_all{|i| i.created_at >= 24.hours.ago}.sort_by{|e| -e[:id]}
+      @author_actions = current_user.author_action_feed.find_all{|i| i.created_at >= 24.hours.ago}
+      @actions =  (current_user.friends_action_feed + @author_actions).sort_by{|e| -e[:id]}
      
       @popular_actions, @popular_authors = Action.latest_from_top_authors
 
-      @popular_actions -= @starred_actions 
+      @popular_actions -= @actions 
       
 
       #@user_actions=current_user.user_action_feed
       
-      if @starred_actions.empty?
+      if @actions.empty?
         flash.now[:notice] = "Follow your favorite econ bloggers to always see their posts on top!" unless flash[:notice]
        #elsif current_user.starred_subscriptions.empty?
        # flash.now[:notice] = "Star your favorite columnists by clicking the star buttons on the right." unless flash[:notice]
@@ -34,7 +34,7 @@ class StaticPagesController < ApplicationController
       end
 
 
-        @starred_actions = Kaminari.paginate_array(@starred_actions).page(params[:page]).per(50)
+        #@starred_actions = Kaminari.paginate_array(@starred_actions).page(params[:page]).per(50)
         @actions = Kaminari.paginate_array(@actions).page(params[:page]).per(50)
         @popular_actions = Kaminari.paginate_array(@popular_actions).page(params[:page]).per(50)
         #  @user_actions = Kaminari.paginate_array(@user_actions).page(params[:page]).per(50)

@@ -4,12 +4,12 @@
 
 <div class = "span8">
 
-	<% if @starred_section_actions.any? %>
+	<% if @actions.any? %>
 	<div id = "favorite_posts">
 	        
 	   Your Newsfeed
 	  <ol class="microposts">
-	<%= render @starred_section_actions %>
+	<%= render @actions %>
 	</ol>
 	</div>
 	<br>
